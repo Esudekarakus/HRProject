@@ -10,6 +10,7 @@ namespace Project.Application.Features.CQRS.Results.EmployerResults
 {
     public class GetEmployerByIdQueryResult
     {
+        public int Id { get; set; }
         public string LastName { get; set; }
         public string SecondName { get; set; }
         public string SecondLastName { get; set; }
