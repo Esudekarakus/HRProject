@@ -18,7 +18,8 @@ namespace Project.Domain.Entities
         public string IdendificationNumber { get; set; }
         public DateTime DateOfStart { get; set; }
         public DateTime DateOfEnd { get; set; }
-        public string CompanyName { get; set; }
+        public int CompanyId { get; set; }
+        public Company Company { get; set; }
         public Departmant Departmant { get; set; }
         public Status Status { get; set; }
         public string ImageURL { get; set; }
