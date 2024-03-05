@@ -16,7 +16,8 @@ namespace Project.Application.Features.CQRS.Results.EmployerResults
 
         public DateTime DateOfBirth { get; set; }
         public Status Status { get; set; }
-
+        public string IdentityNumber { get; set; }
+        public string PlaceOfBirth { get; set; }
         public string ImagePath { get; set; }
         public string Address { get; set; }
 

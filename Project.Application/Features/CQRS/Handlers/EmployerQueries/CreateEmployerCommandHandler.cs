@@ -28,6 +28,8 @@ namespace Project.Application.Features.CQRS.Handlers.EmployerQueries
                 SecondLastName=command.LastName,
                 DateOfBirth=command.DateOfBirth,
                 DateOfStart=command.DateOfStart,
+                PlaceOfBirth=command.PlaceOfBirth,
+                IdentityNumber=command.IdentityNumber,
                 Status=command.Status,
                 ImagePath=command.ImagePath,
                 Address=command.Address,
