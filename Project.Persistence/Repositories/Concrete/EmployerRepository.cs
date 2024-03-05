@@ -2,7 +2,7 @@
 using Project.Application.Repositories.Abstract;
 using Project.Domain.Entities;
 using Project.Persistence.Context;
-using Project.Persistence.Repositories.Abstract;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;

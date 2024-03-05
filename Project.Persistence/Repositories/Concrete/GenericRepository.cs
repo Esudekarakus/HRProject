@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Project.Application.Repositories.Abstract;
+using Project.Persistence.Context;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,56 +12,46 @@ namespace Project.Persistence.Repositories.Concrete
 {
     public class GenericRepository<T> : IRepository<T> where T : class
     {
-        protected readonly DbContext Context;
+        private readonly AppDbContext context;
 
-        public GenericRepository(DbContext Context)
+        public GenericRepository(AppDbContext context)
         {
-            this.Context = Context;
+            context = context;
         }
 
-        public Task AddRangeAsync(IEnumerable<T> entities)
+        public async Task AddRangeAsync(IEnumerable<T> entities)
         {
-            throw new NotImplementedException();
+            context.Set<T>().AddRange(entities);
+            await context.SaveChangesAsync();
         }
 
-        public Task CreateAsync(T entity)
+        public async Task CreateAsync(T entity)
         {
-            throw new NotImplementedException();
+            context.Set<T>().Add(entity);
+            await context.SaveChangesAsync();
         }
 
-        public IEnumerable<T> FindAsync(Expression<Func<T, bool>> predicate)
+        public async Task<List<T>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return await context.Set<T>().ToListAsync();
         }
 
-        public Task<List<T>> GetAllAsync()
+        public async Task<T> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await context.Set<T>().FindAsync(id);
+           
         }
 
-        public Task<T> GetByIdAsync(int id)
+        public async Task RemoveAsync(T entity)
         {
-            throw new NotImplementedException();
+            context.Set<T>().Remove(entity);
+            await context.SaveChangesAsync();
         }
 
-        public Task<IEnumerable<T>> GetWhereListAsync(Expression<Func<T, bool>> expression)
+        public async Task UpdateAsync(T entity)
         {
-            throw new NotImplementedException();
-        }
-
-        public Task RemoveAsync(T entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<T> SingleorDefault(Expression<Func<T, bool>> expression)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task UpdateAsync(T entity)
-        {
-            throw new NotImplementedException();
+            context.Set<T>().Update(entity);
+            await context.SaveChangesAsync();
         }
     }
 }
