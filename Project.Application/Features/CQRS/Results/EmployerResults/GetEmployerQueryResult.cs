@@ -16,7 +16,8 @@ namespace Project.Application.Features.CQRS.Results.EmployerResults
 
         public DateTime DateOfBirth { get; set; }
         public Status Status { get; set; }
-
+        public string IdentityNumber { get; set; }
+        public string PlaceOfBirth { get; set; }
         public string ImagePath { get; set; }
         public string Address { get; set; }
 
@@ -25,7 +26,7 @@ namespace Project.Application.Features.CQRS.Results.EmployerResults
         public double Salary { get; set; }
         public string Profession { get; set; }
         public DateTime DateOfStart { get; set; }
-        public DateTime DateOfEnd { get; set; }
+        public DateTime? DateOfEnd { get; set; }
         public Company? Company { get; set; }
         public int? OffDays { get; set; }
         public int? CompanyId { get; set; }

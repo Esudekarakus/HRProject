@@ -14,6 +14,8 @@ namespace Project.Domain.Entities
        public string SecondName { get; set; }
        public string SecondLastName {get; set; }
 
+       public string IdentityNumber { get; set; }
+       public string PlaceOfBirth { get; set; }
        public DateTime DateOfBirth { get; set; }
        public Status Status { get; set; }
 
@@ -25,7 +27,7 @@ namespace Project.Domain.Entities
         public double Salary { get; set; }
         public string Profession {  get; set; }
         public DateTime DateOfStart { get; set; }
-        public DateTime DateOfEnd { get; set; }
+        public DateTime? DateOfEnd { get; set; }
         public Company? Company { get; set; }
         public int? OffDays { get; set; }
         public int? CompanyId { get; set; }

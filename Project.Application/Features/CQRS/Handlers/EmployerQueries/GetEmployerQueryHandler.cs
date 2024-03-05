@@ -33,8 +33,11 @@ namespace Project.Application.Features.CQRS.Handlers.EmployerQueries
                 Address = x.Address,
                 Salary = x.Salary,
                 DateOfBirth = x.DateOfBirth,
-                DateOfStart = x.DateOfStart,    
-                DateOfEnd = x.DateOfEnd,
+                DateOfStart=x.DateOfStart,
+                DateOfEnd=x.DateOfEnd,
+                IdentityNumber = x.IdentityNumber,
+                PlaceOfBirth = x.PlaceOfBirth,
+               
                 Profession=x.Profession,
                 CompanyId=x.CompanyId,
                 OffDays=x.OffDays,

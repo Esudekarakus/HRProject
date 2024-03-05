@@ -16,6 +16,8 @@ namespace Project.Application.Features.CQRS.Commands.EmployerCommands
         public string LastName { get; set; }
         public string SecondName { get; set; }
         public string SecondLastName { get; set; }
+        public string IdentityNumber { get; set; }
+        public string PlaceOfBirth { get; set; }
         public DateTime DateOfBirth { get; set; }
         public Status Status { get; set; }
         public string ImagePath { get; set; }

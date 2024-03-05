@@ -39,6 +39,8 @@ namespace Project.Application.Features.CQRS.Handlers.EmployerQueries
             values.ImagePath= command.ImagePath;
             values.CompanyId= command.CompanyId;
             values.UpdatedDate = DateTime.Now;
+            values.DateOfBirth= DateTime.Now;
+            values.IdentityNumber= command.IdentityNumber;
 
             await repository.UpdateAsync(values);
         }
