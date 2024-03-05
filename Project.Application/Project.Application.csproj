@@ -15,7 +15,6 @@
     <Folder Include="Features\CQRS\Handlers\" />
     <Folder Include="Features\CQRS\Results\" />
     <Folder Include="Features\CQRS\Queries\" />
-    <Folder Include="Interfaces\" />
   </ItemGroup>
 
 </Project>
