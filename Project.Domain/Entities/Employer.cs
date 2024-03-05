@@ -27,7 +27,7 @@ namespace Project.Domain.Entities
         public double Salary { get; set; }
         public string Profession {  get; set; }
         public DateTime DateOfStart { get; set; }
-        public DateTime DateOfEnd { get; set; }
+        public DateTime? DateOfEnd { get; set; }
         public Company? Company { get; set; }
         public int? OffDays { get; set; }
         public int? CompanyId { get; set; }

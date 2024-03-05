@@ -12,7 +12,7 @@ using Project.Persistence.Context;
 namespace Project.Persistence.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240305112543_init")]
+    [Migration("20240305171515_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -280,7 +280,7 @@ namespace Project.Persistence.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("DateOfEnd")
+                    b.Property<DateTime?>("DateOfEnd")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("DateOfStart")
@@ -372,7 +372,7 @@ namespace Project.Persistence.Migrations
                     b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("DateOfEnd")
+                    b.Property<DateTime?>("DateOfEnd")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("DateOfStart")
@@ -380,6 +380,10 @@ namespace Project.Persistence.Migrations
 
                     b.Property<DateTime?>("DeletedDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("IdentityNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ImagePath")
                         .IsRequired()
@@ -397,6 +401,10 @@ namespace Project.Persistence.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PlaceOfBirth")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
