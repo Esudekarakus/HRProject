@@ -1,4 +1,5 @@
-﻿using Project.Application.Features.CQRS.Results.EmployerResults;
+﻿using Project.Application.Features.CQRS.Queries.EmployerQueries;
+using Project.Application.Features.CQRS.Results.EmployerResults;
 using Project.Application.Interfaces;
 using Project.Domain.Entities;
 using System;
@@ -23,19 +24,23 @@ namespace Project.Application.Features.CQRS.Handlers.EmployerQueries
             var values = await repository.GetByIdAsync(query.Id);
             return new GetEmployerByIdQueryResult
             {
-                LastName = query.LastName,
-                Salary = query.Salary,
-                Address = query.Address,
-                ImagePath = query.ImagePath,
-                Company = query.Company,
-                Profession =query.Profession,
-                OffDays = query.OffDays,
-                SecondLastName = query.SecondLastName,
-                DateOfBirth = query.DateOfBirth,
-                DateOfEnd = query.DateOfEnd,
-                DateOfStart = query.DateOfStart,
-                PhoneNumber = query.PhoneNumber,
-                CompanyId = query.CompanyId,
+                Address = values.Address,
+                Salary = values.Salary,
+                SecondLastName = values.LastName,
+                SecondName = values.Name,
+                Status = values.Status,
+                DateOfStart = values.DateOfStart,
+                DateOfBirth = values.DateOfBirth,
+                DateOfEnd = values.DateOfEnd,
+                ImagePath = values.ImagePath,
+                LastName = values.LastName,
+                IdentityNumber = values.IdentityNumber,
+                PlaceOfBirth = values.PlaceOfBirth,
+                Id = values.Id,
+                Email = values.Email,
+                OffDays = values.OffDays,
+                PhoneNumber = values.PhoneNumber,
+                Profession = values.Profession,
             };
         }
     }

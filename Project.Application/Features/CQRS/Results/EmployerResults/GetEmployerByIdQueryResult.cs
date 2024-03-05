@@ -20,7 +20,8 @@ namespace Project.Application.Features.CQRS.Results.EmployerResults
 
         public string ImagePath { get; set; }
         public string Address { get; set; }
-
+        public string IdentityNumber { get; set; }
+        public string PlaceOfBirth { get; set; }
 
         public string PhoneNumber { get; set; }
         public double Salary { get; set; }
