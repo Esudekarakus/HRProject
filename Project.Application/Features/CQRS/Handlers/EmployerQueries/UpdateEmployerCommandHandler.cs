@@ -37,6 +37,7 @@ namespace Project.Application.Features.CQRS.Handlers.EmployerQueries
             values.OffDays= command.OffDays;
             values.ImagePath= command.ImagePath;
             values.CompanyId= command.CompanyId;
+            values.UpdatedDate = DateTime.Now;
 
             await repository.UpdateAsync(values);
         }
