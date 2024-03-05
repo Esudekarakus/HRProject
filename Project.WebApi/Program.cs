@@ -10,7 +10,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<AppDbContext>(
-    o => o.UseSqlServer(builder.Configuration.GetConnectionString("ConnectionStr")));
+    o => o.UseSqlServer(builder.Configuration.GetConnectionString("Sude")));
 
 var app = builder.Build();
 

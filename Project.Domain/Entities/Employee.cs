@@ -18,7 +18,7 @@ namespace Project.Domain.Entities
         public string BirthOfPlace { get; set; }
         public string IdendificationNumber { get; set; }
         public DateTime DateOfStart { get; set; }
-        public DateTime DateOfEnd { get; set; }
+        public DateTime? DateOfEnd { get; set; }
         public int? CompanyId { get; set; }
         public Company? Company { get; set; }
         public Department Department { get; set; }
