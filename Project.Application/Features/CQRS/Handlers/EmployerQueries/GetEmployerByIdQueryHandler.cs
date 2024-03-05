@@ -40,7 +40,7 @@ namespace Project.Application.Features.CQRS.Handlers.EmployerQueries
                 Email = values.Email,
                 OffDays = values.OffDays,
                 PhoneNumber = values.PhoneNumber,
-                Profession = values.Profession,
+                Profession = values.Profession
             };
         }
     }
