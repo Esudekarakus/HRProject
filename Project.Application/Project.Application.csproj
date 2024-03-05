@@ -11,7 +11,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\CQRS\Commands\EmployerCommands\" />
     <Folder Include="Features\CQRS\Handlers\EmployerQueries\" />
     <Folder Include="Features\CQRS\Queries\EmployerQueries\" />
   </ItemGroup>
