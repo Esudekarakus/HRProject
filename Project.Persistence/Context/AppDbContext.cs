@@ -21,5 +21,6 @@ namespace Project.Persistence.Context
         public DbSet<Employee> Employees { get; set; }
  
         public DbSet<Employer> Employers { get; set; }
+
     }
 }
