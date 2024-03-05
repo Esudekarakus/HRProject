@@ -1,5 +1,6 @@
 ﻿using Project.Application.Features.CQRS.Commands.EmployerCommands;
-using Project.Application.Interfaces;
+using Project.Application.Repositories.Abstract;
+using Project.Application.UnitOfWork.Abstract;
 using Project.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -11,16 +12,16 @@ namespace Project.Application.Features.CQRS.Handlers.EmployerQueries
 {
     public class RemoveEmployerCommandHandler
     {
-        private readonly IRepository<Employer> repository;
-        public RemoveEmployerCommandHandler(IRepository<Employer> repo) 
+        private readonly IUnitOfWork unitOfWork;
+        public RemoveEmployerCommandHandler(IUnitOfWork unitOfWork) 
         {
-            repository = repo;
+            this.unitOfWork = unitOfWork;
         }
 
         public async Task Handle(RemoveEmployerCommand removeCommand)
         {
-            var value = await repository.GetByIdAsync(removeCommand.Id);
-            await repository.RemoveAsync(value);
+            var value = await unitOfWork.employerRepository.GetByIdAsync(removeCommand.Id);
+            await unitOfWork.employerRepository.RemoveAsync(value);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Project.Application.Features.CQRS.Commands.EmployerCommands;
-using Project.Application.Interfaces;
+using Project.Application.Repositories.Abstract;
+using Project.Application.UnitOfWork.Abstract;
 using Project.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -11,16 +12,16 @@ namespace Project.Application.Features.CQRS.Handlers.EmployerQueries
 {
     public class UpdateEmployerCommandHandler
     {
-        private readonly IRepository<Employer> repository;
+        private readonly IUnitOfWork unitOfWork;
 
-        public UpdateEmployerCommandHandler(IRepository<Employer> repo) 
+        public UpdateEmployerCommandHandler(IUnitOfWork unitOfWork) 
         {
-            this.repository = repo;
+            this.unitOfWork = unitOfWork;
         }
 
         public async Task Handle(UpdateEmployerCommand command)
         {
-            var values = await repository.GetByIdAsync(command.Id);
+            var values = await unitOfWork.employerRepository.GetByIdAsync(command.Id);
 
             values.Name = command.Name;
             values.LastName = command.LastName;
