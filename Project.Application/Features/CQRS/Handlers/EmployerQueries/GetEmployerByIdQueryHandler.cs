@@ -18,24 +18,24 @@ namespace Project.Application.Features.CQRS.Handlers.EmployerQueries
             this.repository = repository;
         }
 
-        public async Task<GetEmployerByIdQueryResult> Handle(GetEmployerByIdQueryResult result)
+        public async Task<GetEmployerByIdQueryResult> Handle(GetEmployerByIdQuery query)
         {
-            var values = await repository.GetByIdAsync(result.Id);
+            var values = await repository.GetByIdAsync(query.Id);
             return new GetEmployerByIdQueryResult
             {
-                LastName = result.LastName,
-                Salary = result.Salary,
-                Address = result.Address,
-                ImagePath = result.ImagePath,
-                Company = result.Company,
-                Profession = result.Profession,
-                OffDays = result.OffDays,
-                SecondLastName = result.SecondLastName,
-                DateOfBirth = result.DateOfBirth,
-                DateOfEnd = result.DateOfEnd,
-                DateOfStart = result.DateOfStart,
-                PhoneNumber = result.PhoneNumber,
-                CompanyId = result.CompanyId,
+                LastName = query.LastName,
+                Salary = query.Salary,
+                Address = query.Address,
+                ImagePath = query.ImagePath,
+                Company = query.Company,
+                Profession =query.Profession,
+                OffDays = query.OffDays,
+                SecondLastName = query.SecondLastName,
+                DateOfBirth = query.DateOfBirth,
+                DateOfEnd = query.DateOfEnd,
+                DateOfStart = query.DateOfStart,
+                PhoneNumber = query.PhoneNumber,
+                CompanyId = query.CompanyId,
             };
         }
     }
