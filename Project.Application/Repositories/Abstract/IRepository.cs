@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Project.Application.Interfaces
+namespace Project.Application.Repositories.Abstract
 {
     public interface IRepository<T> where T : class
     {
@@ -14,6 +15,10 @@ namespace Project.Application.Interfaces
         Task CreateAsync(T entity);
         Task UpdateAsync(T entity);
         Task RemoveAsync(T entity);
+        Task AddRangeAsync(IEnumerable<T> entities);
+        IEnumerable<T> FindAsync(Expression<Func<T, bool>> predicate);
+        Task<T> SingleorDefault(Expression<Func<T, bool>> expression);
+        Task<IEnumerable<T>> GetWhereListAsync(Expression<Func<T, bool>> expression);
 
 
     }

@@ -1,5 +1,6 @@
 ﻿using Project.Application.Features.CQRS.Results.EmployerResults;
-using Project.Application.Interfaces;
+using Project.Application.Repositories.Abstract;
+using Project.Application.UnitOfWork.Abstract;
 using Project.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -11,16 +12,16 @@ namespace Project.Application.Features.CQRS.Handlers.EmployerQueries
 {
     public class GetEmployerQueryHandler
     {
-        private readonly IRepository<Employer> repository;
+        private readonly IUnitOfWork unitOfWork;
 
-        public GetEmployerQueryHandler(IRepository<Employer> repo)
+        public GetEmployerQueryHandler(IUnitOfWork unitOfWork)
         {
-            repository = repo;
+            this.unitOfWork = unitOfWork;
         }
 
         public async Task<List<GetEmployerQueryResult>> Handle()
         {
-            var values = await repository.GetAllAsync();
+            var values = await unitOfWork.employerRepository.GetAllAsync();
             return values.Select(x => new GetEmployerQueryResult
             {
                 LastName = x.LastName,
