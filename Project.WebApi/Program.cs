@@ -1,5 +1,6 @@
 
 using Microsoft.EntityFrameworkCore;
+using Project.Application.Features.CQRS.Handlers.CompanyHandlers;
 using Project.Application.Features.CQRS.Handlers.EmployerQueries;
 
 using Project.Application.Repositories.Abstract;
@@ -30,8 +31,15 @@ builder.Services.AddScoped<CreateEmployerCommandHandler>();
 builder.Services.AddScoped<UpdateEmployerCommandHandler>();
 builder.Services.AddScoped<RemoveEmployerCommandHandler>();
 
+builder.Services.AddScoped<CreateCompanyCommandHandler>();
+builder.Services.AddScoped<UpdateCompanyCommandHandler>();
+builder.Services.AddScoped<RemoveCompanyCommandHandler>();
+builder.Services.AddScoped<GetCompanyByIdQueryHandler>();
+builder.Services.AddScoped<GetCompanyByIdQueryHandler>();
+
 
 builder.Services.AddScoped<IEmployerRepository, EmployerRepository>();
+builder.Services.AddScoped<ICompanyRepository, CompanyRepository>();
 
 var app = builder.Build();
 
