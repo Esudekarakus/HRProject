@@ -11,6 +11,7 @@ namespace Project.Application.Features.CQRS.Commands.EmployerCommands
 {
     public class CreateEmployerCommand
     {
+
         public string Name { get; set; }
         public string LastName { get; set; }
         public string SecondName { get; set; }
@@ -26,7 +27,7 @@ namespace Project.Application.Features.CQRS.Commands.EmployerCommands
         public string Profession { get; set; }
         public DateTime DateOfStart { get; set; }
         public DateTime DateOfEnd { get; set; }
-        public Company? Company { get; set; }
+   
         public int? OffDays { get; set; }
         public int? CompanyId { get; set; }
     }

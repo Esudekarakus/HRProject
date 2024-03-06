@@ -11,6 +11,8 @@ namespace Project.Application.Features.CQRS.Results.EmployerResults
     public class GetEmployerByIdQueryResult
     {
         public int Id { get; set; }
+  
+        public string Name { get; set; }
         public string LastName { get; set; }
         public string SecondName { get; set; }
         public string SecondLastName { get; set; }
@@ -28,7 +30,7 @@ namespace Project.Application.Features.CQRS.Results.EmployerResults
         public string Profession { get; set; }
         public DateTime DateOfStart { get; set; }
         public DateTime? DateOfEnd { get; set; }
-        public Company? Company { get; set; }
+    
         public int? OffDays { get; set; }
         public int? CompanyId { get; set; }
 

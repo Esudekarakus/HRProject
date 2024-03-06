@@ -24,6 +24,8 @@ namespace Project.Application.Features.CQRS.Handlers.EmployerQueries
             var values = await unitOfWork.employerRepository.GetAllAsync();
             return values.Select(x => new GetEmployerQueryResult
             {
+                Id = x.Id,
+                Name = x.Name,
                 LastName = x.LastName,
                 SecondLastName = x.LastName,
                 PhoneNumber = x.PhoneNumber,
@@ -37,12 +39,12 @@ namespace Project.Application.Features.CQRS.Handlers.EmployerQueries
                 DateOfEnd=x.DateOfEnd,
                 IdentityNumber = x.IdentityNumber,
                 PlaceOfBirth = x.PlaceOfBirth,
-               
+                
                 Profession=x.Profession,
                 CompanyId=x.CompanyId,
                 OffDays=x.OffDays,
-                Email=x.Email,
-                Company=x.Company,
+                Email=x.Email
+               
 
             }).ToList();
         }
