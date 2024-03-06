@@ -16,7 +16,7 @@ namespace Project.Application.Repositories.Abstract
         Task UpdateAsync(T entity);
         Task RemoveAsync(T entity);
         Task AddRangeAsync(IEnumerable<T> entities);
-      
+        public Task<List<T>> GetWhereListAsync(Expression<Func<T, bool>> predicate);
 
 
     }

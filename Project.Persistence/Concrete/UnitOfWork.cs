@@ -19,6 +19,8 @@ namespace Project.Application.UnitOfWork.Concrete
 
         public IEmployerRepository experienceRepository => throw new NotImplementedException();
 
+        public IEmployerRepository employerRepository => throw new NotImplementedException();
+
         public Task<int> CommitAsync()
         {
             throw new NotImplementedException();
