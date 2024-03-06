@@ -1,5 +1,7 @@
+
 using Microsoft.EntityFrameworkCore;
 using Project.Application.Features.CQRS.Handlers.EmployerQueries;
+
 using Project.Application.Repositories.Abstract;
 using Project.Application.UnitOfWork.Abstract;
 using Project.Application.UnitOfWork.Concrete;
@@ -15,7 +17,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<AppDbContext>(
-    o => o.UseSqlServer(builder.Configuration.GetConnectionString("Sude")));
+    o => o.UseSqlServer(builder.Configuration.GetConnectionString("Tarık")));
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
@@ -27,6 +29,8 @@ builder.Services.AddScoped<CreateEmployerCommandHandler>();
 builder.Services.AddScoped<UpdateEmployerCommandHandler>();
 builder.Services.AddScoped<RemoveEmployerCommandHandler>();
 
+
+builder.Services.AddScoped<IEmployerRepository, EmployerRepository>();
 
 var app = builder.Build();
 
