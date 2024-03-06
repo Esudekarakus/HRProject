@@ -4,9 +4,10 @@ using Project.Application.Features.CQRS.Handlers.EmployerQueries;
 
 using Project.Application.Repositories.Abstract;
 using Project.Application.UnitOfWork.Abstract;
-using Project.Application.UnitOfWork.Concrete;
+
 using Project.Persistence.Context;
 using Project.Persistence.Repositories.Concrete;
+using Project.Persistence.UnitOfWork.Concrete;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,7 +18,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<AppDbContext>(
-    o => o.UseSqlServer(builder.Configuration.GetConnectionString("Tarık")));
+    o => o.UseSqlServer(builder.Configuration.GetConnectionString("Sude")));
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
