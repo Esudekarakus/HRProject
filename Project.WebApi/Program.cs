@@ -1,4 +1,6 @@
 using Microsoft.EntityFrameworkCore;
+using Project.Application.UnitOfWork.Abstract;
+using Project.Application.UnitOfWork.Concrete;
 using Project.Persistence.Context;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,6 +13,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<AppDbContext>(
     o => o.UseSqlServer(builder.Configuration.GetConnectionString("Sude")));
+
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 var app = builder.Build();
 
