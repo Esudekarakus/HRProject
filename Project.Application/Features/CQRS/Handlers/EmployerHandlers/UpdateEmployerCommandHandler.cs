@@ -34,7 +34,7 @@ namespace Project.Application.Features.CQRS.Handlers.EmployerQueries
             values.Status = command.Status;
             values.DateOfStart = command.DateOfStart;
             values.DateOfEnd = command.DateOfEnd;
-            values.Company= command.Company;
+            
             values.OffDays= command.OffDays;
             values.ImagePath= command.ImagePath;
             values.CompanyId= command.CompanyId;
@@ -42,7 +42,7 @@ namespace Project.Application.Features.CQRS.Handlers.EmployerQueries
             values.DateOfBirth= DateTime.Now;
             values.IdentityNumber= command.IdentityNumber;
 
-            await repository.UpdateAsync(values);
+            await unitOfWork.employerRepository.UpdateAsync(values);
         }
     }
 }
