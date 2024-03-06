@@ -9,6 +9,7 @@ namespace Project.Application.Features.CQRS.Commands.CompanyCommands
 {
     public class CreateCompanyCommand
     {
+        public string Name { get; set; }
         public DateTime FoundationDate { get; set; }
         public string Address { get; set; }
         public string PhoneNumber { get; set; }
