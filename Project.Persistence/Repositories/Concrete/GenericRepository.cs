@@ -16,7 +16,7 @@ namespace Project.Persistence.Repositories.Concrete
 
         public GenericRepository(AppDbContext context)
         {
-            context = context;
+            this.context = context;
         }
 
         public async Task AddRangeAsync(IEnumerable<T> entities)
@@ -31,6 +31,8 @@ namespace Project.Persistence.Repositories.Concrete
             await context.SaveChangesAsync();
         }
 
+       
+
         public async Task<List<T>> GetAllAsync()
         {
             return await context.Set<T>().ToListAsync();
@@ -42,10 +44,20 @@ namespace Project.Persistence.Repositories.Concrete
            
         }
 
+        public async Task<List<T>> GetWhereListAsync(Expression<Func<T, bool>> predicate)
+        {
+            return await context.Set<T>().Where(predicate).ToListAsync();
+        }
+
         public async Task RemoveAsync(T entity)
         {
             context.Set<T>().Remove(entity);
             await context.SaveChangesAsync();
+        }
+
+        public async Task<T> SingleorDefault(Expression<Func<T, bool>> expression)
+        {
+            return await context.Set<T>().SingleOrDefaultAsync(expression);
         }
 
         public async Task UpdateAsync(T entity)
@@ -53,5 +65,7 @@ namespace Project.Persistence.Repositories.Concrete
             context.Set<T>().Update(entity);
             await context.SaveChangesAsync();
         }
+
+       
     }
 }
