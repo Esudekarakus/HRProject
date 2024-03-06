@@ -11,6 +11,7 @@ namespace Project.Application.UnitOfWork.Abstract
     public interface IUnitOfWork : IDisposable
     {
         IEmployerRepository employerRepository { get; }
+        ICompanyRepository companyRepository { get; }
 
         Task<int> CommitAsync();
         void Dispose();

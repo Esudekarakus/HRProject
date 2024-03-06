@@ -15,13 +15,14 @@ namespace Project.Persistence.UnitOfWork.Concrete
         private readonly AppDbContext _context;
 
         private EmployerRepository EmployerRepository;
-
+        private CompanyRepository CompanyRepository;
         public UnitOfWork(AppDbContext _context)
         {
             this._context = _context;
         }
 
         public IEmployerRepository employerRepository => EmployerRepository ?? new EmployerRepository(_context);
+        public ICompanyRepository companyRepository => CompanyRepository ?? new CompanyRepository(_context);
 
         public async Task<int> CommitAsync()
         {

@@ -22,6 +22,7 @@ namespace Project.Application.Features.CQRS.Handlers.EmployerQueries
         public async Task Handle(UpdateEmployerCommand command)
         {
             var values = await unitOfWork.employerRepository.GetByIdAsync(command.Id);
+            
 
             values.Name = command.Name;
             values.LastName = command.LastName;
