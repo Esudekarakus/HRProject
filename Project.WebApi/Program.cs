@@ -1,4 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+
+using Microsoft.EntityFrameworkCore;
+using Project.Application.Features.CQRS.Handlers.EmployerQueries;
+
 using Project.Application.Repositories.Abstract;
 using Project.Application.UnitOfWork.Abstract;
 using Project.Application.UnitOfWork.Concrete;
@@ -17,6 +20,15 @@ builder.Services.AddDbContext<AppDbContext>(
     o => o.UseSqlServer(builder.Configuration.GetConnectionString("Tarık")));
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
+builder.Services.AddScoped(typeof(IEmployerRepository), typeof(EmployerRepository));
+
+builder.Services.AddScoped<GetEmployerQueryHandler>();
+builder.Services.AddScoped<GetEmployerByIdQueryHandler>();
+builder.Services.AddScoped<CreateEmployerCommandHandler>();
+builder.Services.AddScoped<UpdateEmployerCommandHandler>();
+builder.Services.AddScoped<RemoveEmployerCommandHandler>();
+
 
 builder.Services.AddScoped<IEmployerRepository, EmployerRepository>();
 
