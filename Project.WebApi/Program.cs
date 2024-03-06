@@ -1,7 +1,9 @@
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using Project.Application.Repositories.Abstract;
 using Project.Application.UnitOfWork.Abstract;
 using Project.Application.UnitOfWork.Concrete;
 using Project.Persistence.Context;
+using Project.Persistence.Repositories.Concrete;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,9 +14,11 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<AppDbContext>(
-    o => o.UseSqlServer(builder.Configuration.GetConnectionString("Sude")));
+    o => o.UseSqlServer(builder.Configuration.GetConnectionString("Tarık")));
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+builder.Services.AddScoped<IEmployerRepository, EmployerRepository>();
 
 var app = builder.Build();
 
