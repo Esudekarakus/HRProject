@@ -8,7 +8,7 @@ namespace Project.Domain.Enum
 {
     public enum Status
     {
-        Active,
+        Active=1,
         Passive
     }
 }
