@@ -19,7 +19,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<AppDbContext>(
-    o => o.UseSqlServer(builder.Configuration.GetConnectionString("Reyhan")));
+    o => o.UseSqlServer(builder.Configuration.GetConnectionString("connectionStr")));
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
