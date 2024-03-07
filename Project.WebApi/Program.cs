@@ -1,6 +1,7 @@
 
 using Microsoft.EntityFrameworkCore;
 using Project.Application.Features.CQRS.Handlers.CompanyHandlers;
+using Project.Application.Features.CQRS.Handlers.EmployerHandlers;
 using Project.Application.Features.CQRS.Handlers.EmployerQueries;
 
 using Project.Application.Repositories.Abstract;
@@ -19,7 +20,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<AppDbContext>(
-    o => o.UseSqlServer(builder.Configuration.GetConnectionString("connectionStr")));
+    o => o.UseSqlServer(builder.Configuration.GetConnectionString("Sude")));
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
@@ -30,12 +31,13 @@ builder.Services.AddScoped<GetEmployerByIdQueryHandler>();
 builder.Services.AddScoped<CreateEmployerCommandHandler>();
 builder.Services.AddScoped<UpdateEmployerCommandHandler>();
 builder.Services.AddScoped<RemoveEmployerCommandHandler>();
+builder.Services.AddScoped<GetEmployerWithCompanyQueryResultHandler>();
 
 builder.Services.AddScoped<CreateCompanyCommandHandler>();
 builder.Services.AddScoped<UpdateCompanyCommandHandler>();
 builder.Services.AddScoped<RemoveCompanyCommandHandler>();
 builder.Services.AddScoped<GetCompanyByIdQueryHandler>();
-builder.Services.AddScoped<GetCompanyByIdQueryHandler>();
+builder.Services.AddScoped<GetCompanyQueryHandler>();
 
 
 builder.Services.AddScoped<IEmployerRepository, EmployerRepository>();

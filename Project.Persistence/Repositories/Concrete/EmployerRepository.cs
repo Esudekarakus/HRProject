@@ -20,6 +20,11 @@ namespace Project.Persistence.Repositories.Concrete
             this.Context = Context;
         }
 
+        public List<Employer> GetEmployersWithCompany()
+        {
+            return Context.Employers.Include(x => x.Company).ToList();
+        }
 
+        
     }
 }

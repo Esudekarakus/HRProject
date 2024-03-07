@@ -9,5 +9,6 @@ namespace Project.Application.Repositories.Abstract
 {
     public interface IEmployerRepository : IRepository<Employer>
     {
+      List<Employer> GetEmployersWithCompany();
     }
 }
