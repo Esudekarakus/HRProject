@@ -58,10 +58,14 @@ namespace Project.WebApi.Controllers
 
         }
 
-        [HttpPut]
+        [HttpPut("{id}")]
 
-        public async Task<IActionResult>UpdateEmployer(UpdateEmployerCommand command)
+        public async Task<IActionResult>UpdateEmployer(int id,UpdateEmployerCommand command)
         {
+            if(id != command.Id)
+            {
+                return BadRequest("Gönderilen ID ile istek yapılan ID uyuşmuyor.");
+            }
             await updateEmployerCommandHandler.Handle(command);
             return Ok("İşveren başarıyla güncellendi");
         }

@@ -379,6 +379,9 @@ namespace Project.Persistence.Migrations
                     b.Property<DateTime?>("DeletedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("Department")
+                        .HasColumnType("int");
+
                     b.Property<string>("IdentityNumber")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
