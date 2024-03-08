@@ -12,8 +12,8 @@ using Project.Persistence.Context;
 namespace Project.Persistence.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240306134440_hr")]
-    partial class hr
+    [Migration("20240308082928_f")]
+    partial class f
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -380,6 +380,9 @@ namespace Project.Persistence.Migrations
 
                     b.Property<DateTime?>("DeletedDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("Department")
+                        .HasColumnType("int");
 
                     b.Property<string>("IdentityNumber")
                         .IsRequired()

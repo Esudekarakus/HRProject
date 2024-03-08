@@ -24,24 +24,24 @@ namespace Project.Application.Features.CQRS.Handlers.EmployerQueries
             var values = await unitOfWork.employerRepository.GetByIdAsync(command.Id);
             
 
-            values.Name = command.Name;
-            values.LastName = command.LastName;
-            values.SecondName = command.SecondName;
-            values.SecondLastName = command.SecondLastName;
+            //values.Name = command.Name;
+            //values.LastName = command.LastName;
+            //values.SecondName = command.SecondName;
+            //values.SecondLastName = command.SecondLastName;
             values.PhoneNumber = command.PhoneNumber;
             values.Address = command.Address;
-            values.Profession= command.Profession;
-            values.Salary = command.Salary;
-            values.Status = command.Status;
-            values.DateOfStart = command.DateOfStart;
-            values.DateOfEnd = command.DateOfEnd;
-            values.Department = command.Department;
-            values.OffDays= command.OffDays;
-            values.ImagePath= command.ImagePath;
-            values.CompanyId= command.CompanyId;
-            values.UpdatedDate = DateTime.Now;
-            values.DateOfBirth=command.DateOfBirth;
-            values.IdentityNumber= command.IdentityNumber;
+            //values.Profession= command.Profession;
+            //values.Salary = command.Salary;
+            //values.Status = command.Status;
+            //values.DateOfStart = command.DateOfStart;
+            //values.DateOfEnd = command.DateOfEnd;
+            //values.Department = command.Department;
+            //values.OffDays= command.OffDays;
+            //values.ImagePath= command.ImagePath;
+            //values.CompanyId= command.CompanyId;
+            //values.UpdatedDate = DateTime.Now;
+            //values.DateOfBirth=command.DateOfBirth;
+            //values.IdentityNumber= command.IdentityNumber;
 
             await unitOfWork.employerRepository.UpdateAsync(values);
         }
