@@ -43,7 +43,7 @@ namespace Project.Application.Features.CQRS.Handlers.EmployerQueries
                 DateOfEnd = values.DateOfEnd,
                 IdentityNumber = values.IdentityNumber,
                 PlaceOfBirth = values.PlaceOfBirth,
-
+                Department = values.Department,
                 Profession = values.Profession,
                 CompanyId = values.CompanyId,
                 OffDays = values.OffDays,
