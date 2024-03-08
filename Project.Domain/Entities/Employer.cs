@@ -18,7 +18,7 @@ namespace Project.Domain.Entities
        public string PlaceOfBirth { get; set; }
        public DateTime DateOfBirth { get; set; }
        public Status Status { get; set; }
-
+       public Department Department { get; set; }
        public string ImagePath { get; set; }
        public string Address {  get; set; }
 

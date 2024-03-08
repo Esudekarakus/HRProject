@@ -8,7 +8,7 @@ namespace Project.Domain.Enum
 {
     public enum Department
     {
-        Management,
+        Management=1,
         Production,
         Marketing,
         Finance,

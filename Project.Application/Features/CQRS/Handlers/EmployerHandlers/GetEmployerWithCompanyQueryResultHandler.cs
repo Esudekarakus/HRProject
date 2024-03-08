@@ -42,7 +42,8 @@ namespace Project.Application.Features.CQRS.Handlers.EmployerHandlers
                 Name = x.Name,
                 PhoneNumber = x.PhoneNumber,
                 PlaceOfBirth = x.PlaceOfBirth,
-                Profession=x.Profession
+                Profession=x.Profession,
+                Department=x.Department,
                 
             }).ToList();
         }

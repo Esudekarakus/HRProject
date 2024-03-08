@@ -40,6 +40,7 @@ namespace Project.Application.Features.CQRS.Handlers.EmployerQueries
                 DateOfEnd=command.DateOfEnd,
                 OffDays=command.OffDays,
                 CompanyId=command.CompanyId,
+                Department=command.Department,
                 
 
             });

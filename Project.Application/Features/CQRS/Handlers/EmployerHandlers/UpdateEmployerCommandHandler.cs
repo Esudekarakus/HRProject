@@ -35,7 +35,7 @@ namespace Project.Application.Features.CQRS.Handlers.EmployerQueries
             values.Status = command.Status;
             values.DateOfStart = command.DateOfStart;
             values.DateOfEnd = command.DateOfEnd;
-            
+            values.Department = command.Department;
             values.OffDays= command.OffDays;
             values.ImagePath= command.ImagePath;
             values.CompanyId= command.CompanyId;
