@@ -32,6 +32,7 @@ builder.Services.AddScoped<CreateEmployerCommandHandler>();
 builder.Services.AddScoped<UpdateEmployerCommandHandler>();
 builder.Services.AddScoped<RemoveEmployerCommandHandler>();
 builder.Services.AddScoped<GetEmployerWithCompanyQueryResultHandler>();
+builder.Services.AddScoped<GetEmployerByIdWithCompanyQueryHandler>();
 
 builder.Services.AddScoped<CreateCompanyCommandHandler>();
 builder.Services.AddScoped<UpdateCompanyCommandHandler>();

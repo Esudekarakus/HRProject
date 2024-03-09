@@ -17,8 +17,9 @@ namespace Project.WebApi.Controllers
         private readonly UpdateEmployerCommandHandler updateEmployerCommandHandler;
         private readonly RemoveEmployerCommandHandler removeEmployerCommandHandler;
         private readonly GetEmployerWithCompanyQueryResultHandler getEmployerWithCompanyQueryResultHandler;
+        private readonly GetEmployerByIdWithCompanyQueryHandler getEmployerByIdWithCompanyQueryHandler;
 
-        public EmployerController(CreateEmployerCommandHandler createEmployerCommandHandler, GetEmployerByIdQueryHandler getEmployerByIdQueryHandler, GetEmployerQueryHandler getEmployerQueryHandler, UpdateEmployerCommandHandler updateEmployerCommandHandler, RemoveEmployerCommandHandler removeEmployerCommandHandler, GetEmployerWithCompanyQueryResultHandler getEmployerWithCompanyQueryResultHandler)
+        public EmployerController(CreateEmployerCommandHandler createEmployerCommandHandler, GetEmployerByIdQueryHandler getEmployerByIdQueryHandler, GetEmployerQueryHandler getEmployerQueryHandler, UpdateEmployerCommandHandler updateEmployerCommandHandler, RemoveEmployerCommandHandler removeEmployerCommandHandler, GetEmployerWithCompanyQueryResultHandler getEmployerWithCompanyQueryResultHandler, GetEmployerByIdWithCompanyQueryHandler getEmployerByIdWithCompanyQueryHandler)
         {
             this.createEmployerCommandHandler = createEmployerCommandHandler;
             this.getEmployerByIdQueryHandler = getEmployerByIdQueryHandler;
@@ -26,6 +27,7 @@ namespace Project.WebApi.Controllers
             this.updateEmployerCommandHandler = updateEmployerCommandHandler;
             this.removeEmployerCommandHandler = removeEmployerCommandHandler;
             this.getEmployerWithCompanyQueryResultHandler = getEmployerWithCompanyQueryResultHandler;
+            this.getEmployerByIdWithCompanyQueryHandler= getEmployerByIdWithCompanyQueryHandler;
         }
 
         [HttpGet]
@@ -40,6 +42,14 @@ namespace Project.WebApi.Controllers
         {
 
             var value = await getEmployerByIdQueryHandler.Handle(new GetEmployerByIdQuery(id));
+            return Ok(value);
+        }
+
+        [HttpGet("GetEmployerWithCompanyById")]
+
+        public async Task<IActionResult> GetEmployerByIdWithCompany(int id)
+        {
+            var value= await getEmployerByIdWithCompanyQueryHandler.Handle(new GetEmployerByIdWithCompanyQuery(id));
             return Ok(value);
         }
         [HttpPost]
