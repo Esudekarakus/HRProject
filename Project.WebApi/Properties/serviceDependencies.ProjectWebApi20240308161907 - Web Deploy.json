@@ -30,6 +30,11 @@
       "ignored": "true",
       "type": "mssql",
       "connectionId": "ConnectionStrings:Gökçe"
+    },
+    "mssql5": {
+      "ignored": "true",
+      "type": "mssql",
+      "connectionId": "ConnectionStrings:Reyhan"
     }
   }
 }
