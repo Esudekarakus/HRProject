@@ -16,7 +16,7 @@ namespace Project.Application.Features.CQRS.Results.EmployerResults
         public string LastName { get; set; }
         public string SecondName { get; set; }
         public string SecondLastName { get; set; }
-        public Department   Department { get; set; }
+        public string   Department { get; set; }
         public DateTime DateOfBirth { get; set; }
         public Status Status { get; set; }
 
