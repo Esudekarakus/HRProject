@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Project.Persistence.Migrations
 {
-    public partial class d : Migration
+    public partial class f : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -28,6 +28,9 @@ namespace Project.Persistence.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Discriminator = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -249,6 +252,41 @@ namespace Project.Persistence.Migrations
                         principalTable: "Companies",
                         principalColumn: "Id");
                 });
+
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[,]
+                {
+                    { "adminRoleId", "98b6047f-84bc-4804-b7d8-4e4350d27d95", "admin", "ADMIN" },
+                    { "employeeRoleId", "98817269-9892-4298-b42d-b34507508968", "employee", "EMPLOYEE" },
+                    { "employerRoleId", "d57de4ba-0535-4cf3-8a85-7b5ef136bfb9", "employer", "EMPLOYER" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Discriminator", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[,]
+                {
+                    { "adminUserId", 0, "5bbfc0ac-78f2-4a1d-af25-3a9d0ad32cc1", "AppUser", "admin@contoso.com", false, "Admin", "Admin", false, null, "ADMIN@BOOST.COM", "ADMIN", "AQAAAAEAACcQAAAAEB0Jo8ni7z043pwe0sRQbhpdepaMrqDGh6VJoIQKOW08xvR4T1B3COnqpTRcHLgeeA==", null, false, "", false, "admin" },
+                    { "employeeUserId", 0, "db62114a-3484-4212-9827-277de2f0a2a6", "AppUser", "employee@contoso.com", false, "Employee", "Employee", false, null, "EMPLOYEE@BOOST.COM", "EMPLOYEE", "AQAAAAEAACcQAAAAEGhuwaLxufcup6DrFwh1V8n3cqCQoSP6DWCf6s6qEARGD2sJ3AOumPUfC248AgdsrQ==", null, false, "", false, "employee" },
+                    { "employerUserId", 0, "9f51513b-16fb-4574-8c4a-c84c8bbd58ba", "AppUser", "employer@contoso.com", false, "Employer", "Employer", false, null, "EMPLOYER@BOOST.COM", "EMPLOYER", "AQAAAAEAACcQAAAAEG+/kT6ABnHm87d2h1wRIpNL477+m0hVcXHX4UuBqfgm3JZMXGlL8S1osPsrwMl9SA==", null, false, "", false, "employer" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUserRoles",
+                columns: new[] { "RoleId", "UserId" },
+                values: new object[] { "adminRoleId", "adminUserId" });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUserRoles",
+                columns: new[] { "RoleId", "UserId" },
+                values: new object[] { "employeeRoleId", "employeeUserId" });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUserRoles",
+                columns: new[] { "RoleId", "UserId" },
+                values: new object[] { "employerRoleId", "employerUserId" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

@@ -47,6 +47,29 @@ namespace Project.Persistence.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "adminRoleId",
+                            ConcurrencyStamp = "98b6047f-84bc-4804-b7d8-4e4350d27d95",
+                            Name = "admin",
+                            NormalizedName = "ADMIN"
+                        },
+                        new
+                        {
+                            Id = "employerRoleId",
+                            ConcurrencyStamp = "d57de4ba-0535-4cf3-8a85-7b5ef136bfb9",
+                            Name = "employer",
+                            NormalizedName = "EMPLOYER"
+                        },
+                        new
+                        {
+                            Id = "employeeRoleId",
+                            ConcurrencyStamp = "98817269-9892-4298-b42d-b34507508968",
+                            Name = "employee",
+                            NormalizedName = "EMPLOYEE"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -84,6 +107,10 @@ namespace Project.Persistence.Migrations
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
@@ -137,6 +164,8 @@ namespace Project.Persistence.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -199,6 +228,23 @@ namespace Project.Persistence.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "adminUserId",
+                            RoleId = "adminRoleId"
+                        },
+                        new
+                        {
+                            UserId = "employerUserId",
+                            RoleId = "employerRoleId"
+                        },
+                        new
+                        {
+                            UserId = "employeeUserId",
+                            RoleId = "employeeRoleId"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -438,6 +484,77 @@ namespace Project.Persistence.Migrations
                     b.HasIndex("CompanyId");
 
                     b.ToTable("Employers");
+                });
+
+            modelBuilder.Entity("Project.Persistence.Identity.AppUser", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasDiscriminator().HasValue("AppUser");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "adminUserId",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "5bbfc0ac-78f2-4a1d-af25-3a9d0ad32cc1",
+                            Email = "admin@contoso.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "ADMIN@BOOST.COM",
+                            NormalizedUserName = "ADMIN",
+                            PasswordHash = "AQAAAAEAACcQAAAAEB0Jo8ni7z043pwe0sRQbhpdepaMrqDGh6VJoIQKOW08xvR4T1B3COnqpTRcHLgeeA==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "",
+                            TwoFactorEnabled = false,
+                            UserName = "admin",
+                            FirstName = "Admin",
+                            LastName = "Admin"
+                        },
+                        new
+                        {
+                            Id = "employerUserId",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "9f51513b-16fb-4574-8c4a-c84c8bbd58ba",
+                            Email = "employer@contoso.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "EMPLOYER@BOOST.COM",
+                            NormalizedUserName = "EMPLOYER",
+                            PasswordHash = "AQAAAAEAACcQAAAAEG+/kT6ABnHm87d2h1wRIpNL477+m0hVcXHX4UuBqfgm3JZMXGlL8S1osPsrwMl9SA==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "",
+                            TwoFactorEnabled = false,
+                            UserName = "employer",
+                            FirstName = "Employer",
+                            LastName = "Employer"
+                        },
+                        new
+                        {
+                            Id = "employeeUserId",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "db62114a-3484-4212-9827-277de2f0a2a6",
+                            Email = "employee@contoso.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "EMPLOYEE@BOOST.COM",
+                            NormalizedUserName = "EMPLOYEE",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGhuwaLxufcup6DrFwh1V8n3cqCQoSP6DWCf6s6qEARGD2sJ3AOumPUfC248AgdsrQ==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "",
+                            TwoFactorEnabled = false,
+                            UserName = "employee",
+                            FirstName = "Employee",
+                            LastName = "Employee"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
