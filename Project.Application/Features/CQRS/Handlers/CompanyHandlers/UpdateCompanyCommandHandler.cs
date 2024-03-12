@@ -21,14 +21,17 @@ namespace Project.Application.Features.CQRS.Handlers.CompanyHandlers
         public async Task Handle(UpdateCompanyCommand command)
         {
             var values = await unitOfWork.companyRepository.GetByIdAsync(command.Id);
+            if(values != null)
+            {
+                values.PhoneNumber = command.PhoneNumber;
+                values.VatNumber = command.VatNumber;
+                values.Address = command.Address;
+                values.Address = command.Address;
+                values.FoundationDate = command.FoundationDate;
 
-            values.PhoneNumber = command.PhoneNumber;
-            values.VatNumber = command.VatNumber;
-            values.Address = command.Address;   
-            values.Address=command.Address;
-            values.FoundationDate = command.FoundationDate;
-           
-            await unitOfWork.companyRepository.UpdateAsync(values);
+                await unitOfWork.companyRepository.UpdateAsync(values);
+            }
+            
         }
     }
 }

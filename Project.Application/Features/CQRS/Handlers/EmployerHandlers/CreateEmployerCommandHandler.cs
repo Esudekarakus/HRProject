@@ -18,13 +18,13 @@ namespace Project.Application.Features.CQRS.Handlers.EmployerQueries
         {
              this.unitOfWork=unitOfWork;
         }
-
+        
         public async Task Handle(CreateEmployerCommand command)
         {
             await unitOfWork.employerRepository.CreateAsync(new Employer
             {
                 Name=command.Name,
-                SecondName=command.SecondName,
+                MiddleName=command.MiddleName,
                 LastName=command.LastName,
                 SecondLastName=command.LastName,
                 DateOfBirth=command.DateOfBirth,

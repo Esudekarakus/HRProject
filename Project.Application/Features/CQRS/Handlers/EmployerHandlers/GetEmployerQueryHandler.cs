@@ -18,7 +18,7 @@ namespace Project.Application.Features.CQRS.Handlers.EmployerQueries
         {
             this.unitOfWork = unitOfWork;
         }
-
+        
         public async Task<List<GetEmployerQueryResult>> Handle()
         {
             var values = await unitOfWork.employerRepository.GetAllAsync();
@@ -29,7 +29,7 @@ namespace Project.Application.Features.CQRS.Handlers.EmployerQueries
                 LastName = x.LastName,
                 SecondLastName = x.LastName,
                 PhoneNumber = x.PhoneNumber,
-                SecondName = x.LastName,
+                MiddleName = x.MiddleName,
                 Status = x.Status,
                 ImagePath = x.ImagePath,
                 Address = x.Address,

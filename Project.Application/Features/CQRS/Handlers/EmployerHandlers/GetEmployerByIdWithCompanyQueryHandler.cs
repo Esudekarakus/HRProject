@@ -18,7 +18,7 @@ namespace Project.Application.Features.CQRS.Handlers.EmployerHandlers
             this.unitOfWork = unitOfWork;
         }
 
-        public IUnitOfWork UnitOfWork => unitOfWork;
+       
 
         public async Task<GetEmployerByIdWithCompanyQueryResult> Handle(GetEmployerByIdWithCompanyQuery query)
         {
@@ -29,7 +29,7 @@ namespace Project.Application.Features.CQRS.Handlers.EmployerHandlers
                Id = values.Id,
                Salary = values.Salary,
                SecondLastName = values.LastName,
-               SecondName = values.LastName,
+               MiddleName = values.MiddleName,
                Address = values.Address,    
                Status = values.Status,
                DateOfStart = values.DateOfStart,

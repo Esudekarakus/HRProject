@@ -21,7 +21,7 @@ namespace Project.Application.Features.CQRS.Handlers.EmployerQueries
             this.unitOfWork = unitOfWork;
         }
 
-        public IUnitOfWork UnitOfWork => unitOfWork;
+       
 
         public async Task<GetEmployerByIdQueryResult> Handle(GetEmployerByIdQuery query)
         {
@@ -33,7 +33,7 @@ namespace Project.Application.Features.CQRS.Handlers.EmployerQueries
                 LastName = values.LastName,
                 SecondLastName = values.LastName,
                 PhoneNumber = values.PhoneNumber,
-                SecondName = values.LastName,
+                MiddleName = values.MiddleName,
                 Status = values.Status,
                 ImagePath = values.ImagePath,
                 Address = values.Address,

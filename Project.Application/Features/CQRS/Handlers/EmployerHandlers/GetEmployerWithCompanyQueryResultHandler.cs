@@ -16,7 +16,7 @@ namespace Project.Application.Features.CQRS.Handlers.EmployerHandlers
         {
             this.unitOfWork = unitOfWork;
         }
-
+       
 
         public  List<GetEmployerWithCompanyQueryResult> Handle() 
         {
@@ -27,7 +27,7 @@ namespace Project.Application.Features.CQRS.Handlers.EmployerHandlers
                 DateOfEnd = x.DateOfEnd,
                 Salary = x.Salary,
                 SecondLastName = x.SecondLastName,
-                SecondName = x.SecondName,
+                MiddleName = x.MiddleName,
                 Status = x.Status,
                 DateOfStart = x.DateOfStart,
                 OffDays = x.OffDays,
