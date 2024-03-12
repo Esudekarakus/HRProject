@@ -16,6 +16,7 @@ namespace Project.Persistence.UnitOfWork.Concrete
 
         private EmployerRepository EmployerRepository;
         private CompanyRepository CompanyRepository;
+        private EmployeeRepository EmployeeRepository;
         public UnitOfWork(AppDbContext _context)
         {
             this._context = _context;
@@ -23,7 +24,7 @@ namespace Project.Persistence.UnitOfWork.Concrete
 
         public IEmployerRepository employerRepository => EmployerRepository ?? new EmployerRepository(_context);
         public ICompanyRepository companyRepository => CompanyRepository ?? new CompanyRepository(_context);
-
+        public IEmployeeRepository employeeRepository => EmployeeRepository ?? new EmployeeRepository(_context);
         public async Task<int> CommitAsync()
         {
             return await _context.SaveChangesAsync();

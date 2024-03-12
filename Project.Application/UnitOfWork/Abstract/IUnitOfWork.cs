@@ -12,6 +12,7 @@ namespace Project.Application.UnitOfWork.Abstract
     {
         IEmployerRepository employerRepository { get; }
         ICompanyRepository companyRepository { get; }
+        IEmployeeRepository employeeRepository { get; }
 
         Task<int> CommitAsync();
         void Dispose();

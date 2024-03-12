@@ -14,7 +14,7 @@ namespace Project.Application.Features.CQRS.Commands.EmployerCommands
 
         public string Name { get; set; }
         public string LastName { get; set; }
-        public string SecondName { get; set; }
+        public string MiddleName { get; set; }
         public string SecondLastName { get; set; }
         public DateTime DateOfBirth { get; set; }
         public string Department { get; set; }

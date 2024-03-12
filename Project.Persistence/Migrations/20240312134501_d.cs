@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Project.Persistence.Migrations
 {
-    public partial class f : Migration
+    public partial class d : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -180,20 +180,20 @@ namespace Project.Persistence.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    FirstName2 = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    MiddleName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    LastName2 = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    SecondLastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: false),
                     BirthOfPlace = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IdendificationNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IdendificationNumber = table.Column<string>(type: "nvarchar(11)", maxLength: 11, nullable: false),
                     DateOfStart = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DateOfEnd = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CompanyId = table.Column<int>(type: "int", nullable: true),
-                    Department = table.Column<int>(type: "int", nullable: false),
+                    Department = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Status = table.Column<int>(type: "int", nullable: false),
                     ImageURL = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Salary = table.Column<double>(type: "float", nullable: false),
                     OffDays = table.Column<int>(type: "int", nullable: true),
                     Profession = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -219,13 +219,13 @@ namespace Project.Persistence.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SecondName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    MiddleName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     SecondLastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IdentityNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IdentityNumber = table.Column<string>(type: "nvarchar(11)", maxLength: 11, nullable: false),
                     PlaceOfBirth = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Status = table.Column<int>(type: "int", nullable: false),
-                    Department = table.Column<int>(type: "int", nullable: false),
+                    Department = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ImagePath = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
