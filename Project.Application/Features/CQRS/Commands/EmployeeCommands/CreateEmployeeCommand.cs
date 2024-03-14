@@ -39,5 +39,7 @@ namespace Project.Application.Features.CQRS.Commands.EmployeeCommands
         public double Salary { get; set; }
         public int? OffDays { get; set; }
         public string Profession { get; set; }
+
+        public string PrivateMail { get; set; }
     }
 }

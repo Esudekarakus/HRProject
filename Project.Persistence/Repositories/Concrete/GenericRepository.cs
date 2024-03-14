@@ -44,6 +44,11 @@ namespace Project.Persistence.Repositories.Concrete
            
         }
 
+        public async Task<T> FirstOrDefaultAsync(Expression<Func<T, bool>> predicate)
+        {
+            return await context.Set<T>().FirstOrDefaultAsync(predicate);
+        }
+
         public async Task<List<T>> GetWhereListAsync(Expression<Func<T, bool>> predicate)
         {
             return await context.Set<T>().Where(predicate).ToListAsync();
