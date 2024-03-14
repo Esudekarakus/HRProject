@@ -29,6 +29,7 @@ namespace Project.Domain.Entities
         public string ImageURL { get; set; }
 
         public string Address { get; set; }
+        public string PrivateMail { get; set; }
 
         [Phone]
         public string PhoneNumber { get; set; }

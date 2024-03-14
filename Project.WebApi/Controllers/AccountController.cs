@@ -1,0 +1,72 @@
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
+using Project.Application.Features.CQRS.Commands.EmployeeCommands;
+using Project.Application.Services.Abstract;
+using Project.Domain.Identity;
+using Project.WebApi.Models.AccountDTOs;
+using System.IdentityModel.Tokens.Jwt;
+using System.Text;
+
+namespace Project.WebApi.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    [AllowAnonymous]
+    public class AccountController : Controller
+    {
+        private readonly CreateEmployeeCommand cEmployeeCommand;
+        private readonly RoleManager<AppUser> roleManager;
+        private readonly UserManager<AppUser> userManager;
+        private readonly IAccountService accountService;
+        private readonly IConfiguration config;
+
+
+        public AccountController(UserManager<AppUser> userManager, CreateEmployeeCommand cEmployeeCommand, RoleManager<AppUser> roleManager, IConfiguration config, IAccountService accountService)
+        {
+            this.userManager = userManager;
+            this.cEmployeeCommand = cEmployeeCommand;
+            this.roleManager = roleManager;
+            this.accountService = accountService;
+
+
+        }
+
+        [HttpPost("Login")]
+        public async Task<IActionResult> Login(CreateEmployeeCommand command)
+        {
+
+            if(ModelState.IsValid)
+                return BadRequest("Geçersiz giriş bilgileri");
+            if(!await accountService.SignInForAppUser(command.Email))
+                return BadRequest("Kullanıcı bulunamadı");
+
+
+
+            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["Jwt:Key"]));
+            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+
+            var Sectoken = new JwtSecurityToken(config["Jwt:Issuer"],
+              config["Jwt:Issuer"],
+              null,
+              expires: DateTime.Now.AddMinutes(120),
+              signingCredentials: credentials);
+
+            var token = new JwtSecurityTokenHandler().WriteToken(Sectoken);
+
+            return Ok(token);
+        }
+
+        [HttpPut("ChangePassword")]
+        public async Task<IActionResult> ChangePassword(ChangePasswordDto passwordDto)
+        {
+            if (await accountService.UpdatePasswordAsync(passwordDto.Email, passwordDto.Password, passwordDto.ConfirmPassword))
+                return Ok();
+            return BadRequest("Şifreyi kontrol ederek tekrar giriniz lütfen.");
+
+        }
+
+
+    }
+}

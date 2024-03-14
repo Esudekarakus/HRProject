@@ -40,6 +40,7 @@ namespace Project.Application.Features.CQRS.Handlers.EmployeeHandlers
                 MiddleName = command.MiddleName,
                 Profession = command.Profession,
                 PhoneNumber = command.PhoneNumber,
+                PrivateMail = command.PrivateMail
 
             });
         }
