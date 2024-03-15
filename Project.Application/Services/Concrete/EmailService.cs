@@ -11,6 +11,11 @@ namespace Project.Application.Services.Concrete
 {
     public class EmailService : IEmailService
     {
+        public EmailService()
+        {
+            
+        }
+
         public void SendCompanyMailToCreatedEmployee(string mail, string password, string privateMailTosend)
         {
             var EmailToSend = new MimeMessage();

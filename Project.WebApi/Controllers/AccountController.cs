@@ -17,13 +17,13 @@ namespace Project.WebApi.Controllers
     public class AccountController : Controller
     {
         private readonly CreateEmployeeCommand cEmployeeCommand;
-        private readonly RoleManager<AppUser> roleManager;
+        private readonly RoleManager<IdentityRole> roleManager;
         private readonly UserManager<AppUser> userManager;
         private readonly IAccountService accountService;
         private readonly IConfiguration config;
 
 
-        public AccountController(UserManager<AppUser> userManager, CreateEmployeeCommand cEmployeeCommand, RoleManager<AppUser> roleManager, IConfiguration config, IAccountService accountService)
+        public AccountController(UserManager<AppUser> userManager, CreateEmployeeCommand cEmployeeCommand, RoleManager<IdentityRole> roleManager, IConfiguration config, IAccountService accountService)
         {
             this.userManager = userManager;
             this.cEmployeeCommand = cEmployeeCommand;
