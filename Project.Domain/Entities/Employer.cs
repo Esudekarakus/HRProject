@@ -1,5 +1,7 @@
-﻿using Project.Domain.Enum;
+﻿using Microsoft.AspNetCore.Http;
+using Project.Domain.Enum;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace Project.Domain.Entities
@@ -17,7 +19,8 @@ namespace Project.Domain.Entities
         public Status Status { get; set; }
         public string Department { get; set; }
         public string ImagePath { get; set; }
-
+        [NotMapped]
+        public IFormFile ImageFile { get; set; }
         public string Address { get; set; }
 
         [Phone]
