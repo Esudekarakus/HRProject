@@ -41,7 +41,7 @@ namespace Project.Application.Features.CQRS.Handlers.EmployeeHandlers
                 Email=x.Email,
                 Id=x.Id,
                 IdendificationNumber=x.IdendificationNumber,
-                ImageURL=x.ImageURL,
+               
                 PhoneNumber=x.PhoneNumber,
                 Profession=x.Profession
                 
