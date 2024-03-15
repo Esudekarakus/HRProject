@@ -28,6 +28,7 @@ namespace Project.Persistence.Repositories.Concrete
             return _Context.Employees.Include(x=>x.Company).ToList();    
         }
 
+
         
     }
 }

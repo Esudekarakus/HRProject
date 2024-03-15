@@ -17,14 +17,16 @@ namespace Project.WebApi.Controllers
         private readonly RemoveEmployeeCommandHandler removeEmployeeCommandHandler;
         private readonly GetEmployeeByIdWithCompanyHandler getEmployeeByIdWithCompanyHandler;
         private readonly GetEmployeeWithCompanyHandler getEmployeeWithCompanyHandler;
+        private readonly IWebHostEnvironment environment;
 
-        public EmployeeController(CreateEmployeeCommandHandler createEmployeeCommandHandler, UpdateEmployeeCommandHandler updateEmployeeCommandHandler, RemoveEmployeeCommandHandler removeEmployeeCommandHandler, GetEmployeeByIdWithCompanyHandler getEmployeeByIdWithCompanyHandler, GetEmployeeWithCompanyHandler getEmployeeWithCompanyHandler)
+        public EmployeeController(CreateEmployeeCommandHandler createEmployeeCommandHandler, UpdateEmployeeCommandHandler updateEmployeeCommandHandler, RemoveEmployeeCommandHandler removeEmployeeCommandHandler, GetEmployeeByIdWithCompanyHandler getEmployeeByIdWithCompanyHandler, GetEmployeeWithCompanyHandler getEmployeeWithCompanyHandler, IWebHostEnvironment environment)
         {
             this.createEmployeeCommandHandler = createEmployeeCommandHandler;
             this.updateEmployeeCommandHandler = updateEmployeeCommandHandler;
             this.removeEmployeeCommandHandler = removeEmployeeCommandHandler;
             this.getEmployeeByIdWithCompanyHandler = getEmployeeByIdWithCompanyHandler;
             this.getEmployeeWithCompanyHandler = getEmployeeWithCompanyHandler;
+            this.environment = environment;
         }
 
         [HttpGet]
@@ -43,8 +45,9 @@ namespace Project.WebApi.Controllers
         }
         [HttpPost]
 
-        public async Task<IActionResult> CreateEmployee(CreateEmployeeCommand command)
+        public async Task<IActionResult> CreateEmployee([FromForm]CreateEmployeeCommand command)
         {
+            command.ImageName = await SaveImage(command.ImageFile);
             await createEmployeeCommandHandler.Handle(command);
             return Ok("Çalışan başarıyla eklendi");
         }
@@ -67,6 +70,19 @@ namespace Project.WebApi.Controllers
             }
             await updateEmployeeCommandHandler.Handle(command);
             return Ok("Çalışan başarıyla güncellendi");
+        }
+
+        [NonAction]
+        public async Task<string> SaveImage(IFormFile imageFile)
+        {
+            string imageName = new String(Path.GetFileNameWithoutExtension(imageFile.FileName).Take(10).ToArray()).Replace(' ', '-');
+            imageName = imageName + DateTime.Now.ToString("yymmssfff") + Path.GetExtension(imageFile.FileName);
+            var imagePath = Path.Combine(environment.ContentRootPath, "Images", imageName);
+            using (var fileStream = new FileStream(imagePath, FileMode.Create))
+            {
+                await imageFile.CopyToAsync(fileStream);
+            }
+            return imageName;
         }
     }
 }
