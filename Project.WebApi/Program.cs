@@ -1,17 +1,23 @@
 ﻿
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Project.Application.DTOs;
+using Project.Application.Features.CQRS.Commands.EmployeeCommands;
 using Project.Application.Features.CQRS.Handlers.CompanyHandlers;
 using Project.Application.Features.CQRS.Handlers.EmployeeHandlers;
 using Project.Application.Features.CQRS.Handlers.EmployerHandlers;
 using Project.Application.Features.CQRS.Handlers.EmployerQueries;
 
 using Project.Application.Repositories.Abstract;
+using Project.Application.Services.Abstract;
+using Project.Application.Services.Concrete;
 using Project.Application.UnitOfWork.Abstract;
-
+using Project.Application.Validation;
+using Project.Domain.Identity;
 using Project.Persistence.Context;
 using Project.Persistence.Repositories.Concrete;
 using Project.Persistence.UnitOfWork.Concrete;
@@ -29,6 +35,11 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<AppDbContext>(
     o => o.UseSqlServer(builder.Configuration.GetConnectionString("Sude")));
+
+builder.Services.AddIdentity<AppUser, IdentityRole>()
+    .AddEntityFrameworkStores<AppDbContext>();
+
+builder.Services.AddScoped<RoleManager<IdentityRole>>();
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
@@ -54,10 +65,21 @@ builder.Services.AddScoped<RemoveEmployeeCommandHandler>();
 builder.Services.AddScoped<GetEmployeeByIdWithCompanyHandler>();
 builder.Services.AddScoped<GetEmployeeWithCompanyHandler>();
 
+builder.Services.AddScoped<CreateEmployeeCommand>();
+
 
 builder.Services.AddScoped<IEmployerRepository, EmployerRepository>();
 builder.Services.AddScoped<ICompanyRepository, CompanyRepository>();
 builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+
+builder.Services.AddScoped<IAccountService, AccountService>();
+builder.Services.AddScoped<IEmailService, EmailService>();
+
+builder.Services.AddControllers()
+    .AddFluentValidation(fv =>
+    {
+        fv.RegisterValidatorsFromAssemblyContaining<AddingPersonelValid>();
+    });
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
  .AddJwtBearer(options =>

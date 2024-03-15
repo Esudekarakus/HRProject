@@ -13,12 +13,12 @@ namespace Project.Application.Services.Concrete
 {
     public class AccountService : IAccountService
     {
-        private readonly RoleManager<AppUser> roleManager;
+        private readonly RoleManager<IdentityRole> roleManager;
         private readonly UserManager<AppUser> userManager;
         private readonly SignInManager<AppUser> signInManager;
         private readonly IUnitOfWork unitOfWork;
 
-        public AccountService(RoleManager<AppUser> roleManager, UserManager<AppUser> userManager, IUnitOfWork unitOfWork, SignInManager<AppUser> signInManager)
+        public AccountService(RoleManager<IdentityRole> roleManager, UserManager<AppUser> userManager, IUnitOfWork unitOfWork, SignInManager<AppUser> signInManager)
         {
             this.roleManager = roleManager;
             this.userManager = userManager;

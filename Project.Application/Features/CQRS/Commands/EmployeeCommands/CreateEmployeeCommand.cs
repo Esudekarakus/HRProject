@@ -42,5 +42,7 @@ namespace Project.Application.Features.CQRS.Commands.EmployeeCommands
         public string Profession { get; set; }
 
         public string PrivateMail { get; set; }
+
+        public string Password { get; set; }
     }
 }
