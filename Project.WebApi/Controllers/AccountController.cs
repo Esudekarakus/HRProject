@@ -81,10 +81,22 @@ namespace Project.WebApi.Controllers
         [HttpPut("ChangePassword")]
         public async Task<IActionResult> ChangePassword(ChangePasswordDto passwordDto)
         {
-            if (await accountService.UpdatePasswordAsync(passwordDto.Email, passwordDto.Password, passwordDto.ConfirmPassword))
-                return Ok();
-            return BadRequest("Şifreyi kontrol ederek tekrar giriniz lütfen.");
+            if (!await accountService.IsUserValid(passwordDto.Email))
+            {
+                return BadRequest("Kullanıcı bulunamadı.");
+            }
 
+            if (!await accountService.IfPasswordMatches(passwordDto.Password, passwordDto.ConfirmPassword))
+            {
+                return BadRequest("Parolalar eşleşmiyor.");
+            }
+
+            if (await accountService.UpdatePasswordAsync(passwordDto.Email, passwordDto.Password, passwordDto.ConfirmPassword))
+            {
+                return Ok();
+            }
+
+            return BadRequest("Parola güncellenemedi.");
         }
 
 
