@@ -14,5 +14,6 @@ namespace Project.Application.Features.CQRS.Commands.CompanyCommands
         public string Address { get; set; }
         public string PhoneNumber { get; set; }
         public int VatNumber { get; set; }
+        
     }
 }

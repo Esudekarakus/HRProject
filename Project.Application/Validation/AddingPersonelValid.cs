@@ -12,9 +12,9 @@ namespace Project.Application.Validation
     {
         public AddingPersonelValid()
         {
-            RuleFor(x => x.ImageURL).NotNull().WithMessage("Lütfen bir resim dosyası seçin.");
+            //RuleFor(x => x.ImageURL).NotNull().WithMessage("Lütfen bir resim dosyası seçin.");
 
-            RuleFor(dto => dto.Profession)
+            RuleFor(dto => dto.Department)
                 .NotEmpty().WithMessage("Departman alanı boş geçilemez!");
 
             RuleFor(x => x.Profession)

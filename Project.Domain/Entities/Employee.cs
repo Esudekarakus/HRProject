@@ -6,6 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Project.Domain.Enum;
+using Microsoft.AspNetCore.Http;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Project.Domain.Entities
 {
@@ -26,8 +28,10 @@ namespace Project.Domain.Entities
         public Company? Company { get; set; }
         public string Department { get; set; }
         public Status Status { get; set; }
-        public string ImageURL { get; set; }
+        public string ImageName { get; set; }
 
+        [NotMapped]
+        public IFormFile ImageFile { get; set; }
         public string Address { get; set; }
         public string PrivateMail { get; set; }
 
