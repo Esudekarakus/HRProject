@@ -4,13 +4,6 @@
       "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.ApiManagement/service/HrWebAppApi/apis/ProjectWebApi",
       "type": "apis.azure"
     },
-    "mssql6": {
-      "serviceConnectorResourceId": "",
-      "secretStore": "AzureAppSettings",
-      "type": "mssql.onprem",
-      "connectionId": "ConnectionStrings:connectionStr",
-      "dynamicId": null
-    },
     "mssql1": {
       "ignored": "true",
       "type": "mssql",
@@ -35,6 +28,13 @@
       "ignored": "true",
       "type": "mssql",
       "connectionId": "ConnectionStrings:Reyhan"
+    },
+    "mssql6": {
+      "serviceConnectorResourceId": "",
+      "secretStore": "AzureAppSettings",
+      "resourceId": null,
+      "type": "mssql.onprem",
+      "connectionId": "ConnectionStrings:connectionStr"
     }
   }
 }

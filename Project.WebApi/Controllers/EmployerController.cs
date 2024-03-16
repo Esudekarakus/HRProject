@@ -20,8 +20,8 @@ namespace Project.WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(AuthenticationSchemes = "Admin")]
-    [Authorize(Roles = "Admin")]
+    //[Authorize(AuthenticationSchemes = "Employer")]
+    //[Authorize(Roles = "Employer")]
     public class EmployerController : ControllerBase
     {
         private readonly CreateEmployerCommandHandler createEmployerCommandHandler;
