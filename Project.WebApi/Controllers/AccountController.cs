@@ -7,6 +7,7 @@ using Project.Application.Services.Abstract;
 using Project.Domain.Identity;
 using Project.WebApi.Models.AccountDTOs;
 using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using System.Text;
 
 namespace Project.WebApi.Controllers
@@ -20,7 +21,7 @@ namespace Project.WebApi.Controllers
         private readonly RoleManager<IdentityRole> roleManager;
         private readonly UserManager<AppUser> userManager;
         private readonly IAccountService accountService;
-        private readonly IConfiguration config;
+        private readonly IConfiguration _config;
 
 
         public AccountController(UserManager<AppUser> userManager, CreateEmployeeCommand cEmployeeCommand, RoleManager<IdentityRole> roleManager, IConfiguration config, IAccountService accountService)
@@ -29,32 +30,51 @@ namespace Project.WebApi.Controllers
             this.cEmployeeCommand = cEmployeeCommand;
             this.roleManager = roleManager;
             this.accountService = accountService;
+            this._config = config;
+
 
 
         }
 
         [HttpPost("Login")]
-        public async Task<IActionResult> Login(CreateEmployeeCommand command)
+        public async Task<IActionResult> Login(LoginUserMV user)
         {
 
-            if(ModelState.IsValid)
+            if (!ModelState.IsValid)
                 return BadRequest("Geçersiz giriş bilgileri");
-            if(!await accountService.SignInForAppUser(command.Email))
+
+            var signInResult = await accountService.SignInForAppUser(user.Email,user.Password);
+            if (!await accountService.SignInForAppUser(user.Email, user.Password))
                 return BadRequest("Kullanıcı bulunamadı");
 
+            var appUser = await userManager.FindByEmailAsync(user.Email);
+            var userRoles = await userManager.GetRolesAsync(appUser);
 
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.NameIdentifier, appUser.Id),
+                new Claim(ClaimTypes.Email, appUser.Email)
+            };
 
-            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["Jwt:Key"]));
+            foreach (var role in userRoles)
+            {
+                claims.Add(new Claim(ClaimTypes.Role, role));
+            }
+
+            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
+
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
-            var Sectoken = new JwtSecurityToken(config["Jwt:Issuer"],
-              config["Jwt:Issuer"],
-              null,
-              expires: DateTime.Now.AddMinutes(120),
-              signingCredentials: credentials);
+            var Sectoken = new JwtSecurityToken(
+                _config["Jwt:Issuer"],
+                _config["Jwt:Issuer"],
+                claims,
+                expires: DateTime.Now.AddMinutes(120),
+                signingCredentials: credentials);
 
             var token = new JwtSecurityTokenHandler().WriteToken(Sectoken);
 
+          
             return Ok(token);
         }
 

@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Project.Domain.Identity;
 using Project.Application.UnitOfWork.Abstract;
+using System.Security.Policy;
 
 namespace Project.Application.Services.Concrete
 {
@@ -26,13 +27,15 @@ namespace Project.Application.Services.Concrete
             this.signInManager = signInManager;
         }
 
-        public async Task<bool> SignInForAppUser(string mail)
+        public async Task<bool> SignInForAppUser(string inputMail ,string inputPassword)
         {
 
-            var User = await userManager.FindByEmailAsync(mail);
+            var User = await userManager.FindByEmailAsync(inputMail);
+
             if (User != null)
             {
-                var result = await signInManager.PasswordSignInAsync(User, User.PasswordHash, false, false);
+
+                var result = await signInManager.PasswordSignInAsync(User, inputPassword, false, false);
                 if (result.Succeeded)
                     return true;
 
@@ -40,6 +43,8 @@ namespace Project.Application.Services.Concrete
             }
             return false;
         }
+
+     
 
         public async Task<bool> UpdatePasswordAsync(string email, string password, string confirmPassword)
         {

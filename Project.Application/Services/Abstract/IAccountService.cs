@@ -8,7 +8,7 @@ namespace Project.Application.Services.Abstract
 {
     public interface IAccountService
     {
-        public Task<bool> SignInForAppUser(string mail);
+        public Task<bool> SignInForAppUser(string mail,string inputPassword);
         Task<bool> UpdatePasswordAsync(string email, string password, string confirmPassword);
     }
 }
