@@ -45,7 +45,7 @@ namespace Project.WebApi.Controllers
 
             var signInResult = await accountService.SignInForAppUser(user.Email,user.Password);
             if (!await accountService.SignInForAppUser(user.Email, user.Password))
-                return BadRequest("Kullanıcı bulunamadı");
+                return NotFound("Kullanıcı bulunamadı");
 
             var appUser = await userManager.FindByEmailAsync(user.Email);
             var userRoles = await userManager.GetRolesAsync(appUser);
