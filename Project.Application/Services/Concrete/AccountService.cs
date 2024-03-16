@@ -44,34 +44,49 @@ namespace Project.Application.Services.Concrete
             return false;
         }
 
-     
-
-        public async Task<bool> UpdatePasswordAsync(string email, string password, string confirmPassword)
+        public async Task<bool> IsUserValid(string email)
         {
             AppUser user = await userManager.FindByEmailAsync(email);
+            if (user == null)
+                return false;
 
-            if (user != null)
+            return true;
+        }
+        public async Task<bool>IfPasswordMatches(string password, string confirmPassword)
+        {
+            if((password !=null && confirmPassword!=null)&& password ==confirmPassword)
             {
-                if (password == confirmPassword)
+                return true;
+            }
+            return false;
+        }
+        public async Task<bool> UpdatePasswordAsync(string email, string password, string confirmPassword)
+        {
+            try
+            {
+                AppUser user = await userManager.FindByEmailAsync(email);
+
+
+                var passwordValidator = new PasswordValidator<AppUser>();
+                var result = await passwordValidator.ValidateAsync(userManager, user, password);
+
+                if (result.Succeeded)
                 {
-                    var passwordValidator = new PasswordValidator<AppUser>();
-                    var result = await passwordValidator.ValidateAsync(userManager, user, password);
+                    var token = await userManager.GeneratePasswordResetTokenAsync(user);
+                    var resetResult = await userManager.ResetPasswordAsync(user, token, password);
 
-                    if (result.Succeeded)
-                    {
-                        var token = await userManager.GeneratePasswordResetTokenAsync(user);
-                        var resetResult = await userManager.ResetPasswordAsync(user, token, password);
-
-                        if (resetResult.Succeeded)
-                            return true;
-                        return false;
-                    }
+                    if (resetResult.Succeeded)
+                        return true;
                     return false;
-
                 }
                 return false;
             }
-            return false;
+            catch (Exception ex)
+            {
+                return false;
+            }
+            
+  
 
         }
     }
