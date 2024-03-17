@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Project.Domain.Entities;
-using Project.Persistence.Identity;
+using Project.Domain.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -58,7 +58,7 @@ namespace Project.Persistence.Context
                     Id = "adminUserId",
                     UserName = "admin",
                     NormalizedUserName = "ADMIN",
-                    Email = "admin@contoso.com",
+                    Email = "admin@boost.com",
                     NormalizedEmail = "ADMIN@BOOST.COM",
                     PasswordHash = hasher.HashPassword(null, "Admin123+"),
                     SecurityStamp = string.Empty,
@@ -70,7 +70,7 @@ namespace Project.Persistence.Context
                     Id = "employerUserId",
                     UserName = "employer",
                     NormalizedUserName = "EMPLOYER",
-                    Email = "employer@contoso.com",
+                    Email = "employer@boost.com",
                     NormalizedEmail = "EMPLOYER@BOOST.COM",
                     PasswordHash = hasher.HashPassword(null, "Employer123+"),
                     SecurityStamp = string.Empty,
@@ -82,7 +82,7 @@ namespace Project.Persistence.Context
                     Id = "employeeUserId",
                     UserName = "employee",
                     NormalizedUserName = "EMPLOYEE",
-                    Email = "employee@contoso.com",
+                    Email = "employee@boost.com",
                     NormalizedEmail = "EMPLOYEE@BOOST.COM",
                     PasswordHash = hasher.HashPassword(null, "Employee123+"),
                     SecurityStamp = string.Empty,

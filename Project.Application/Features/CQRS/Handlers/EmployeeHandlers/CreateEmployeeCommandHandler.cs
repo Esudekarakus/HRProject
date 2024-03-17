@@ -32,7 +32,7 @@ namespace Project.Application.Features.CQRS.Handlers.EmployeeHandlers
                 DateOfBirth = command.DateOfBirth,
                 Department = command.Department,
                 OffDays = command.OffDays,
-                ImageURL = command.ImageURL,
+                ImageName = command.ImageName,
                 IdendificationNumber = command.IdendificationNumber,
                 Address=command.Address,
                 Name = command.Name,
@@ -40,6 +40,7 @@ namespace Project.Application.Features.CQRS.Handlers.EmployeeHandlers
                 MiddleName = command.MiddleName,
                 Profession = command.Profession,
                 PhoneNumber = command.PhoneNumber,
+                PrivateMail = command.PrivateMail
 
             });
         }

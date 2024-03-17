@@ -52,21 +52,21 @@ namespace Project.Persistence.Migrations
                         new
                         {
                             Id = "adminRoleId",
-                            ConcurrencyStamp = "950781fe-db8e-4811-b050-3b7ec9c14b24",
+                            ConcurrencyStamp = "19d3abbd-e87e-47da-b5f6-5c9286f8fafa",
                             Name = "admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "employerRoleId",
-                            ConcurrencyStamp = "0d29650c-9186-4368-8f85-6388d90f761e",
+                            ConcurrencyStamp = "d57de4ba-0535-4cf3-8a85-7b5ef136bfb9",
                             Name = "employer",
                             NormalizedName = "EMPLOYER"
                         },
                         new
                         {
                             Id = "employeeRoleId",
-                            ConcurrencyStamp = "a2914a83-c3ab-4048-a1fe-62923bdc3dd8",
+                            ConcurrencyStamp = "98817269-9892-4298-b42d-b34507508968",
                             Name = "employee",
                             NormalizedName = "EMPLOYEE"
                         });
@@ -349,7 +349,7 @@ namespace Project.Persistence.Migrations
                         .HasMaxLength(11)
                         .HasColumnType("nvarchar(11)");
 
-                    b.Property<string>("ImageURL")
+                    b.Property<string>("ImageName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -523,13 +523,13 @@ namespace Project.Persistence.Migrations
                         {
                             Id = "adminUserId",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "7c950c0a-56b5-434b-8854-0f8c74ae87bc",
+                            ConcurrencyStamp = "5bbfc0ac-78f2-4a1d-af25-3a9d0ad32cc1",
                             Email = "admin@contoso.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@BOOST.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEBrGnan5+iaykm6NYaSQ6YOEf71fe+EQvYf+MtphNADaJYhwrZPiqskLstblYW5/lA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEB0Jo8ni7z043pwe0sRQbhpdepaMrqDGh6VJoIQKOW08xvR4T1B3COnqpTRcHLgeeA==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -541,13 +541,13 @@ namespace Project.Persistence.Migrations
                         {
                             Id = "employerUserId",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "4c2b539a-1ea3-4ad5-b87c-0b68b491fce1",
+                            ConcurrencyStamp = "9f51513b-16fb-4574-8c4a-c84c8bbd58ba",
                             Email = "employer@contoso.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "EMPLOYER@BOOST.COM",
                             NormalizedUserName = "EMPLOYER",
-                            PasswordHash = "AQAAAAEAACcQAAAAEFY4fUO5HxrKIv2/fG6zGLYc9lSVsywW4qqPrmm8HbUsDZOKT4OOee4rlEKVhtRXUg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEG+/kT6ABnHm87d2h1wRIpNL477+m0hVcXHX4UuBqfgm3JZMXGlL8S1osPsrwMl9SA==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -559,13 +559,13 @@ namespace Project.Persistence.Migrations
                         {
                             Id = "employeeUserId",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "11d643a6-1214-468f-ad2a-cfccb1f273c0",
+                            ConcurrencyStamp = "db62114a-3484-4212-9827-277de2f0a2a6",
                             Email = "employee@contoso.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "EMPLOYEE@BOOST.COM",
                             NormalizedUserName = "EMPLOYEE",
-                            PasswordHash = "AQAAAAEAACcQAAAAEGU/HThYsP4UvH/E+7cvDVRdk0AsODdUY/S8HkerPTfovshXAVTFhUdoKm6zNLsvVg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGhuwaLxufcup6DrFwh1V8n3cqCQoSP6DWCf6s6qEARGD2sJ3AOumPUfC248AgdsrQ==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,

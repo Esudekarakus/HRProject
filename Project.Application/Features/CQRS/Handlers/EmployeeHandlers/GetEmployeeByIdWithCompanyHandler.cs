@@ -39,7 +39,7 @@ namespace Project.Application.Features.CQRS.Handlers.EmployeeHandlers
                 Department=values.Department,
                 Email=values.Email,
                 IdendificationNumber=values.IdendificationNumber,
-                ImageURL=values.ImageURL,
+               
                 LastName=values.LastName,
                 MiddleName=values.MiddleName,
                 OffDays=values.OffDays,
