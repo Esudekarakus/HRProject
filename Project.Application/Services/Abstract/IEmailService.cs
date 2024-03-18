@@ -8,6 +8,6 @@ namespace Project.Application.Services.Abstract
 {
     public interface IEmailService
     {
-        public void SendCompanyMailToCreatedEmployee(string mail, string password, string privateMailTosend);
+        public Task SendCompanyMailToCreatedEmployee(string mail, string password, string privateMailTosend);
     }
 }

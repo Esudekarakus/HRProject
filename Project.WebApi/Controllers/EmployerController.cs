@@ -113,7 +113,7 @@ namespace Project.WebApi.Controllers
         }
 
         [HttpPost("CreateEmployee")]
-        public async Task<IActionResult> CreateEmployee(CreateEmployeeCommand command)
+        public async Task<IActionResult> CreateEmployee([FromForm]CreateEmployeeCommand command)
         {
 
             var validator = new AddingPersonelValid();
@@ -157,7 +157,7 @@ namespace Project.WebApi.Controllers
                     {
                         await userManager.AddToRoleAsync(createdUser, role.Name);
 
-                        mailService.SendCompanyMailToCreatedEmployee(createdUser.Email, "Bilgeadam.123", command.PrivateMail);
+                        await mailService.SendCompanyMailToCreatedEmployee(createdUser.Email, "Bilgeadam.123", command.PrivateMail);
                     }
                     else
                         return BadRequest("Employee role not found.");

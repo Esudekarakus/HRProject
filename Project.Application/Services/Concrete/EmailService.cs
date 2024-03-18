@@ -1,5 +1,8 @@
 ﻿using MailKit.Net.Smtp;
+using MailKit.Security;
+using Microsoft.Extensions.Options;
 using MimeKit;
+using Project.Application.DTOs;
 using Project.Application.Services.Abstract;
 using System;
 using System.Collections.Generic;
@@ -11,18 +14,19 @@ namespace Project.Application.Services.Concrete
 {
     public class EmailService : IEmailService
     {
-        public EmailService()
+        private readonly EmailSettings emailSettings;
+
+        public EmailService(IOptions<EmailSettings> options)
         {
-            
+            this.emailSettings = options.Value;
         }
 
-        public void SendCompanyMailToCreatedEmployee(string mail, string password, string privateMailTosend)
+        public async Task SendCompanyMailToCreatedEmployee(string mail, string password, string privateMailTosend)
         {
-            var EmailToSend = new MimeMessage();
-            EmailToSend.From.Add(MailboxAddress.Parse("hrprojectbyteam@gmail.com"));
-            EmailToSend.To.Add(MailboxAddress.Parse(privateMailTosend));
-
-            EmailToSend.Subject = "Your Company Account info";
+            var email = new MimeMessage();
+            email.Sender = MailboxAddress.Parse(emailSettings.Email);
+            email.To.Add(MailboxAddress.Parse(privateMailTosend));
+            email.Subject = "Your Company Account info";
             var bodyBuilder = new BodyBuilder();
             bodyBuilder.HtmlBody = $@"
             <!DOCTYPE html>
@@ -42,14 +46,13 @@ namespace Project.Application.Services.Concrete
                 <p>Thank you!</p>
             </body>
             </html>";
+            email.Body = bodyBuilder.ToMessageBody();
 
-            using(var emailClient = new SmtpClient())
-            {
-                emailClient.Connect("stmp.gmail.com", 587, MailKit.Security.SecureSocketOptions.StartTls);
-                emailClient.Authenticate("hrproject", "yvfwedarqvcrtpfz");
-                emailClient.Send(EmailToSend);
-                emailClient.Disconnect(true);
-            }
+            using var smtp = new SmtpClient();
+            smtp.Connect(emailSettings.Host, emailSettings.Port,SecureSocketOptions.StartTls);
+            smtp.Authenticate(emailSettings.Email, emailSettings.Password);
+            await smtp.SendAsync(email);
+            smtp.Disconnect(true);
 
 
         }

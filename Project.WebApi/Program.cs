@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Project.Application.DTOs;
 using Project.Application.Features.CQRS.Commands.EmployeeCommands;
@@ -36,7 +37,9 @@ builder.Services.AddDbContext<AppDbContext>(
 
 
 
-    o => o.UseSqlServer(builder.Configuration.GetConnectionString("Sude")));
+    o => o.UseSqlServer(builder.Configuration.GetConnectionString("connectionString")));
+
+builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
 
 
 builder.Services.AddIdentity<AppUser, IdentityRole>()
