@@ -13,7 +13,6 @@ using Project.Application.Services.Abstract;
 using Project.Application.UnitOfWork.Abstract;
 using Project.Application.Validation;
 using Project.Domain.Entities;
-using Project.Domain.Identity;
 
 
 namespace Project.WebApi.Controllers

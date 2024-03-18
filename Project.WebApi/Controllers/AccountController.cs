@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using Project.Application.Features.CQRS.Commands.EmployeeCommands;
 using Project.Application.Services.Abstract;
-using Project.Domain.Identity;
+using Project.Domain.Entities;
 using Project.WebApi.Models.AccountDTOs;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;

@@ -9,8 +9,8 @@ namespace Project.Domain.Entities
     public class Employer : BaseEntity
     {
         public string LastName { get; set; }
-        public string MiddleName { get; set; }
-        public string SecondLastName { get; set; }
+        public string? MiddleName { get; set; }
+        public string? SecondLastName { get; set; }
 
         [StringLength(11)]
         public string IdentityNumber { get; set; }
@@ -18,9 +18,9 @@ namespace Project.Domain.Entities
         public DateTime DateOfBirth { get; set; }
         public Status Status { get; set; }
         public string Department { get; set; }
-        public string ImagePath { get; set; }
+        public string? ImagePath { get; set; }
         [NotMapped]
-        public IFormFile ImageFile { get; set; }
+        public IFormFile? ImageFile { get; set; }
         public string Address { get; set; }
 
         [Phone]

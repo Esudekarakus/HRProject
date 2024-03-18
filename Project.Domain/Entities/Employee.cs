@@ -13,10 +13,17 @@ namespace Project.Domain.Entities
 {
     public class Employee : BaseEntity
     {
-       
-        public string MiddleName { get; set; }
+
+        public Employee()
+        {
+            Expenses = new List<Expense>();
+            Advances = new List<Advance>();
+            DayOffs = new List<DayOff>();
+        }
+
+        public string? MiddleName { get; set; }
         public string LastName { get; set; }
-        public string SecondLastName { get; set; }
+        public string? SecondLastName { get; set; }
         public DateTime DateOfBirth { get; set; }
         public string BirthOfPlace { get; set; }
 
@@ -28,10 +35,10 @@ namespace Project.Domain.Entities
         public Company? Company { get; set; }
         public string Department { get; set; }
         public Status Status { get; set; }
-        public string ImageName { get; set; }
+        public string? ImageName { get; set; }
 
         [NotMapped]
-        public IFormFile ImageFile { get; set; }
+        public IFormFile? ImageFile { get; set; }
         public string Address { get; set; }
         public string PrivateMail { get; set; }
 
@@ -49,5 +56,10 @@ namespace Project.Domain.Entities
         public double Salary { get; set; }
         public int? OffDays { get; set; }
         public string Profession { get; set; }
+
+        public List<Expense> Expenses { get; set; }
+        public List<Advance> Advances { get; set; }
+        public List<DayOff> DayOffs { get; set; }
+
     }
 }
