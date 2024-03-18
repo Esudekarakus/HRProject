@@ -111,8 +111,8 @@ namespace Project.WebApi.Controllers
             return Ok(values);
         }
 
-        [HttpPost("CreateEmployee")]
-        public async Task<IActionResult> CreateEmployee([FromForm]CreateEmployeeCommand command)
+        [HttpPost("CreateEmployeeByEmployer")]
+        public async Task<IActionResult> CreateEmployeeByEmployer([FromForm]CreateEmployeeCommand command)
         {
 
             var validator = new AddingPersonelValid();
@@ -171,13 +171,6 @@ namespace Project.WebApi.Controllers
                 var errors = result.Errors.Select(e => e.Description).ToList();
                 return BadRequest(errors);
             }
-
-
-
-
-
-
-
             return Ok();
         }
 
