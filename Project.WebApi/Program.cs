@@ -17,7 +17,7 @@ using Project.Application.Services.Abstract;
 using Project.Application.Services.Concrete;
 using Project.Application.UnitOfWork.Abstract;
 using Project.Application.Validation;
-using Project.Domain.Identity;
+using Project.Domain.Entities;
 using Project.Persistence.Context;
 using Project.Persistence.Repositories.Concrete;
 using Project.Persistence.UnitOfWork.Concrete;
@@ -34,13 +34,9 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<AppDbContext>(
-
-
-
     o => o.UseSqlServer(builder.Configuration.GetConnectionString("connectionString")));
 
 builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
-
 
 builder.Services.AddIdentity<AppUser, IdentityRole>()
     .AddEntityFrameworkStores<AppDbContext>()

@@ -1,14 +1,13 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using Project.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Project.Domain.Identity
+namespace Project.Domain.Entities
 {
-    public class AppUser:IdentityUser
+    public class AppUser : IdentityUser
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }

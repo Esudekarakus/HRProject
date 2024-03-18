@@ -6,9 +6,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Project.Domain.Identity;
 using Project.Application.UnitOfWork.Abstract;
 using System.Security.Policy;
+using Project.Domain.Entities;
 
 namespace Project.Application.Services.Concrete
 {
