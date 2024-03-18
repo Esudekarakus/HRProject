@@ -19,10 +19,10 @@ namespace Project.Application.Services.Concrete
         public void SendCompanyMailToCreatedEmployee(string mail, string password, string privateMailTosend)
         {
             var EmailToSend = new MimeMessage();
-            EmailToSend.From.Add(MailboxAddress.Parse("tarikcelebi97@gmail.com"));
+            EmailToSend.From.Add(MailboxAddress.Parse("hrprojectbyteam@gmail.com"));
             EmailToSend.To.Add(MailboxAddress.Parse(privateMailTosend));
 
-            EmailToSend.Subject = "Your Account info";
+            EmailToSend.Subject = "Your Company Account info";
             var bodyBuilder = new BodyBuilder();
             bodyBuilder.HtmlBody = $@"
             <!DOCTYPE html>
@@ -46,7 +46,7 @@ namespace Project.Application.Services.Concrete
             using(var emailClient = new SmtpClient())
             {
                 emailClient.Connect("stmp.gmail.com", 587, MailKit.Security.SecureSocketOptions.StartTls);
-                emailClient.Authenticate("Our created mail", "password");
+                emailClient.Authenticate("hrproject", "yvfwedarqvcrtpfz");
                 emailClient.Send(EmailToSend);
                 emailClient.Disconnect(true);
             }

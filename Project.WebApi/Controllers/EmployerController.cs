@@ -137,6 +137,7 @@ namespace Project.WebApi.Controllers
                 Email = CreatedUser.Email,
                 FirstName=CreatedUser.Name,
                 PhoneNumber = CreatedUser.PhoneNumber,
+                UserName=CreatedUser.Email,
                 EmailConfirmed = false,
             };
 
