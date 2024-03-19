@@ -28,7 +28,11 @@ namespace Project.Persistence.Repositories.Concrete
             return _Context.Employees.Include(x=>x.Company).ToList();    
         }
 
+        public double GetSalaryByEmployeeId(int employeeId)
+        {
+            var employee= _Context.Employees.FirstOrDefault(x=>x.Id == employeeId);
 
-        
+            return employee.Salary;
+        }
     }
 }
