@@ -35,7 +35,7 @@ namespace Project.Application.Features.CQRS.Commands.EmployeeCommands
 
 
         public string PhoneNumber { get; set; }
-        public string? Email { get; set; }
+        
 
         public double Salary { get; set; }
         public int? OffDays { get; set; }
@@ -43,6 +43,6 @@ namespace Project.Application.Features.CQRS.Commands.EmployeeCommands
 
         public string PrivateMail { get; set; }
 
-        public string? Password { get; set; }
+       
     }
 }

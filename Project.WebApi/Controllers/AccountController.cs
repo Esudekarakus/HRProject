@@ -19,7 +19,7 @@ namespace Project.WebApi.Controllers
     [AllowAnonymous]
     public class AccountController : Controller
     {
-        private readonly CreateEmployeeCommand cEmployeeCommand;
+        
         private readonly RoleManager<IdentityRole> roleManager;
         private readonly UserManager<AppUser> userManager;
         private readonly IAccountService accountService;
@@ -27,10 +27,10 @@ namespace Project.WebApi.Controllers
         private readonly JwtConfiguration jwtService;
 
 
-        public AccountController(UserManager<AppUser> userManager, CreateEmployeeCommand cEmployeeCommand, RoleManager<IdentityRole> roleManager, IConfiguration config, IAccountService accountService, JwtConfiguration jwtService)
+        public AccountController(UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager, IConfiguration config, IAccountService accountService, JwtConfiguration jwtService)
         {
             this.userManager = userManager;
-            this.cEmployeeCommand = cEmployeeCommand;
+            
             this.roleManager = roleManager;
             this.accountService = accountService;
             this._config = config;
