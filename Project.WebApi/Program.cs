@@ -12,7 +12,7 @@ using Project.Application.Features.CQRS.Handlers.CompanyHandlers;
 using Project.Application.Features.CQRS.Handlers.EmployeeHandlers;
 using Project.Application.Features.CQRS.Handlers.EmployerHandlers;
 using Project.Application.Features.CQRS.Handlers.EmployerQueries;
-
+using Project.Application.Features.CQRS.Handlers.LeaveHandler;
 using Project.Application.Repositories.Abstract;
 using Project.Application.Services.Abstract;
 using Project.Application.Services.Concrete;
@@ -76,11 +76,18 @@ builder.Services.AddScoped<RemoveAdvanceCommandHandler>();
 builder.Services.AddScoped<GetAdvanceByEmployeeIdQueryResultHandler>();
 builder.Services.AddScoped<GetAdvanceQueryResultHandler>();
 
+builder.Services.AddScoped<CreateLeaveCommandHandler>();
+builder.Services.AddScoped<UpdateLeaveCommandHandler>();
+builder.Services.AddScoped<RemoveLeaveCommandHandler>();
+builder.Services.AddScoped<GetLeaveByEmployeeIdQueryResultHandler>();
+builder.Services.AddScoped<GetLeaveQueryResultHandler>();
+
 
 builder.Services.AddScoped<IEmployerRepository, EmployerRepository>();
 builder.Services.AddScoped<ICompanyRepository, CompanyRepository>();
 builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
 builder.Services.AddScoped<IAdvanceRepository, AdvanceRepository>();
+builder.Services.AddScoped<ILeaveRepository, LeaveRepository>();
 
 builder.Services.AddScoped<IAccountService, AccountService>();
 builder.Services.AddScoped<IEmailService, EmailService>();

@@ -52,21 +52,21 @@ namespace Project.Persistence.Migrations
                         new
                         {
                             Id = "AdminRoleID",
-                            ConcurrencyStamp = "d5c251f9-9d32-410f-807a-fe2150dbb990",
+                            ConcurrencyStamp = "4803ebdf-6451-4ee3-8ea4-0f559594bbd6",
                             Name = "admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "EmployerRoleID",
-                            ConcurrencyStamp = "9091926f-1fa0-49d6-9986-af476ac6abf5",
+                            ConcurrencyStamp = "9406d040-9f30-40bc-8da1-9cffeb8bad97",
                             Name = "employer",
                             NormalizedName = "EMPLOYER"
                         },
                         new
                         {
                             Id = "EmployeeRoleID",
-                            ConcurrencyStamp = "e5359bcd-6989-4d95-b7dd-7a3aa5edb80e",
+                            ConcurrencyStamp = "b7c8df84-c24b-4e23-81ee-ed634407ecf1",
                             Name = "employee",
                             NormalizedName = "EMPLOYEE"
                         });
@@ -352,49 +352,6 @@ namespace Project.Persistence.Migrations
                     b.ToTable("Companies", (string)null);
                 });
 
-            modelBuilder.Entity("Project.Domain.Entities.DayOff", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<DateTime>("ApprovalDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("DueDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("EmployeeId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("LeaveDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("NumberOfDays")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("RequestDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Type")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EmployeeId");
-
-                    b.ToTable("DayOffs", (string)null);
-                });
-
             modelBuilder.Entity("Project.Domain.Entities.Employee", b =>
                 {
                     b.Property<int>("Id")
@@ -630,6 +587,49 @@ namespace Project.Persistence.Migrations
                     b.ToTable("Expenses", (string)null);
                 });
 
+            modelBuilder.Entity("Project.Domain.Entities.Leave", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("ApprovalDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("DueDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("EmployeeId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("LeaveDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("NumberOfDays")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("RequestDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EmployeeId");
+
+                    b.ToTable("DayOffs", (string)null);
+                });
+
             modelBuilder.Entity("Project.Domain.Entities.AppUser", b =>
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
@@ -659,13 +659,13 @@ namespace Project.Persistence.Migrations
                         {
                             Id = "adminUserId",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "6843b3a8-4c8e-4057-8c47-1d1aeff507d2",
+                            ConcurrencyStamp = "0f24da92-d9d0-43ab-b847-616986789bcb",
                             Email = "admin@boost.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@BOOST.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEI+Cf/btKibqZFIZhJlZdRfTD1mo99MYOKStImhjfOhQOhEz6gqjZozLbMseoYDeGQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEMVvek2Lc9Qq9bojVUf9MLNFf1r7ZsfeVejbD4cmjzvdz/OQac+jqB5G8e1SmCLoug==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -677,13 +677,13 @@ namespace Project.Persistence.Migrations
                         {
                             Id = "employerUserId",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "a75ddfb6-0d9f-4a7a-824e-9d57deef8bb7",
+                            ConcurrencyStamp = "6a2e85eb-a7be-4f5c-8986-3797c0014c03",
                             Email = "employer@boost.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "EMPLOYER@BOOST.COM",
                             NormalizedUserName = "EMPLOYER",
-                            PasswordHash = "AQAAAAEAACcQAAAAEH74NFlmGU/Vw+S81MW7pHBKcHCLj5dAk+qZi3Id1WecJc3MCs/xlU13p4SNIUm3Ag==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEC84hNDwMCCiMU/pjTdYVvT4VKRy4+mLWNz6sUUdxWx6Bmh1qFLPGRhyzL1+6eWaMg==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -695,13 +695,13 @@ namespace Project.Persistence.Migrations
                         {
                             Id = "employeeUserId",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "369a137b-b666-4f06-a17f-044d4bc56ebf",
+                            ConcurrencyStamp = "fb8bdcab-7d27-4259-8c0a-a1da10608008",
                             Email = "employee@boost.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "EMPLOYEE@BOOST.COM",
                             NormalizedUserName = "EMPLOYEE",
-                            PasswordHash = "AQAAAAEAACcQAAAAEPb97eGlere0gP4wuZsw59aIfuurNc/2F1hGkTHiW8JmyusII7TKyjOg0r2PMrjdiw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEPMTh6JShRfXyqslnvaNkj79OoH5Mzt/XoeaoLmr9fTN8Uwk0RM0KINi1YU+kN6ATw==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -773,17 +773,6 @@ namespace Project.Persistence.Migrations
                     b.Navigation("Employee");
                 });
 
-            modelBuilder.Entity("Project.Domain.Entities.DayOff", b =>
-                {
-                    b.HasOne("Project.Domain.Entities.Employee", "Employee")
-                        .WithMany("DayOffs")
-                        .HasForeignKey("EmployeeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Employee");
-                });
-
             modelBuilder.Entity("Project.Domain.Entities.Employee", b =>
                 {
                     b.HasOne("Project.Domain.Entities.Company", "Company")
@@ -806,6 +795,17 @@ namespace Project.Persistence.Migrations
                 {
                     b.HasOne("Project.Domain.Entities.Employee", "Employee")
                         .WithMany("Expenses")
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Employee");
+                });
+
+            modelBuilder.Entity("Project.Domain.Entities.Leave", b =>
+                {
+                    b.HasOne("Project.Domain.Entities.Employee", "Employee")
+                        .WithMany("Leaves")
                         .HasForeignKey("EmployeeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -839,9 +839,9 @@ namespace Project.Persistence.Migrations
                 {
                     b.Navigation("Advances");
 
-                    b.Navigation("DayOffs");
-
                     b.Navigation("Expenses");
+
+                    b.Navigation("Leaves");
                 });
 #pragma warning restore 612, 618
         }

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Project.Persistence.Migrations
 {
-    public partial class HrProjectDB3 : Migration
+    public partial class d : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -357,9 +357,9 @@ namespace Project.Persistence.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "AdminRoleID", "82c3fd96-a1f8-40ef-8f84-defbef01f2d3", "admin", "ADMIN" },
-                    { "EmployeeRoleID", "a6d41a4f-85dd-4215-b31a-2400ff0d28c7", "employee", "EMPLOYEE" },
-                    { "EmployerRoleID", "dd02b054-1881-43f9-9166-f2b0d4dacc55", "employer", "EMPLOYER" }
+                    { "AdminRoleID", "4803ebdf-6451-4ee3-8ea4-0f559594bbd6", "admin", "ADMIN" },
+                    { "EmployeeRoleID", "b7c8df84-c24b-4e23-81ee-ed634407ecf1", "employee", "EMPLOYEE" },
+                    { "EmployerRoleID", "9406d040-9f30-40bc-8da1-9cffeb8bad97", "employer", "EMPLOYER" }
                 });
 
             migrationBuilder.InsertData(
@@ -367,9 +367,9 @@ namespace Project.Persistence.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Discriminator", "Email", "EmailConfirmed", "EmployeeID", "EmployerID", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "adminUserId", 0, "6da3e912-2938-409a-a364-d262e5e752bf", "AppUser", "admin@boost.com", false, null, null, "Admin", "Admin", false, null, "ADMIN@BOOST.COM", "ADMIN", "AQAAAAEAACcQAAAAEAKCjSsSyDjP4JvUZI1xar3rgv1TSX5d7ovssHLgEBZRQa8Jx64HklrLphZSME5cfA==", null, false, "", false, "admin" },
-                    { "employeeUserId", 0, "0042adda-9862-4a5b-819b-51e1e33d4d7d", "AppUser", "employee@boost.com", false, null, null, "Employee", "Employee", false, null, "EMPLOYEE@BOOST.COM", "EMPLOYEE", "AQAAAAEAACcQAAAAEH+UO5aoBbLmBek+ipwczzJX5ayPLOqjLr+rWjl1lg/y5RvgBXiS9euSTdksLohF0A==", null, false, "", false, "employee" },
-                    { "employerUserId", 0, "61410041-2af3-40fa-9060-d166576c9250", "AppUser", "employer@boost.com", false, null, null, "Employer", "Employer", false, null, "EMPLOYER@BOOST.COM", "EMPLOYER", "AQAAAAEAACcQAAAAEH7U5U+GwIHF/L8544XShZcPrnaTeTPAtVeJcdaGHQ5yPW3zOnjjUuiIgo5u8Ya3VA==", null, false, "", false, "employer" }
+                    { "adminUserId", 0, "0f24da92-d9d0-43ab-b847-616986789bcb", "AppUser", "admin@boost.com", false, null, null, "Admin", "Admin", false, null, "ADMIN@BOOST.COM", "ADMIN", "AQAAAAEAACcQAAAAEMVvek2Lc9Qq9bojVUf9MLNFf1r7ZsfeVejbD4cmjzvdz/OQac+jqB5G8e1SmCLoug==", null, false, "", false, "admin" },
+                    { "employeeUserId", 0, "fb8bdcab-7d27-4259-8c0a-a1da10608008", "AppUser", "employee@boost.com", false, null, null, "Employee", "Employee", false, null, "EMPLOYEE@BOOST.COM", "EMPLOYEE", "AQAAAAEAACcQAAAAEPMTh6JShRfXyqslnvaNkj79OoH5Mzt/XoeaoLmr9fTN8Uwk0RM0KINi1YU+kN6ATw==", null, false, "", false, "employee" },
+                    { "employerUserId", 0, "6a2e85eb-a7be-4f5c-8986-3797c0014c03", "AppUser", "employer@boost.com", false, null, null, "Employer", "Employer", false, null, "EMPLOYER@BOOST.COM", "EMPLOYER", "AQAAAAEAACcQAAAAEC84hNDwMCCiMU/pjTdYVvT4VKRy4+mLWNz6sUUdxWx6Bmh1qFLPGRhyzL1+6eWaMg==", null, false, "", false, "employer" }
                 });
 
             migrationBuilder.InsertData(

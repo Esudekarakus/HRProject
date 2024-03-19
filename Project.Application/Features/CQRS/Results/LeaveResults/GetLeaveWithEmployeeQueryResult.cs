@@ -5,22 +5,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Project.Domain.Entities
+namespace Project.Application.Features.CQRS.Results.LeaveResults
 {
-    public class Leave
+    public class GetLeaveWithEmployeeQueryResult
     {
         public int Id { get; set; }
         public LeaveType Type { get; set; }
-        public ApprovalStatus Status { get; set; } = ApprovalStatus.Waiting;
+
         public DateTime LeaveDate { get; set; }
         public DateTime DueDate { get; set; }
-        public DateTime RequestDate { get; set; } = DateTime.Now;
+
         public DateTime ApprovalDate { get; set; }
         public string Description { get; set; }
         public int NumberOfDays { get; set; }
 
         //Nav.Props.
         public int EmployeeId { get; set; }
-        public Employee Employee { get; set; }
+
+        public string EmployeeName { get; set; }
+        public string EmployeeLastName { get; set; }
     }
 }

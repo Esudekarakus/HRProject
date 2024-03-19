@@ -22,7 +22,7 @@ namespace Project.Persistence.Context
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Advance> Advances { get; set; }
         public DbSet<Expense> Expenses { get; set; }
-        public DbSet<Leave> DayOffs { get; set; }
+        public DbSet<Leave> Leaves { get; set; }
         public DbSet<Employer> Employers { get; set; }
 
 
