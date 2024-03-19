@@ -96,6 +96,7 @@ builder.Services.AddControllers()
     .AddFluentValidation(fv =>
     {
         fv.RegisterValidatorsFromAssemblyContaining<AddingPersonelValid>();
+        fv.RegisterValidatorsFromAssemblyContaining<LoginValidation>();
     });
 
 //builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
