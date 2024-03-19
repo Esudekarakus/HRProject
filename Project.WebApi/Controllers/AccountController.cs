@@ -70,19 +70,19 @@ namespace Project.WebApi.Controllers
         }
 
         [HttpPut("ChangePassword")]
-        public async Task<IActionResult> ChangePassword(ChangePasswordDto passwordDto)
+        public async Task<IActionResult> ChangePassword(ForgotPasswordCommand command)
         {
-            if (!await accountService.IsUserValid(passwordDto.Email))
+            if (!await accountService.IsUserValid(command.Email))
             {
                 return BadRequest("Kullanıcı bulunamadı.");
             }
 
-            if (!await accountService.IfPasswordMatches(passwordDto.Password, passwordDto.ConfirmPassword))
+            if (!await accountService.IfPasswordMatches(command.Password, command.ConfirmPassword))
             {
                 return BadRequest("Parolalar eşleşmiyor.");
             }
 
-            if (await accountService.UpdatePasswordAsync(passwordDto.Email, passwordDto.Password, passwordDto.ConfirmPassword))
+            if (await accountService.UpdatePasswordAsync(command.Email, command.Password, command.ConfirmPassword))
             {
                 return Ok();
             }
