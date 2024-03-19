@@ -21,11 +21,11 @@ using Project.Domain.Entities;
 using Project.Persistence.Context;
 using Project.Persistence.Repositories.Concrete;
 using Project.Persistence.UnitOfWork.Concrete;
+using Project.WebApi.DTOs.TokenDTOs.OptionsSetup;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
-//var jwtIssuer = builder.Configuration.GetSection("Jwt:Issuer").Get<string>();
-//var jwtKey = builder.Configuration.GetSection("Jwt:Key").Get<string>();
+
 
 // Add services to the container.
 
@@ -47,6 +47,7 @@ builder.Services.AddScoped<RoleManager<IdentityRole>>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
 
+builder.Services.AddScoped<JwtConfiguration>();
 
 builder.Services.AddScoped<GetEmployerQueryHandler>();
 builder.Services.AddScoped<GetEmployerByIdQueryHandler>();
@@ -85,7 +86,7 @@ builder.Services.AddControllers()
     });
 
 //builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-//    .AddJwtBearer("Employer", options =>
+//    .AddJwtBearer("Employee", options =>
 //    {
 //        options.TokenValidationParameters = new TokenValidationParameters
 //        {
@@ -97,7 +98,13 @@ builder.Services.AddControllers()
 //            ValidAudience = jwtIssuer,
 //            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey))
 //        };
-//    });
+//   });
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer();
+
+builder.Services.ConfigureOptions<JwtOptionsSetup>();
+builder.Services.ConfigureOptions<JwtBearerOptionsSetup>();
+
 
 var app = builder.Build();
 
@@ -110,8 +117,14 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
+
 app.UseAuthorization();
-app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+app.UseCors(options => options
+.AllowAnyOrigin()
+.AllowAnyMethod()
+.AllowAnyHeader()
+);
 app.MapControllers();
 
 app.Run();

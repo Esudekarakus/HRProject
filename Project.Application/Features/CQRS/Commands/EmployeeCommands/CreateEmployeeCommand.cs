@@ -29,9 +29,9 @@ namespace Project.Application.Features.CQRS.Commands.EmployeeCommands
         
         public string Department { get; set; }
         public Status Status { get; set; }
-        public string? ImageName { get; set; }
+        //public string? ImageName { get; set; }
 
-        public IFormFile? ImageFile { get; set; }
+        //public IFormFile? ImageFile { get; set; }
 
 
         public string PhoneNumber { get; set; }

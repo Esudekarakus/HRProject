@@ -32,7 +32,7 @@ namespace Project.Application.Features.CQRS.Handlers.EmployerQueries
                 PlaceOfBirth=command.PlaceOfBirth,
                 IdentityNumber=command.IdentityNumber,
                 Status=command.Status,
-                ImagePath=command.ImagePath,
+                //ImagePath=command.ImagePath,
                 Address=command.Address,
                 Salary=command.Salary,
                 Profession=command.Profession,

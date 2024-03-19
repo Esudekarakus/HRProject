@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace Project.Application.DTOs
 {
-    public class JwtConfiguration
+    public class JwtOptions
     {
-        public string Key { get; set; }
+        public string secureKey { get; set; }
         public string Issuer { get; set; }
+        public string Audience { get; set; } 
     }
 }
