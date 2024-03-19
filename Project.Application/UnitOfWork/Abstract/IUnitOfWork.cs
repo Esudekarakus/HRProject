@@ -13,6 +13,7 @@ namespace Project.Application.UnitOfWork.Abstract
         IEmployerRepository employerRepository { get; }
         ICompanyRepository companyRepository { get; }
         IEmployeeRepository employeeRepository { get; }
+        IAdvanceRepository advanceRepository { get; }
         IRepository<T> GetRepository<T>() where T : class;
 
         Task<int> CommitAsync();

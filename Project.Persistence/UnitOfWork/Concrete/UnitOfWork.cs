@@ -17,6 +17,7 @@ namespace Project.Persistence.UnitOfWork.Concrete
         private EmployerRepository EmployerRepository;
         private CompanyRepository CompanyRepository;
         private EmployeeRepository EmployeeRepository;
+        private AdvanceRepository AdvanceRepository;
         
 
         public UnitOfWork(AppDbContext _context)
@@ -27,6 +28,8 @@ namespace Project.Persistence.UnitOfWork.Concrete
         public IEmployerRepository employerRepository => EmployerRepository ?? new EmployerRepository(_context);
         public ICompanyRepository companyRepository => CompanyRepository ?? new CompanyRepository(_context);
         public IEmployeeRepository employeeRepository => EmployeeRepository ?? new EmployeeRepository(_context);
+
+        public IAdvanceRepository advanceRepository => AdvanceRepository ?? new AdvanceRepository(_context);
         
         public IRepository<T> GetRepository<T>() where T : class
         {
