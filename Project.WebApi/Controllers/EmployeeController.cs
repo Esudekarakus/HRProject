@@ -47,7 +47,7 @@ namespace Project.WebApi.Controllers
 
         public async Task<IActionResult> CreateEmployee([FromForm]CreateEmployeeCommand command)
         {
-            command.ImageName = await SaveImage(command.ImageFile);
+            //command.ImageName = await SaveImage(command.ImageFile);
             await createEmployeeCommandHandler.Handle(command);
             return Ok("Çalışan başarıyla eklendi");
         }

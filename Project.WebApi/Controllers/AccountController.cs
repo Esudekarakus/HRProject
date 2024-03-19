@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
+using Project.Application.DTOs;
 using Project.Application.Features.CQRS.Commands.EmployeeCommands;
 using Project.Application.Services.Abstract;
 using Project.Domain.Entities;
@@ -14,7 +15,7 @@ namespace Project.WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [AllowAnonymous]
+    [Authorize]
     public class AccountController : Controller
     {
         private readonly CreateEmployeeCommand cEmployeeCommand;
@@ -22,60 +23,48 @@ namespace Project.WebApi.Controllers
         private readonly UserManager<AppUser> userManager;
         private readonly IAccountService accountService;
         private readonly IConfiguration _config;
+        private readonly JwtConfiguration jwtService;
 
 
-        public AccountController(UserManager<AppUser> userManager, CreateEmployeeCommand cEmployeeCommand, RoleManager<IdentityRole> roleManager, IConfiguration config, IAccountService accountService)
+        public AccountController(UserManager<AppUser> userManager, CreateEmployeeCommand cEmployeeCommand, RoleManager<IdentityRole> roleManager, IConfiguration config, IAccountService accountService, JwtConfiguration jwtService)
         {
             this.userManager = userManager;
             this.cEmployeeCommand = cEmployeeCommand;
             this.roleManager = roleManager;
             this.accountService = accountService;
             this._config = config;
+            this.jwtService = jwtService;
 
 
 
         }
 
+
+
         [HttpPost("Login")]
-        public async Task<IActionResult> Login(LoginUserMV user)
+        public async Task<IActionResult> Login([FromBody]LoginUserMV user,CancellationToken cancellationToken)
         {
 
             if (!ModelState.IsValid)
                 return BadRequest("Geçersiz giriş bilgileri");
-
-            var signInResult = await accountService.SignInForAppUser(user.Email,user.Password);
             if (!await accountService.SignInForAppUser(user.Email, user.Password))
-                return NotFound("Kullanıcı bulunamadı");
+                return NotFound("Giriş yapılırken bir hata ile karşılaşıldı.");
 
             var appUser = await userManager.FindByEmailAsync(user.Email);
             var userRoles = await userManager.GetRolesAsync(appUser);
-
-            var claims = new List<Claim>
-            {
-                new Claim(ClaimTypes.NameIdentifier, appUser.Id),
-                new Claim(ClaimTypes.Email, appUser.Email)
-            };
-
+            var claims = new List<Claim>();
             foreach (var role in userRoles)
             {
                 claims.Add(new Claim(ClaimTypes.Role, role));
             }
 
-            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
+            var jwt = jwtService.Generate(appUser);
 
-            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+            if (jwt==null)
+                return BadRequest("token oluşmadı");
 
-            var Sectoken = new JwtSecurityToken(
-                _config["Jwt:Issuer"],
-                _config["Jwt:Issuer"],
-                claims,
-                expires: DateTime.Now.AddMinutes(120),
-                signingCredentials: credentials);
+            return Ok(jwt);
 
-            var token = new JwtSecurityTokenHandler().WriteToken(Sectoken);
-
-          
-            return Ok(token);
         }
 
         [HttpPut("ChangePassword")]
