@@ -58,7 +58,7 @@ namespace Project.WebApi.Controllers
                 claims.Add(new Claim(ClaimTypes.Role, role));
             }
 
-            var jwt = jwtService.Generate(appUser);
+            var jwt = jwtService.Generate(appUser,claims);
 
             if (jwt==null)
                 return BadRequest("token oluşmadı");
