@@ -17,7 +17,7 @@ namespace Project.Domain.Entities
         public double Amount { get; set; }
         public DateTime ExpenseDate { get; set; }
         public string InvoicePath { get; set; }
-        public DateTime CreatedDate { get; set; }
+        public DateTime CreatedDate { get; set; }=DateTime.Now;
         public DateTime? ApprovalDate { get; set; }
         public DateTime? UpdatedDate { get; set; }
         public DateTime? DeletedTime { get; set; }

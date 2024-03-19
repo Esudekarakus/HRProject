@@ -15,7 +15,7 @@ namespace Project.Domain.Entities
         public AdvanceType AdvanceType { get; set; }
         public ApprovalStatus ApprovalStatus { get; set; }
         public double Amount { get; set; }
-        public DateTime CreatedDate { get; set; }
+        public DateTime CreatedDate { get; set; } = DateTime.Now;
         public DateTime? ApprovalDate { get; set; }
         public DateTime? UpdatedDate { get; set; }
         public DateTime? DeletedTime { get; set; }
