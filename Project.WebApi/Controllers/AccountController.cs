@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using Project.Application.DTOs;
+using Project.Application.Features.CQRS.Commands.AccountCommands;
 using Project.Application.Features.CQRS.Commands.EmployeeCommands;
 using Project.Application.Services.Abstract;
 using Project.Domain.Entities;
@@ -41,7 +42,7 @@ namespace Project.WebApi.Controllers
 
 
         [HttpPost("Login")]
-        public async Task<IActionResult> Login([FromBody]LoginUserMV user,CancellationToken cancellationToken)
+        public async Task<IActionResult> Login([FromBody]LoginCommand user,CancellationToken cancellationToken)
         {
 
             if (!ModelState.IsValid)
