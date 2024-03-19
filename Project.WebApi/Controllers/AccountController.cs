@@ -15,7 +15,7 @@ namespace Project.WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    [AllowAnonymous]
     public class AccountController : Controller
     {
         private readonly CreateEmployeeCommand cEmployeeCommand;
@@ -38,7 +38,6 @@ namespace Project.WebApi.Controllers
 
 
         }
-
 
 
         [HttpPost("Login")]
