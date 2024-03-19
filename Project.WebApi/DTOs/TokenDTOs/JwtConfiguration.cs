@@ -21,16 +21,8 @@ namespace Project.Application.DTOs
             this.jwtOptions = jwtOptions.Value;
         }
 
-        public string Generate(AppUser user,List<Claim> RoleClaims)
+        public string Generate(AppUser user,List<Claim> claims)
         {
-
-            var claims = new Claim[] 
-            {
-                new Claim(JwtRegisteredClaimNames.Sub, user.Id),
-                new Claim(JwtRegisteredClaimNames.Email, user.Email),
-            };
-
-            claims = RoleClaims.ToArray();
 
 
             var symmetricSecurityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtOptions.secureKey));

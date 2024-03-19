@@ -58,6 +58,8 @@ namespace Project.WebApi.Controllers
                 claims.Add(new Claim(ClaimTypes.Role, role));
             }
 
+            claims.Add(new Claim(ClaimTypes.Email, appUser.Email));
+
             var jwt = jwtService.Generate(appUser,claims);
 
             if (jwt==null)
