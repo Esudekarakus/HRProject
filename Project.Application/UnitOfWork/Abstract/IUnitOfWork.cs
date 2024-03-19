@@ -14,8 +14,9 @@ namespace Project.Application.UnitOfWork.Abstract
         ICompanyRepository companyRepository { get; }
         IEmployeeRepository employeeRepository { get; }
         IAdvanceRepository advanceRepository { get; }
+        ILeaveRepository leaveRepository { get; }
         IRepository<T> GetRepository<T>() where T : class;
-
+        
         Task<int> CommitAsync();
         void Dispose();
 
