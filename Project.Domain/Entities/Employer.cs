@@ -38,9 +38,8 @@ namespace Project.Domain.Entities
         {
             get
             {
-                string birthYear = DateOfBirth.Year.ToString();
-                string lastName = ToEnglishCharacters(LastName);
-                string email = $"{LastName?.ToLower()}{birthYear}@bilgeadam.boost";
+
+                string email = $"{LastName?.ToLower()}{Name.ToLower()}@bilgeadam.boost";
                 return email;
             }
         }

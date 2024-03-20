@@ -56,9 +56,11 @@ namespace Project.WebApi.Controllers
             foreach (var role in userRoles)
             {
                 claims.Add(new Claim(ClaimTypes.Role, role));
+                
             }
 
             claims.Add(new Claim(ClaimTypes.Email, appUser.Email));
+            claims.Add(new Claim("UserId", appUser.Id));
 
             var jwt = jwtService.Generate(appUser,claims);
 
