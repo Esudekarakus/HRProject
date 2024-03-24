@@ -70,6 +70,7 @@ namespace Project.Application.Features.CQRS.Handlers.LeaveHandler
             var values = await unitOfWork.leaveRepository.GetLeaveWithEmployeeWithEmployeeId(query.Id);
             return values.Select(x=> new GetLeaveByEmployeeIdQueryResult
             { 
+
                 EmployeeId = x.EmployeeId,
                 Id = x.Id,
                 Description = x.Description,
