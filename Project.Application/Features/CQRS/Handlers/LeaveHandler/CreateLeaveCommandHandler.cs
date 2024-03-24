@@ -23,7 +23,7 @@ namespace Project.Application.Features.CQRS.Handlers.LeaveHandler
             {
                 Type = command.Type,
                 Description = command.Description,
-                ApprovalDate = command.ApprovalDate,
+               
                 DueDate = command.DueDate,
                 LeaveDate = command.LeaveDate,
                 NumberOfDays = command.NumberOfDays,

@@ -11,15 +11,15 @@ namespace Project.Domain.Entities
     {
         public int Id { get; set; }
         public string Description { get; set; }
-        public Currency Currency { get; set; }
-        public AdvanceType AdvanceType { get; set; }
-        public ApprovalStatus ApprovalStatus { get; set; } = ApprovalStatus.Waiting;
+        public int CurrencyInt { get; set; }
+        public int AdvanceTypeInt { get; set; }
+        public int ApprovalStatusInt { get; set; }
         public double Amount { get; set; }
         public DateTime CreatedDate { get; set; } = DateTime.Now;
         public DateTime? ApprovalDate { get; set; }
         public DateTime? UpdatedDate { get; set; }
         public DateTime? DeletedTime { get; set; }
-        public int EmployeeId { get; set; }
-        public Employee Employee { get; set; }
+        public int? EmployeeId { get; set; }
+        public Employee? Employee { get; set; }
     }
 }

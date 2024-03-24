@@ -123,7 +123,7 @@ namespace Project.Persistence.Context
             builder.Entity<Employee>().ToTable("Employees");
             builder.Entity<Advance>().ToTable("Advances");
             builder.Entity<Expense>().ToTable("Expenses");
-            builder.Entity<Leave>().ToTable("DayOffs");
+            builder.Entity<Leave>().ToTable("Leaves");
             builder.Entity<Employer>().ToTable("Employers");
         }
 

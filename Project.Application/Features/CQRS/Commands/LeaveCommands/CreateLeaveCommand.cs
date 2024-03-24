@@ -9,12 +9,12 @@ namespace Project.Application.Features.CQRS.Commands.LeaveCommands
 {
     public class CreateLeaveCommand
     {
-        public LeaveType Type { get; set; }
+        public int Type { get; set; }
         
         public DateTime LeaveDate { get; set; }
         public DateTime DueDate { get; set; }
       
-        public DateTime ApprovalDate { get; set; }
+        //public DateTime? ApprovalDate { get; set; }
         public string Description { get; set; }
         public int NumberOfDays { get; set; }
 

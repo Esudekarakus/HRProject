@@ -20,16 +20,21 @@ namespace Project.Application.Features.CQRS.Handlers.LeaveHandler
         {
             var values= await unitOfWork.leaveRepository.GetByIdAsync(command.Id);
 
-            if (values == null)
+            if (values != null)
             {
-                values.LeaveDate=command.LeaveDate;
-                values.ApprovalDate=command.ApprovalDate;
-                values.Status=command.Status;
-                values.DueDate=command.DueDate;
-                values.NumberOfDays=command.NumberOfDays;
+                if (command.Status == 2)
+                {
+                    values.ApprovalDate = DateTime.Now;
+                }
+                else
+                {
+                    values.ApprovalDate = null;
+                }
+              
+                values.Status = command.Status;
 
-                await unitOfWork.leaveRepository.UpdateAsync(values);
             }
+            await unitOfWork.leaveRepository.UpdateAsync(values);
         }
     }
 }
