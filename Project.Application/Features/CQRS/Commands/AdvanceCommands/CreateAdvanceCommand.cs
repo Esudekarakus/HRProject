@@ -10,8 +10,8 @@ namespace Project.Application.Features.CQRS.Commands.AdvanceCommands
     public class CreateAdvanceCommand
     {
         public string Description { get; set; }
-        public Currency Currency { get; set; }
-        public AdvanceType AdvanceType { get; set; }
+        public int Currency { get; set; }
+        public int AdvanceType { get; set; }
        
         public double Amount { get; set; }
         public int EmployeeId { get; set; }

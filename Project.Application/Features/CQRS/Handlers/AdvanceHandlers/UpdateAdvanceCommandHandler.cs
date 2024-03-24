@@ -22,11 +22,19 @@ namespace Project.Application.Features.CQRS.Handlers.AdvanceHandlers
             var values= await unitOfWork.advanceRepository.GetByIdAsync(command.Id);
             if(values != null)
             {
-                values.ApprovalDate=command.ApprovalDate;
+                if (command.ApprovalStatus == 2)
+                {
+                    values.ApprovalDate = DateTime.Now;
+                }
+                else
+                {
+                    values.ApprovalDate = null;
+                }
                 values.UpdatedDate = DateTime.Now;
-                values.ApprovalStatus=command.ApprovalStatus;
+                values.ApprovalStatusInt = command.ApprovalStatus;
 
             }
+            await unitOfWork.advanceRepository.UpdateAsync(values);
         }
     }
 }

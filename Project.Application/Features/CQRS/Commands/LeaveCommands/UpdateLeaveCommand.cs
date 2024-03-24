@@ -10,11 +10,9 @@ namespace Project.Application.Features.CQRS.Commands.LeaveCommands
     public class UpdateLeaveCommand
     {
         public int Id { get; set; }
-        public ApprovalStatus Status { get; set; }
-        public DateTime LeaveDate { get; set; }
-        public DateTime DueDate { get; set; }
-        public DateTime ApprovalDate { get; set; }
-
-        public int NumberOfDays { get; set; }
+        public int Status { get; set; }
+        
+       
+        
     }
 }

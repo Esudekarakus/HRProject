@@ -10,8 +10,8 @@ namespace Project.Application.Features.CQRS.Commands.AdvanceCommands
     public class UpdateAdvanceCommand
     {
         public int Id { get; set; }
-        public DateTime? ApprovalDate { get; set; }
-        public DateTime? UpdatedDate { get; set; }
-        public ApprovalStatus ApprovalStatus { get; set; }
+        
+        
+        public int ApprovalStatus { get; set; }
     }
 }

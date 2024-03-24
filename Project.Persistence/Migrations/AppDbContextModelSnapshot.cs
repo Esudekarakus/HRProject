@@ -52,21 +52,21 @@ namespace Project.Persistence.Migrations
                         new
                         {
                             Id = "AdminRoleID",
-                            ConcurrencyStamp = "4803ebdf-6451-4ee3-8ea4-0f559594bbd6",
+                            ConcurrencyStamp = "71098231-6d49-4600-941a-5c16b16c88c3",
                             Name = "admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "EmployerRoleID",
-                            ConcurrencyStamp = "9406d040-9f30-40bc-8da1-9cffeb8bad97",
+                            ConcurrencyStamp = "614e47a1-5e9a-467b-83c2-4c7028a25420",
                             Name = "employer",
                             NormalizedName = "EMPLOYER"
                         },
                         new
                         {
                             Id = "EmployeeRoleID",
-                            ConcurrencyStamp = "b7c8df84-c24b-4e23-81ee-ed634407ecf1",
+                            ConcurrencyStamp = "df2d9149-abf7-4895-8279-23e0a1028584",
                             Name = "employee",
                             NormalizedName = "EMPLOYEE"
                         });
@@ -274,7 +274,7 @@ namespace Project.Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("AdvanceType")
+                    b.Property<int>("AdvanceTypeInt")
                         .HasColumnType("int");
 
                     b.Property<double>("Amount")
@@ -283,13 +283,13 @@ namespace Project.Persistence.Migrations
                     b.Property<DateTime?>("ApprovalDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("ApprovalStatus")
+                    b.Property<int>("ApprovalStatusInt")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Currency")
+                    b.Property<int>("CurrencyInt")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("DeletedTime")
@@ -299,7 +299,7 @@ namespace Project.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("EmployeeId")
+                    b.Property<int?>("EmployeeId")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("UpdatedDate")
@@ -595,7 +595,7 @@ namespace Project.Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<DateTime>("ApprovalDate")
+                    b.Property<DateTime?>("ApprovalDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
@@ -627,7 +627,7 @@ namespace Project.Persistence.Migrations
 
                     b.HasIndex("EmployeeId");
 
-                    b.ToTable("DayOffs", (string)null);
+                    b.ToTable("Leaves", (string)null);
                 });
 
             modelBuilder.Entity("Project.Domain.Entities.AppUser", b =>
@@ -659,13 +659,13 @@ namespace Project.Persistence.Migrations
                         {
                             Id = "adminUserId",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "0f24da92-d9d0-43ab-b847-616986789bcb",
+                            ConcurrencyStamp = "eea94d98-6add-467d-ac20-c14ca816358f",
                             Email = "admin@boost.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@BOOST.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEMVvek2Lc9Qq9bojVUf9MLNFf1r7ZsfeVejbD4cmjzvdz/OQac+jqB5G8e1SmCLoug==",
+                            PasswordHash = "AQAAAAEAACcQAAAAENtx6l26TDweDyeod+PZ+AdZs95W/fn+DKu7ZkIIOb4kJJ5T2X1o/BlzDks6jSxEqA==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -677,13 +677,13 @@ namespace Project.Persistence.Migrations
                         {
                             Id = "employerUserId",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "6a2e85eb-a7be-4f5c-8986-3797c0014c03",
+                            ConcurrencyStamp = "3b966da5-3856-4620-b0e1-df600eff8457",
                             Email = "employer@boost.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "EMPLOYER@BOOST.COM",
                             NormalizedUserName = "EMPLOYER",
-                            PasswordHash = "AQAAAAEAACcQAAAAEC84hNDwMCCiMU/pjTdYVvT4VKRy4+mLWNz6sUUdxWx6Bmh1qFLPGRhyzL1+6eWaMg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEG+8drqls8N0K4epGkhK7QdS+jCHtOIPuJPnkpHFmh0p5gl7q2RTyOKrQIcqjHmESA==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -695,13 +695,13 @@ namespace Project.Persistence.Migrations
                         {
                             Id = "employeeUserId",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "fb8bdcab-7d27-4259-8c0a-a1da10608008",
+                            ConcurrencyStamp = "c413b4e1-4214-4c79-bdd1-8305e8d1a2aa",
                             Email = "employee@boost.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "EMPLOYEE@BOOST.COM",
                             NormalizedUserName = "EMPLOYEE",
-                            PasswordHash = "AQAAAAEAACcQAAAAEPMTh6JShRfXyqslnvaNkj79OoH5Mzt/XoeaoLmr9fTN8Uwk0RM0KINi1YU+kN6ATw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEBBntfgizWDoEloGZDl64cfgkhehg7CU+Vboo0EcesgAncuoLyycKYYyIU2Oah5AQg==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -766,9 +766,7 @@ namespace Project.Persistence.Migrations
                 {
                     b.HasOne("Project.Domain.Entities.Employee", "Employee")
                         .WithMany("Advances")
-                        .HasForeignKey("EmployeeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("EmployeeId");
 
                     b.Navigation("Employee");
                 });

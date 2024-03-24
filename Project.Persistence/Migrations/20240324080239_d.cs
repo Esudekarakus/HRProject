@@ -149,15 +149,15 @@ namespace Project.Persistence.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Currency = table.Column<int>(type: "int", nullable: false),
-                    AdvanceType = table.Column<int>(type: "int", nullable: false),
-                    ApprovalStatus = table.Column<int>(type: "int", nullable: false),
+                    CurrencyInt = table.Column<int>(type: "int", nullable: false),
+                    AdvanceTypeInt = table.Column<int>(type: "int", nullable: false),
+                    ApprovalStatusInt = table.Column<int>(type: "int", nullable: false),
                     Amount = table.Column<double>(type: "float", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ApprovalDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DeletedTime = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    EmployeeId = table.Column<int>(type: "int", nullable: false)
+                    EmployeeId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -166,35 +166,7 @@ namespace Project.Persistence.Migrations
                         name: "FK_Advances_Employees_EmployeeId",
                         column: x => x.EmployeeId,
                         principalTable: "Employees",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "DayOffs",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Type = table.Column<int>(type: "int", nullable: false),
-                    Status = table.Column<int>(type: "int", nullable: false),
-                    LeaveDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DueDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    RequestDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ApprovalDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    NumberOfDays = table.Column<int>(type: "int", nullable: false),
-                    EmployeeId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_DayOffs", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_DayOffs_Employees_EmployeeId",
-                        column: x => x.EmployeeId,
-                        principalTable: "Employees",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -221,6 +193,33 @@ namespace Project.Persistence.Migrations
                     table.PrimaryKey("PK_Expenses", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Expenses_Employees_EmployeeId",
+                        column: x => x.EmployeeId,
+                        principalTable: "Employees",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Leaves",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Type = table.Column<int>(type: "int", nullable: false),
+                    Status = table.Column<int>(type: "int", nullable: false),
+                    LeaveDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DueDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    RequestDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ApprovalDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    NumberOfDays = table.Column<int>(type: "int", nullable: false),
+                    EmployeeId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Leaves", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Leaves_Employees_EmployeeId",
                         column: x => x.EmployeeId,
                         principalTable: "Employees",
                         principalColumn: "Id",
@@ -357,9 +356,9 @@ namespace Project.Persistence.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "AdminRoleID", "4803ebdf-6451-4ee3-8ea4-0f559594bbd6", "admin", "ADMIN" },
-                    { "EmployeeRoleID", "b7c8df84-c24b-4e23-81ee-ed634407ecf1", "employee", "EMPLOYEE" },
-                    { "EmployerRoleID", "9406d040-9f30-40bc-8da1-9cffeb8bad97", "employer", "EMPLOYER" }
+                    { "AdminRoleID", "71098231-6d49-4600-941a-5c16b16c88c3", "admin", "ADMIN" },
+                    { "EmployeeRoleID", "df2d9149-abf7-4895-8279-23e0a1028584", "employee", "EMPLOYEE" },
+                    { "EmployerRoleID", "614e47a1-5e9a-467b-83c2-4c7028a25420", "employer", "EMPLOYER" }
                 });
 
             migrationBuilder.InsertData(
@@ -367,9 +366,9 @@ namespace Project.Persistence.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Discriminator", "Email", "EmailConfirmed", "EmployeeID", "EmployerID", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "adminUserId", 0, "0f24da92-d9d0-43ab-b847-616986789bcb", "AppUser", "admin@boost.com", false, null, null, "Admin", "Admin", false, null, "ADMIN@BOOST.COM", "ADMIN", "AQAAAAEAACcQAAAAEMVvek2Lc9Qq9bojVUf9MLNFf1r7ZsfeVejbD4cmjzvdz/OQac+jqB5G8e1SmCLoug==", null, false, "", false, "admin" },
-                    { "employeeUserId", 0, "fb8bdcab-7d27-4259-8c0a-a1da10608008", "AppUser", "employee@boost.com", false, null, null, "Employee", "Employee", false, null, "EMPLOYEE@BOOST.COM", "EMPLOYEE", "AQAAAAEAACcQAAAAEPMTh6JShRfXyqslnvaNkj79OoH5Mzt/XoeaoLmr9fTN8Uwk0RM0KINi1YU+kN6ATw==", null, false, "", false, "employee" },
-                    { "employerUserId", 0, "6a2e85eb-a7be-4f5c-8986-3797c0014c03", "AppUser", "employer@boost.com", false, null, null, "Employer", "Employer", false, null, "EMPLOYER@BOOST.COM", "EMPLOYER", "AQAAAAEAACcQAAAAEC84hNDwMCCiMU/pjTdYVvT4VKRy4+mLWNz6sUUdxWx6Bmh1qFLPGRhyzL1+6eWaMg==", null, false, "", false, "employer" }
+                    { "adminUserId", 0, "eea94d98-6add-467d-ac20-c14ca816358f", "AppUser", "admin@boost.com", false, null, null, "Admin", "Admin", false, null, "ADMIN@BOOST.COM", "ADMIN", "AQAAAAEAACcQAAAAENtx6l26TDweDyeod+PZ+AdZs95W/fn+DKu7ZkIIOb4kJJ5T2X1o/BlzDks6jSxEqA==", null, false, "", false, "admin" },
+                    { "employeeUserId", 0, "c413b4e1-4214-4c79-bdd1-8305e8d1a2aa", "AppUser", "employee@boost.com", false, null, null, "Employee", "Employee", false, null, "EMPLOYEE@BOOST.COM", "EMPLOYEE", "AQAAAAEAACcQAAAAEBBntfgizWDoEloGZDl64cfgkhehg7CU+Vboo0EcesgAncuoLyycKYYyIU2Oah5AQg==", null, false, "", false, "employee" },
+                    { "employerUserId", 0, "3b966da5-3856-4620-b0e1-df600eff8457", "AppUser", "employer@boost.com", false, null, null, "Employer", "Employer", false, null, "EMPLOYER@BOOST.COM", "EMPLOYER", "AQAAAAEAACcQAAAAEG+8drqls8N0K4epGkhK7QdS+jCHtOIPuJPnkpHFmh0p5gl7q2RTyOKrQIcqjHmESA==", null, false, "", false, "employer" }
                 });
 
             migrationBuilder.InsertData(
@@ -442,11 +441,6 @@ namespace Project.Persistence.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_DayOffs_EmployeeId",
-                table: "DayOffs",
-                column: "EmployeeId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Employees_CompanyId",
                 table: "Employees",
                 column: "CompanyId");
@@ -459,6 +453,11 @@ namespace Project.Persistence.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Expenses_EmployeeId",
                 table: "Expenses",
+                column: "EmployeeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Leaves_EmployeeId",
+                table: "Leaves",
                 column: "EmployeeId");
         }
 
@@ -483,10 +482,10 @@ namespace Project.Persistence.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "DayOffs");
+                name: "Expenses");
 
             migrationBuilder.DropTable(
-                name: "Expenses");
+                name: "Leaves");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
