@@ -58,7 +58,7 @@ namespace Project.WebApi.Controllers
         public async Task<IActionResult> RemoveEmployee(int id)
         {
             await getLeaveByEmployeeIdQueryResultHandler.Handle(new GetLeaveByEmployerIdQuery(id));
-            return Ok("Avans başarıyla silindi");
+            return Ok("İzin başarıyla silindi");
 
         }
 
@@ -67,7 +67,7 @@ namespace Project.WebApi.Controllers
         public async Task<IActionResult> UpdateEmployee(UpdateLeaveCommand command)
         {
             await updateLeaveCommandHandler.Handle(command);
-            return Ok("Avans başarıyla güncellendi");
+            return Ok("İzin başarıyla güncellendi");
 
         }
     }
