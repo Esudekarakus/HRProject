@@ -19,7 +19,7 @@ namespace Project.Persistence.Repositories.Concrete
             _context = context;
         }
 
-        public async Task<List<Expense>> GetAdvanceWithEmployeeByEmployeeId(int employeeId)
+        public async Task<List<Expense>> GetExpenseWithEmployeeByEmployeeId(int employeeId)
         {
             return await _context.Expenses.Include(x=>x.Employee).Where(x=>x.EmployeeId == employeeId).ToListAsync();   
         }

@@ -87,6 +87,8 @@ builder.Services.AddScoped<GetLeaveQueryResultHandler>();
 builder.Services.AddScoped<CreateExpenseCommandHandler>();
 builder.Services.AddScoped<RemoveExpenseCommandHandler>();
 builder.Services.AddScoped<UpdateExpenseCommandHandler>();
+builder.Services.AddScoped<GetExpenseByEmployeeIdQueryHandler>();
+builder.Services.AddScoped<GetExpensesWithEmployeesQueryHandler>();
 
 builder.Services.AddScoped<IEmployerRepository, EmployerRepository>();
 builder.Services.AddScoped<ICompanyRepository, CompanyRepository>();

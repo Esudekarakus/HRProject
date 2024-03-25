@@ -10,6 +10,6 @@ namespace Project.Application.Repositories.Abstract
     public interface IExpenseRepository:IRepository<Expense>
     {
         List<Expense> GetAllWithEmployee();
-        Task<List<Expense>> GetAdvanceWithEmployeeByEmployeeId(int employeeId);
+        Task<List<Expense>> GetExpenseWithEmployeeByEmployeeId(int employeeId);
     }
 }

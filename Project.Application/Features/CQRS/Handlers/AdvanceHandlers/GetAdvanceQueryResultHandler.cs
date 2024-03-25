@@ -77,14 +77,14 @@ namespace Project.Application.Features.CQRS.Handlers.AdvanceHandlers
             foreach (var advance in advances)
             {
                 
-                var approvalStatus = GetEnum(advance.ApprovalStatusInt); // Bu, int'ten enum'a çeviren bir fonksiyon varsayımıdır.
+                var approvalStatus = GetEnum(advance.ApprovalStatusInt); 
                 var currencyE = GetCurrencyEnum(advance.CurrencyInt);
                 var type=GetEnumAdvance(advance.CurrencyInt);
-                // Sonuç listesine yeni bir nesne ekleyin.
+                
                 results.Add(new GetAdvanceWithEmployeeQueryResult
                 {
                     Id = advance.Id,
-                    ApprovalStatus = approvalStatus, // Dönüştürülen enum değerini kullanın
+                    ApprovalStatus = approvalStatus, 
                     Amount = advance.Amount,
                     Currency = currencyE,
                     AdvanceType=type,
@@ -95,7 +95,7 @@ namespace Project.Application.Features.CQRS.Handlers.AdvanceHandlers
                     EmployeeName = advance.Employee.Name,
                     EmployeeLastName = advance.Employee.LastName,
                     UpdatedDate = advance.UpdatedDate,
-                    // Diğer alanlarınız...
+                    
                 });
             }
 

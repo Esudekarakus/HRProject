@@ -14,7 +14,8 @@ namespace Project.Domain.Enum
         Materials,
         Education,
         Health,
-        Fuel
+        Fuel,
+        Other
 
     }
 }
