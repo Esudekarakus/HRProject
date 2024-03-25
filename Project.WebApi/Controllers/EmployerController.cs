@@ -138,9 +138,10 @@ namespace Project.WebApi.Controllers
                 PhoneNumber = CreatedUser.PhoneNumber,
                 UserName=CreatedUser.Email,
                 EmailConfirmed = false,
+                EmployeeID=CreatedUser.Id
             };
 
-
+            var hasher = new PasswordHasher<AppUser>();
             var result = await userManager.CreateAsync(NewUser, "Bilgeadam.123");
 
             if (result.Succeeded)

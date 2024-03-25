@@ -18,7 +18,12 @@ namespace Project.Persistence.Repositories.Concrete
             this._Context = Context;
         }
 
-        public async Task<Employee> GetEmployeeByIdWithCompanyAsync(int employeeId)
+        public async Task<Employee> GetEmployeeByEmailWithCompanyAsync(string email)
+        {
+            return await _Context.Employees.Include(x => x.Company).FirstOrDefaultAsync(x => x.Email == email);
+        }
+
+        public async Task<Employee> GetEmployeeByIdWithCompanyAsync(int? employeeId)
         {
             return await _Context.Employees.Include(x => x.Company).FirstOrDefaultAsync(x => x.Id == employeeId);
         }
