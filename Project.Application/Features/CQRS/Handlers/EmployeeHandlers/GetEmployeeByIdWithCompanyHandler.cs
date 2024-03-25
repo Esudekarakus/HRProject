@@ -1,6 +1,7 @@
 ﻿using Project.Application.Features.CQRS.Queries.EmployeeQueries;
 using Project.Application.Features.CQRS.Results.EmployeeResults;
 using Project.Application.UnitOfWork.Abstract;
+using Project.Domain.Enum;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +19,18 @@ namespace Project.Application.Features.CQRS.Handlers.EmployeeHandlers
             this.unitOfWork = unitOfWork;
         }
 
-       
+        public Status GetEnumStatus(int status)
+        {
+            switch (status)
+            {
+                case 1:
+                    return Status.Active;
+                case 2:
+                    return Status.Passive;
+                default:
+                    return Status.Passive;
+            }
+        }
         public async Task<GetEmployeeByIdWithCompanyQueryResult> Handle(GetEmployeeByIdWithCompanyQuery query)
         {
             var values = await unitOfWork.employeeRepository.GetEmployeeByIdWithCompanyAsync(query.Id);
@@ -30,7 +42,7 @@ namespace Project.Application.Features.CQRS.Handlers.EmployeeHandlers
                 SecondLastName = values.SecondLastName,
                 Name = values.Name,
                 BirthOfPlace = values.BirthOfPlace,
-                Status = values.Status,
+                Status = GetEnumStatus(values.Status),
                 DateOfStart = values.DateOfStart,
                 CompanyId = values.CompanyId,
                 CompanyName=values.Company.Name,

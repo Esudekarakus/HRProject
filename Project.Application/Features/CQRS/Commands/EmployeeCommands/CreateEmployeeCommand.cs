@@ -22,13 +22,13 @@ namespace Project.Application.Features.CQRS.Commands.EmployeeCommands
         public string Address { get; set; }
 
       
-        public string IdendificationNumber { get; set; }
+        public string IdentificationNumber { get; set; }
         public DateTime DateOfStart { get; set; }
         public DateTime? DateOfEnd { get; set; }
         public int? CompanyId { get; set; }
         
         public string Department { get; set; }
-        public Status Status { get; set; }
+        public int Status { get; set; }
         //public string? ImageName { get; set; }
 
         //public IFormFile? ImageFile { get; set; }

@@ -34,7 +34,7 @@ namespace Project.Domain.Entities
         public int? CompanyId { get; set; }
         public Company? Company { get; set; }
         public string Department { get; set; }
-        public Status Status { get; set; }
+        public int Status { get; set; }
         public string? ImageName { get; set; }
 
         [NotMapped]
