@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Project.Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,5 +13,6 @@ namespace Project.Application.Services.Abstract
         public  Task<bool> IfPasswordMatches(string password, string confirmPassword);
         Task<bool> UpdatePasswordAsync(string email, string password, string confirmPassword);
         public Task<bool> IsUserValid(string email);
+        public Task<AppUser> getAppUserDetailsIncludePersonelDetails(AppUser appUser);
     }
 }

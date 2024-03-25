@@ -20,6 +20,11 @@ namespace Project.Persistence.Repositories.Concrete
             this.Context = Context;
         }
 
+        public async Task<Employer> GetEmployerByEmailWithCompanyAsync(string mail)
+        {
+            return await Context.Employers.Include(x => x.Company).FirstOrDefaultAsync(x => x.Email == mail);
+        }
+
         public async Task<Employer> GetEmployerByIdWithCompanyAsync(int employerId)
         {
             return await Context.Employers.Include(x => x.Company).FirstOrDefaultAsync(x => x.Id == employerId);

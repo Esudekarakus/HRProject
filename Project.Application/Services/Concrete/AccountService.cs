@@ -35,7 +35,8 @@ namespace Project.Application.Services.Concrete
             if (User != null)
             {
 
-                var result = await signInManager.PasswordSignInAsync(User, inputPassword, false, false);
+                await signInManager.SignOutAsync();
+                Microsoft.AspNetCore.Identity.SignInResult result = await signInManager.PasswordSignInAsync(User, inputPassword, true, true);
                 if (result.Succeeded)
                     return true;
 
@@ -85,9 +86,16 @@ namespace Project.Application.Services.Concrete
             {
                 return false;
             }
-            
-  
-
         }
+
+        public Task<AppUser> getAppUserDetailsIncludePersonelDetails(AppUser appUser)
+        {
+            throw new NotImplementedException();
+        }
+
+        //public async Task<AppUser> getAppUserDetailsIncludePersonalDetails(AppUser appUser)
+        //{
+        //    await userManager.
+        //}
     }
 }

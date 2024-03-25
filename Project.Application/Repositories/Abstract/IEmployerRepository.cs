@@ -11,5 +11,6 @@ namespace Project.Application.Repositories.Abstract
     {
       List<Employer> GetEmployersWithCompany();
       Task<Employer> GetEmployerByIdWithCompanyAsync(int employerId);
+      Task<Employer> GetEmployerByEmailWithCompanyAsync(string mail);
     }
 }
