@@ -18,7 +18,7 @@ namespace Project.Domain.Entities
         {
             Expenses = new List<Expense>();
             Advances = new List<Advance>();
-            DayOffs = new List<DayOff>();
+            Leaves = new List<Leave>();
         }
 
         public string? MiddleName { get; set; }
@@ -48,8 +48,8 @@ namespace Project.Domain.Entities
         {
             get
             {
-                string birthYear = DateOfBirth.Year.ToString();
-                string email = $"{LastName?.ToLower()}{birthYear}@bilgeadam.boost";
+               
+                string email = $"{LastName?.ToLower()}{Name.ToLower()}@bilgeadam.boost";
                 return email;
             }
         }
@@ -59,7 +59,7 @@ namespace Project.Domain.Entities
 
         public List<Expense> Expenses { get; set; }
         public List<Advance> Advances { get; set; }
-        public List<DayOff> DayOffs { get; set; }
+        public List<Leave> Leaves { get; set; }
 
     }
 }

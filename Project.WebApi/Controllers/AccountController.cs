@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using Project.Application.DTOs;
+using Project.Application.Features.CQRS.Commands.AccountCommands;
 using Project.Application.Features.CQRS.Commands.EmployeeCommands;
 using Project.Application.Features.CQRS.Handlers.EmployeeHandlers;
 using Project.Application.Features.CQRS.Handlers.EmployerHandlers;
@@ -28,7 +29,7 @@ namespace Project.WebApi.Controllers
     [AllowAnonymous]
     public class AccountController : Controller
     {
-        private readonly CreateEmployeeCommand cEmployeeCommand;
+        
         private readonly RoleManager<IdentityRole> roleManager;
         private readonly UserManager<AppUser> userManager;
         private readonly IAccountService accountService;
@@ -38,10 +39,10 @@ namespace Project.WebApi.Controllers
 
 
 
-        public AccountController(UserManager<AppUser> userManager, CreateEmployeeCommand cEmployeeCommand, RoleManager<IdentityRole> roleManager, IConfiguration config, IAccountService accountService, JwtConfiguration jwtService, IUnitOfWork unitOfWork)
+        public AccountController(UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager, IConfiguration config, IAccountService accountService, JwtConfiguration jwtService)
         {
             this.userManager = userManager;
-            this.cEmployeeCommand = cEmployeeCommand;
+            
             this.roleManager = roleManager;
             this.accountService = accountService;
             this._config = config;
@@ -133,7 +134,8 @@ namespace Project.WebApi.Controllers
 
 
         [HttpPost("Login")]
-        public async Task<IActionResult> Login([FromBody] LoginUserMV user, CancellationToken cancellationToken)
+        public async Task<IActionResult> Login([FromBody]LoginCommand user,CancellationToken cancellationToken)
+
         {
 
             if (!ModelState.IsValid)
@@ -147,9 +149,11 @@ namespace Project.WebApi.Controllers
             foreach (var role in userRoles)
             {
                 claims.Add(new Claim(ClaimTypes.Role, role));
+                
             }
 
             claims.Add(new Claim(ClaimTypes.Email, appUser.Email));
+            claims.Add(new Claim("UserId", appUser.Id));
 
             var jwt = jwtService.Generate(appUser, claims);
 
@@ -161,19 +165,19 @@ namespace Project.WebApi.Controllers
         }
 
         [HttpPut("ChangePassword")]
-        public async Task<IActionResult> ChangePassword(ChangePasswordDto passwordDto)
+        public async Task<IActionResult> ChangePassword(ForgotPasswordCommand command)
         {
-            if (!await accountService.IsUserValid(passwordDto.Email))
+            if (!await accountService.IsUserValid(command.Email))
             {
                 return BadRequest("Kullanıcı bulunamadı.");
             }
 
-            if (!await accountService.IfPasswordMatches(passwordDto.Password, passwordDto.ConfirmPassword))
+            if (!await accountService.IfPasswordMatches(command.Password, command.ConfirmPassword))
             {
                 return BadRequest("Parolalar eşleşmiyor.");
             }
 
-            if (await accountService.UpdatePasswordAsync(passwordDto.Email, passwordDto.Password, passwordDto.ConfirmPassword))
+            if (await accountService.UpdatePasswordAsync(command.Email, command.Password, command.ConfirmPassword))
             {
                 return Ok();
             }

@@ -9,6 +9,7 @@ namespace Project.Domain.Enum
     public enum AdvanceType
     {
         Individual = 1,
-        Institutional
+        Medical,
+        Travel
     }
 }

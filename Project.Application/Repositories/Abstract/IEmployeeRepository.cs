@@ -10,7 +10,10 @@ namespace Project.Application.Repositories.Abstract
     public interface IEmployeeRepository : IRepository<Employee>
     {
         List<Employee> GetEmployeesWithCompany();
-        Task<Employee> GetEmployeeByIdWithCompanyAsync(int? employeeId);
-        Task<Employee> GetEmployeeByEmailWithCompanyAsync(string email);
+
+        Task<Employee> GetEmployeeByIdWithCompanyAsync(int employeeId);
+
+        public double GetSalaryByEmployeeId(int employeeId);
+
     }
 }

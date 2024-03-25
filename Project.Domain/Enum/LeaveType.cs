@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Project.Domain.Enum
 {
-    public enum DayOffType
+    public enum LeaveType
     {
         YillikIzin=1,
         UcretsizIzin,

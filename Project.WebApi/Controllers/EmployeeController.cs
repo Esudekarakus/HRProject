@@ -45,7 +45,7 @@ namespace Project.WebApi.Controllers
         }
         [HttpPost]
 
-        public async Task<IActionResult> CreateEmployee([FromForm]CreateEmployeeCommand command)
+        public async Task<IActionResult> CreateEmployee(/*[FromForm]*/CreateEmployeeCommand command)
         {
             //command.ImageName = await SaveImage(command.ImageFile);
             await createEmployeeCommandHandler.Handle(command);

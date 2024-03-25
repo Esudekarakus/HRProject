@@ -7,11 +7,12 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Project.Application.DTOs;
 using Project.Application.Features.CQRS.Commands.EmployeeCommands;
+using Project.Application.Features.CQRS.Handlers.AdvanceHandlers;
 using Project.Application.Features.CQRS.Handlers.CompanyHandlers;
 using Project.Application.Features.CQRS.Handlers.EmployeeHandlers;
 using Project.Application.Features.CQRS.Handlers.EmployerHandlers;
 using Project.Application.Features.CQRS.Handlers.EmployerQueries;
-
+using Project.Application.Features.CQRS.Handlers.LeaveHandler;
 using Project.Application.Repositories.Abstract;
 using Project.Application.Services.Abstract;
 using Project.Application.Services.Concrete;
@@ -34,7 +35,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<AppDbContext>(
-    o => o.UseSqlServer(builder.Configuration.GetConnectionString("connectionString")));
+    o => o.UseSqlServer(builder.Configuration.GetConnectionString("Sude")));
 
 builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
 
@@ -69,12 +70,24 @@ builder.Services.AddScoped<RemoveEmployeeCommandHandler>();
 builder.Services.AddScoped<GetEmployeeByIdWithCompanyHandler>();
 builder.Services.AddScoped<GetEmployeeWithCompanyHandler>();
 
-builder.Services.AddScoped<CreateEmployeeCommand>();
+builder.Services.AddScoped<CreateAdvanceCommandHandler>();
+builder.Services.AddScoped<UpdateAdvanceCommandHandler>();
+builder.Services.AddScoped<RemoveAdvanceCommandHandler>();
+builder.Services.AddScoped<GetAdvanceByEmployeeIdQueryResultHandler>();
+builder.Services.AddScoped<GetAdvanceQueryResultHandler>();
+
+builder.Services.AddScoped<CreateLeaveCommandHandler>();
+builder.Services.AddScoped<UpdateLeaveCommandHandler>();
+builder.Services.AddScoped<RemoveLeaveCommandHandler>();
+builder.Services.AddScoped<GetLeaveByEmployeeIdQueryResultHandler>();
+builder.Services.AddScoped<GetLeaveQueryResultHandler>();
 
 
 builder.Services.AddScoped<IEmployerRepository, EmployerRepository>();
 builder.Services.AddScoped<ICompanyRepository, CompanyRepository>();
 builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+builder.Services.AddScoped<IAdvanceRepository, AdvanceRepository>();
+builder.Services.AddScoped<ILeaveRepository, LeaveRepository>();
 
 builder.Services.AddScoped<IAccountService, AccountService>();
 builder.Services.AddScoped<IEmailService, EmailService>();
@@ -83,6 +96,9 @@ builder.Services.AddControllers()
     .AddFluentValidation(fv =>
     {
         fv.RegisterValidatorsFromAssemblyContaining<AddingPersonelValid>();
+        fv.RegisterValidatorsFromAssemblyContaining<LoginValidation>();
+        fv.RegisterValidatorsFromAssemblyContaining<CreateAdvanceValidation>();
+        fv.RegisterValidatorsFromAssemblyContaining<ForgotPasswordValidation>();
     });
 
 //builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
