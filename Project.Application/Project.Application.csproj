@@ -19,6 +19,8 @@
 
   <ItemGroup>
     <Folder Include="Features\CQRS\Handlers\LoginHandlers\" />
+    <Folder Include="Features\CQRS\Queries\ExpenseQueries\" />
+    <Folder Include="Features\CQRS\Results\ExpenseResults\" />
   </ItemGroup>
 
 </Project>

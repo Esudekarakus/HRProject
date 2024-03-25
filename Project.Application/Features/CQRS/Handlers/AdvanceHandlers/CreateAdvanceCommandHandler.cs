@@ -55,7 +55,6 @@ namespace Project.Application.Features.CQRS.Handlers.AdvanceHandlers
         {
             try 
             {   
-                // Enum isimlerini string olarak alıp, integer değerlerine çevir
                 
 
                 await unitOfWork.advanceRepository.CreateAsync(new Advance
@@ -68,9 +67,8 @@ namespace Project.Application.Features.CQRS.Handlers.AdvanceHandlers
                 });
             }
             catch (Exception ex)
-    {
-                // Loglama yapın
-                throw;
+            {
+                throw new Exception(ex.Message);
             }
         }
     }

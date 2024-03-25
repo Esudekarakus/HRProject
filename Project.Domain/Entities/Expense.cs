@@ -11,9 +11,9 @@ namespace Project.Domain.Entities
     {
         public int Id { get; set; }
         public string Description { get; set; }
-        public Currency Currency { get; set; }
-        public ExpenseType ExpenseType { get; set; }
-        public ApprovalStatus ApprovalStatus { get; set; }
+        public int  Currency { get; set; }
+        public int ExpenseType { get; set; }
+        public int ApprovalStatus { get; set; }
         public double Amount { get; set; }
         public DateTime ExpenseDate { get; set; }
         public string InvoicePath { get; set; }
@@ -22,7 +22,7 @@ namespace Project.Domain.Entities
         public DateTime? UpdatedDate { get; set; }
         public DateTime? DeletedTime { get; set; }
 
-        public int EmployeeId { get; set; }
-        public Employee Employee { get; set; }
+        public int? EmployeeId { get; set; }
+        public Employee? Employee { get; set; }
     }
 }
