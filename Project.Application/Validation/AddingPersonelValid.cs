@@ -36,7 +36,7 @@ namespace Project.Application.Validation
 
             RuleFor(x => x.DateOfStart).NotEmpty().WithMessage("Başlangıç tarihi boş bırakılamaz.");
 
-            RuleFor(x => x.IdendificationNumber)
+            RuleFor(x => x.IdentificationNumber)
                 .NotEmpty().WithMessage("Kimlik numarası boş bırakılamaz.")
                 .Length(11).WithMessage("Kimlik numarası 11 karakter olmalıdır.");
 

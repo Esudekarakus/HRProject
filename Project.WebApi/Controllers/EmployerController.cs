@@ -129,7 +129,7 @@ namespace Project.WebApi.Controllers
 
             await createEmployee.Handle(command);
 
-            Employee CreatedUser = await unitOfWork.employeeRepository.FirstOrDefaultAsync(x => x.IdendificationNumber == command.IdendificationNumber);
+            Employee CreatedUser = await unitOfWork.employeeRepository.FirstOrDefaultAsync(x => x.IdendificationNumber == command.IdentificationNumber);
 
             AppUser NewUser = new()
             {
@@ -177,7 +177,7 @@ namespace Project.WebApi.Controllers
 
         private async Task<bool> CheckUserIds(CreateEmployeeCommand command)
         {
-            var checkUserId = await unitOfWork.employerRepository.GetWhereListAsync(x => x.IdentityNumber == command.IdendificationNumber || x.PhoneNumber==command.PhoneNumber);
+            var checkUserId = await unitOfWork.employerRepository.GetWhereListAsync(x => x.IdentityNumber == command.IdentificationNumber || x.PhoneNumber==command.PhoneNumber);
             if (checkUserId!=null)
                 return false;
             return true;

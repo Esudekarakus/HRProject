@@ -1,5 +1,6 @@
 ﻿using Project.Application.Features.CQRS.Results.EmployeeResults;
 using Project.Application.UnitOfWork.Abstract;
+using Project.Domain.Enum;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,36 +17,56 @@ namespace Project.Application.Features.CQRS.Handlers.EmployeeHandlers
         {
             this.unitOfWork = unitOfWork;
         }
-        
+        public Status GetEnumStatus(int status)
+        {
+            switch (status)
+            {
+                case 1:
+                    return Status.Active;
+                case 2:
+                    return Status.Passive;
+                default:
+                    return Status.Passive;
+            }
+        }
 
         public List<GetEmployeeWithCompanyQueryResult> Handle()
         {
-            var values = unitOfWork.employeeRepository.GetEmployeesWithCompany();
+            var employees = unitOfWork.employeeRepository.GetEmployeesWithCompany();
+            var results= new List<GetEmployeeWithCompanyQueryResult>();
 
-            return values.Select(x=> new GetEmployeeWithCompanyQueryResult
+            foreach (var employee in employees)
             {
-                Name = x.Name,
-                MiddleName = x.MiddleName,
-                LastName = x.LastName,
-                BirthOfPlace = x.BirthOfPlace,
-                Salary = x.Salary,
-                SecondLastName = x.SecondLastName,
-                Status = x.Status,
-                DateOfStart = x.DateOfStart,
-                CompanyId = x.CompanyId,
-                CompanyName=x.Company.Name,
-                DateOfBirth=x.DateOfBirth,
-                DateOfEnd=x.DateOfEnd,
-                Department=x.Department,
-                OffDays=x.OffDays,
-                Email=x.Email,
-                Id=x.Id,
-                IdendificationNumber=x.IdendificationNumber,
+                var statusE= GetEnumStatus(employee.Status);
+
+                results.Add(new GetEmployeeWithCompanyQueryResult
+                {
+                    Id = employee.Id,
+                    Status = statusE,
+                    Name = employee.Name,
+                    MiddleName = employee.MiddleName,
+                    Salary = employee.Salary,
+                    SecondLastName = employee.LastName,
+                    DateOfStart = employee.DateOfStart,
+                    BirthOfPlace = employee.BirthOfPlace,
+                    CompanyId = employee.CompanyId,
+                    CompanyName = employee.Company.Name,
+                    DateOfBirth = employee.DateOfBirth,
+                    DateOfEnd = employee.DateOfEnd,
+                    Department = employee.Department,
+                    Email = employee.Email,
+                    IdendificationNumber = employee.IdendificationNumber,
+                    LastName = employee.LastName,
+                    OffDays = employee.OffDays,
+
+                    PhoneNumber = employee.PhoneNumber,
+                    Profession = employee.Profession,
+
+                });
                
-                PhoneNumber=x.PhoneNumber,
-                Profession=x.Profession
-                
-            }).ToList();
+            }
+            return results;
+
         }
     }
 }
