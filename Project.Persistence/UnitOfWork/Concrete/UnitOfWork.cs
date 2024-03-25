@@ -19,7 +19,7 @@ namespace Project.Persistence.UnitOfWork.Concrete
         private EmployeeRepository EmployeeRepository;
         private AdvanceRepository AdvanceRepository;
         private LeaveRepository LeaveRepository;
-        
+        private ExpenseRepository ExpenseRepository;
 
         public UnitOfWork(AppDbContext _context)
         {
@@ -32,6 +32,8 @@ namespace Project.Persistence.UnitOfWork.Concrete
 
         public IAdvanceRepository advanceRepository => AdvanceRepository ?? new AdvanceRepository(_context);
         public ILeaveRepository leaveRepository => LeaveRepository ?? new LeaveRepository(_context);
+
+        public IExpenseRepository expenseRepository => ExpenseRepository ?? new ExpenseRepository(_context);
         
         public IRepository<T> GetRepository<T>() where T : class
         {
