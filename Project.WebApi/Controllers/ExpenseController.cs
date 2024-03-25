@@ -56,7 +56,7 @@ namespace Project.WebApi.Controllers
         [HttpDelete]
         public async Task<IActionResult> RemoveExpense(int id)
         {
-            await _getExpenseByEmployeeIdQueryHandler.Handle(new GetExpenseByEmployeeIdQuery(id));
+            await _removeExpenseCommandHandler.Handle(new RemoveExpenseCommand(id));
             return Ok("Avans başarıyla silindi");
 
         }
