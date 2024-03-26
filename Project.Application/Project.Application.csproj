@@ -16,4 +16,11 @@
   <ItemGroup>
     <ProjectReference Include="..\Project.Domain\Project.Domain.csproj" />
   </ItemGroup>
+
+
+  <ItemGroup>
+    <Folder Include="Features\CQRS\Handlers\LoginHandlers\" />
+  </ItemGroup>
+
+
 </Project>
