@@ -13,6 +13,7 @@ namespace Project.Persistence.Repositories.Concrete
     public class EmployeeRepository : GenericRepository<Employee>, IEmployeeRepository
     {
         protected readonly AppDbContext _Context;
+
         public EmployeeRepository(AppDbContext Context) : base(Context)
         {
             this._Context = Context;
@@ -26,6 +27,11 @@ namespace Project.Persistence.Repositories.Concrete
         public async Task<Employee> GetEmployeeByIdWithCompanyAsync(int? employeeId)
         {
             return await _Context.Employees.Include(x => x.Company).FirstOrDefaultAsync(x => x.Id == employeeId);
+        }
+
+        public Task<Employee> GetEmployeeByIdWithCompanyAsync(int employeeId)
+        {
+            throw new NotImplementedException();
         }
 
         public List<Employee> GetEmployeesWithCompany()

@@ -35,7 +35,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<AppDbContext>(
-    o => o.UseSqlServer(builder.Configuration.GetConnectionString("Sude")));
+    o => o.UseSqlServer(builder.Configuration.GetConnectionString("connectionString")));
 
 builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
 
@@ -137,7 +137,8 @@ app.UseAuthentication();
 
 app.UseAuthorization();
 app.UseCors(options => options
-.AllowAnyOrigin()
+.WithOrigins("http://localhost:5174", "http://localhost:5173", "http://localhost:5175", "http://localhost:5176")
+.AllowCredentials()
 .AllowAnyMethod()
 .AllowAnyHeader()
 );
