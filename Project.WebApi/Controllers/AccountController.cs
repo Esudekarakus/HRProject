@@ -63,7 +63,7 @@ namespace Project.WebApi.Controllers
                     Email=user.Email,
                     Salary = employee.Salary,
                     SecondLastName = employee.LastName,
-                    Status = employee.Status,
+                    //Status = employee.Status,
                     BirthOfPlace = employee.BirthOfPlace,
                     CompanyId = employee.CompanyId,
                     DateOfStart = employee.DateOfStart,

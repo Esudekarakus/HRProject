@@ -17,16 +17,26 @@ namespace Project.Application.Features.CQRS.Handlers.EmployeeHandlers
             this.unitOfWork = unitOfWork;
         }
 
-        public async Task Handle(UpdateEmployeeCommand command)
+        public async Task Handle( UpdateEmployeeCommand command)
         {
-            var values = await unitOfWork.employeeRepository.GetByIdAsync(command.Id);
-            if (values == null)
+            var employee = await unitOfWork.employeeRepository.GetByIdAsync(command.Id);
+            if (employee == null)
             {
-                values.PhoneNumber= command.PhoneNumber;
-                values.Address= command.Address;
-                await unitOfWork.employeeRepository.UpdateAsync(values);
-
+                throw new Exception("Belirtilen ID ile çalışan bulunamadı.");
             }
+
+            // Adres ve telefon numarasını güncelle
+            employee.PhoneNumber = command.PhoneNumber;
+            employee.Address = command.Address;
+
+            // Resim adını güncelle (eğer bir resim adı varsa)
+            if (!string.IsNullOrEmpty(command.ImageName))
+            {
+                employee.ImageName = command.ImageName;
+            }
+
+            await unitOfWork.employeeRepository.UpdateAsync(employee);
+            await unitOfWork.CommitAsync(); // Transaksiyonu kaydet
         }
     }
 }
