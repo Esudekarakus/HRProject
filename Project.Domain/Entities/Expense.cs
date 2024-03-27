@@ -1,6 +1,8 @@
-﻿using Project.Domain.Enum;
+﻿using Microsoft.AspNetCore.Http;
+using Project.Domain.Enum;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,6 +24,9 @@ namespace Project.Domain.Entities
         public DateTime? UpdatedDate { get; set; }
         public DateTime? DeletedTime { get; set; }
 
+        [NotMapped] 
+        IFormFile? ExpenseFile { get; set; }
+        public string? FileName { get; set; }
         public int? EmployeeId { get; set; }
         public Employee? Employee { get; set; }
     }

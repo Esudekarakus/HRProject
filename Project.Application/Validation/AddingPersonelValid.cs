@@ -36,9 +36,9 @@ namespace Project.Application.Validation
 
             RuleFor(x => x.DateOfStart).NotEmpty().WithMessage("Başlangıç tarihi boş bırakılamaz.");
 
-            RuleFor(x => x.IdentificationNumber)
-                .NotEmpty().WithMessage("Kimlik numarası boş bırakılamaz.")
-                .Must(BeValidTurkishIdentificationNumber).WithMessage("Geçersiz bir TC kimlik numarası girdiniz.");
+            //RuleFor(x => x.IdentificationNumber)
+            //    .NotEmpty().WithMessage("Kimlik numarası boş bırakılamaz.")
+            //    .Must(BeValidTurkishIdentificationNumber).WithMessage("Geçersiz bir TC kimlik numarası girdiniz.");
 
 
             RuleFor(x => x.Salary)
