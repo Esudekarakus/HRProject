@@ -66,8 +66,21 @@ namespace Project.WebApi.Controllers
             {
                 return BadRequest("Gönderilen ID ile istek yapılan ID uyuşmuyor.");
             }
-            await updateEmployeeCommandHandler.Handle(command);
-            return Ok("Çalışan başarıyla güncellendi");
+
+            try
+            {
+                // Resmi kaydet
+                string imageName = await SaveImage(command.ImageFile);
+
+                // Komutu güncelleme işleyicisine
+                await updateEmployeeCommandHandler.Handle(command);
+
+                return Ok("Çalışan başarıyla güncellendi");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Bir hata oluştu: {ex.Message}");
+            }
         }
 
         [NonAction]

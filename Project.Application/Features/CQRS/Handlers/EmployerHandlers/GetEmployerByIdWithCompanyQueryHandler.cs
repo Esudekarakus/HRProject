@@ -40,7 +40,7 @@ namespace Project.Application.Features.CQRS.Handlers.EmployerHandlers
                Department=values.Department,
                Email=values.Email,
                IdentityNumber=values.IdentityNumber,
-               ImagePath=values.ImagePath,
+               
                LastName=values.LastName,
                Name=values.Name,
                OffDays=values.OffDays,

@@ -37,7 +37,7 @@ namespace Project.Application.Features.CQRS.Handlers.EmployerHandlers
                 Email=x.Email,
                 Id = x.Id,
                 IdentityNumber = x.IdentityNumber,
-                ImagePath = x.ImagePath,
+                
                 LastName = x.LastName,
                 Name = x.Name,
                 PhoneNumber = x.PhoneNumber,
