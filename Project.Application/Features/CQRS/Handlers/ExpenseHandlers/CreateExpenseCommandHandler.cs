@@ -30,8 +30,10 @@ namespace Project.Application.Features.CQRS.Handlers.ExpenseHandlers
                     ExpenseDate = DateTime.Now,
                     ExpenseType = command.ExpenseType,
                     EmployeeId = command.EmployeeId,
+                    FileName = command.FileName,
 
                 });
+                await unitOfWork.CommitAsync();
             }
             catch (Exception ex)
             {
