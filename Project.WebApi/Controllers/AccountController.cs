@@ -16,6 +16,7 @@ using System.Security.Claims;
 using System.Text;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 using System.Xml.Linq;
+using Project.WebApi.Helpers;
 
 namespace Project.WebApi.Controllers
 {
@@ -31,10 +32,11 @@ namespace Project.WebApi.Controllers
         private readonly IConfiguration _config;
         private readonly JwtConfiguration jwtService;
         private readonly IUnitOfWork unitOfWork;
+        private readonly IEmailService emailService;
 
 
 
-        public AccountController(UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager, IConfiguration config, IAccountService accountService, JwtConfiguration jwtService, IUnitOfWork unitOfWork, IConfiguration _config)
+        public AccountController(UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager, IConfiguration config, IAccountService accountService, JwtConfiguration jwtService, IUnitOfWork unitOfWork, IConfiguration _config, IEmailService emailService)
         {
             this.userManager = userManager;
             this.roleManager = roleManager;
@@ -42,6 +44,7 @@ namespace Project.WebApi.Controllers
             this._config = config;
             this.jwtService = jwtService;
             this.unitOfWork = unitOfWork;
+            this.emailService = emailService;
         }
 
 
@@ -58,7 +61,7 @@ namespace Project.WebApi.Controllers
                     Email = user.Email,
                     Salary = employee.Salary,
                     SecondLastName = employee.LastName,
-                    Status = employee.Status,
+                    Status = (Status?)employee.Status,
                     BirthOfPlace = employee.BirthOfPlace,
                     CompanyId = employee.CompanyId,
                     DateOfStart = employee.DateOfStart,
@@ -167,14 +170,32 @@ namespace Project.WebApi.Controllers
                 return BadRequest("Parolalar eşleşmiyor.");
             }
 
-            if (await accountService.UpdatePasswordAsync(command.Email, command.Password, command.ConfirmPassword))
-            {
+            //if (await accountService.UpdatePasswordAsync(command.Email, command.Password, command.ConfirmPassword))
+            //{
+            //    return Ok();
+            //}
+
+            if (await emailService.SendVerificationCodeToUser(command))
                 return Ok();
-            }
 
             return BadRequest("Parola güncellenemedi.");
         }
 
+        [HttpPost("VerifyCode")]
+        public async Task<IActionResult> VerifyCode(VerifyCodeDTO verifyCodeDTO)
+        {
+            if (verifyCodeDTO.inputCode == GeneratedVerifyCode.Code)
+            {
+                if (await accountService.UpdatePasswordAsync(verifyCodeDTO.Email, verifyCodeDTO.Password, verifyCodeDTO.ConfirmPassword))
+                {
+                    GeneratedVerifyCode.Code = "";
+                    return Ok();
+                }
+
+            }
+
+            return BadRequest("Kodunuz Hatalıdır lütfen tekrar deneyin.");
+        }
 
     }
 }

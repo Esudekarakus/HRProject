@@ -8,6 +8,7 @@ namespace Project.Application.Features.CQRS.Commands.AccountCommands
 {
     public class ForgotPasswordCommand
     {
+        public string privateMail { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
         //public string VerificationCode { get; set; }

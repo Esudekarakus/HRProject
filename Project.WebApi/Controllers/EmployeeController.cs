@@ -37,7 +37,6 @@ namespace Project.WebApi.Controllers
         }
 
         [HttpGet("{id}")]
-
         public async Task<IActionResult>GetEmployeeByIdWithCompany(int id)
         {
             var value= await getEmployeeByIdWithCompanyHandler.Handle(new GetEmployeeByIdWithCompanyQuery(id));
@@ -61,7 +60,6 @@ namespace Project.WebApi.Controllers
         }
 
         [HttpPut("{id}")]
-
         public async Task<IActionResult> UpdateEmployee(int id, UpdateEmployeeCommand command)
         {
             if (id != command.Id)
