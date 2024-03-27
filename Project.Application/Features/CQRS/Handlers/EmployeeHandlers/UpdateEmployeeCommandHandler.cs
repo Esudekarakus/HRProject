@@ -25,7 +25,7 @@ namespace Project.Application.Features.CQRS.Handlers.EmployeeHandlers
                 throw new Exception("Belirtilen ID ile çalışan bulunamadı.");
             }
 
-            // Adres ve telefon numarasını güncelle
+            
             employee.PhoneNumber = command.PhoneNumber;
             employee.Address = command.Address;
 

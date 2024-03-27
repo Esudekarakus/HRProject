@@ -13,6 +13,7 @@ using Project.Application.Services.Abstract;
 using Project.Application.UnitOfWork.Abstract;
 using Project.Application.Validation;
 using Project.Domain.Entities;
+using System;
 
 
 namespace Project.WebApi.Controllers
@@ -35,9 +36,9 @@ namespace Project.WebApi.Controllers
         private readonly IUnitOfWork unitOfWork;
         private readonly IEmailService mailService;
         private readonly RoleManager<IdentityRole> roleManager;
-        
+        private readonly IWebHostEnvironment environment;
 
-        public EmployerController(CreateEmployerCommandHandler createEmployerCommandHandler, GetEmployerByIdQueryHandler getEmployerByIdQueryHandler, GetEmployerQueryHandler getEmployerQueryHandler, UpdateEmployerCommandHandler updateEmployerCommandHandler, RemoveEmployerCommandHandler removeEmployerCommandHandler, GetEmployerWithCompanyQueryResultHandler getEmployerWithCompanyQueryResultHandler, GetEmployerByIdWithCompanyQueryHandler getEmployerByIdWithCompanyQueryHandler, UserManager<AppUser> userManager, IUnitOfWork unitOfWork, CreateEmployeeCommandHandler createEmployee, IEmailService mailService, RoleManager<IdentityRole> roleManager)
+        public EmployerController(CreateEmployerCommandHandler createEmployerCommandHandler, GetEmployerByIdQueryHandler getEmployerByIdQueryHandler, GetEmployerQueryHandler getEmployerQueryHandler, UpdateEmployerCommandHandler updateEmployerCommandHandler, RemoveEmployerCommandHandler removeEmployerCommandHandler, GetEmployerWithCompanyQueryResultHandler getEmployerWithCompanyQueryResultHandler, GetEmployerByIdWithCompanyQueryHandler getEmployerByIdWithCompanyQueryHandler, UserManager<AppUser> userManager, IUnitOfWork unitOfWork, CreateEmployeeCommandHandler createEmployee, IEmailService mailService, RoleManager<IdentityRole> roleManager,IWebHostEnvironment environment)
         {
             this.createEmployerCommandHandler = createEmployerCommandHandler;
             this.getEmployerByIdQueryHandler = getEmployerByIdQueryHandler;
@@ -51,6 +52,7 @@ namespace Project.WebApi.Controllers
             this.createEmployee = createEmployee;
             this.mailService = mailService;
             this.roleManager = roleManager;
+            this.environment = environment;
         }
 
         [HttpGet]
@@ -112,7 +114,7 @@ namespace Project.WebApi.Controllers
         }
 
         [HttpPost("CreateEmployeeByEmployer")]
-        public async Task<IActionResult> CreateEmployeeByEmployer([FromForm]CreateEmployeeCommand command)
+        public async Task<IActionResult> CreateEmployeeByEmployer([FromForm] CreateEmployeeCommand command)
         {
 
             var validator = new AddingPersonelValid();
@@ -127,6 +129,7 @@ namespace Project.WebApi.Controllers
             if (await CheckUserIds(command))
                 return BadRequest("Eklenmek istenen kullanıcı halihazırda mevcut.");
 
+            string imageName = await SaveImage(command.ImageFile);
             await createEmployee.Handle(command);
 
             Employee CreatedUser = await unitOfWork.employeeRepository.FirstOrDefaultAsync(x => x.IdendificationNumber == command.IdentificationNumber);
@@ -147,6 +150,7 @@ namespace Project.WebApi.Controllers
             if (result.Succeeded)
             {
                 // Kullanıcı başarıyla oluşturulduysa, kullanıcıyı bulma işlemi
+
                 AppUser createdUser = await userManager.FindByNameAsync(NewUser.Email);
 
                 if (createdUser != null)
@@ -181,6 +185,20 @@ namespace Project.WebApi.Controllers
             if (checkUserId!=null)
                 return false;
             return true;
+        }
+
+
+        [NonAction]
+        public async Task<string> SaveImage(IFormFile imageFile)
+        {
+            string imageName = new String(Path.GetFileNameWithoutExtension(imageFile.FileName).Take(10).ToArray()).Replace(' ', '-');
+            imageName = imageName + DateTime.Now.ToString("yymmssfff") + Path.GetExtension(imageFile.FileName);
+            var imagePath = Path.Combine(environment.ContentRootPath, "Images", imageName);
+            using (var fileStream = new FileStream(imagePath, FileMode.Create))
+            {
+                await imageFile.CopyToAsync(fileStream);
+            }
+            return imageName;
         }
     }
 }

@@ -18,7 +18,7 @@ namespace Project.Domain.Entities
         public DateTime DateOfBirth { get; set; }
         public Status Status { get; set; }
         public string Department { get; set; }
-        public string? ImagePath { get; set; }
+        public string? ImageName { get; set; }
         [NotMapped]
         public IFormFile? ImageFile { get; set; }
         public string Address { get; set; }

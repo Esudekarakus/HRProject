@@ -31,7 +31,7 @@ namespace Project.Application.Features.CQRS.Handlers.EmployerQueries
                 PhoneNumber = x.PhoneNumber,
                 MiddleName = x.MiddleName,
                 Status = x.Status,
-                ImagePath = x.ImagePath,
+              
                 Address = x.Address,
                 Salary = x.Salary,
                 DateOfBirth = x.DateOfBirth,
