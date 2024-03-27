@@ -38,7 +38,8 @@ namespace Project.Application.Validation
 
             RuleFor(x => x.IdentificationNumber)
                 .NotEmpty().WithMessage("Kimlik numarası boş bırakılamaz.")
-                .Length(11).WithMessage("Kimlik numarası 11 karakter olmalıdır.");
+                .Must(BeValidTurkishIdentificationNumber).WithMessage("Geçersiz bir TC kimlik numarası girdiniz.");
+
 
             RuleFor(x => x.Salary)
                 .NotEmpty().WithMessage("Maaş alanı boş bırakılamaz.")
@@ -61,6 +62,61 @@ namespace Project.Application.Validation
             RuleFor(x => x.PhoneNumber).NotEmpty().WithMessage("Telefon numarası boş bırakılamaz.")
             .Matches(@"^05[0-9]{9}$").WithMessage("Geçerli bir telefon numarası girin.");
 
+
+
+
+
+        }
+
+        private bool BeValidTurkishIdentificationNumber(string identificationNumber)
+        {
+            // TC kimlik numarası 11 karakter olmalı
+            if (string.IsNullOrEmpty(identificationNumber) || identificationNumber.Length != 11)
+            {
+                return false;
+            }
+
+            // TC kimlik numarası sadece rakamlardan oluşmalıdır
+            foreach (char c in identificationNumber)
+            {
+                if (!char.IsDigit(c))
+                {
+                    return false;
+                }
+            }
+
+            // İlk rakam sıfır olamaz
+            if (identificationNumber[0] == '0')
+            {
+                return false;
+            }
+
+            // İlk 9 rakamın toplamının 10. rakama modu 10 olmalı
+            int sumFirstNineDigits = 0;
+            for (int i = 0; i < 9; i++)
+            {
+                sumFirstNineDigits += int.Parse(identificationNumber[i].ToString());
+            }
+            int tenthDigit = int.Parse(identificationNumber[9].ToString());
+            if (sumFirstNineDigits % 10 != tenthDigit)
+            {
+                return false;
+            }
+
+            // İlk 10 rakamın toplamının modu 10. rakamla aynı olmalıdır
+            int sumFirstTenDigits = 0;
+            for (int i = 0; i < 10; i++)
+            {
+                sumFirstTenDigits += int.Parse(identificationNumber[i].ToString());
+            }
+            int eleventhDigit = int.Parse(identificationNumber[10].ToString());
+            if (sumFirstTenDigits % 10 != eleventhDigit)
+            {
+                return false;
+            }
+
+            
+            return true;
         }
 
 
