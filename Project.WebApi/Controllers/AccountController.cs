@@ -115,6 +115,7 @@ namespace Project.WebApi.Controllers
             }
             else
             {
+                //null reference gelmemea için kontrol lazım
                 AppUserDetailsDTO detailsDTO2 = new AppUserDetailsDTO()
                 {
                     Email = user.Email,

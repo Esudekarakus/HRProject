@@ -57,7 +57,7 @@ namespace Project.WebApi.Controllers
         [HttpDelete]
         public async Task<IActionResult> RemoveEmployee(int id)
         {
-            await getLeaveByEmployeeIdQueryResultHandler.Handle(new GetLeaveByEmployerIdQuery(id));
+            await removeLeaveCommandHandler.Handle(new RemoveLeaveCommand(id));
             return Ok("İzin başarıyla silindi");
 
         }

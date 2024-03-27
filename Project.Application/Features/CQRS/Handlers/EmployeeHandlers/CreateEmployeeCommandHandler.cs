@@ -22,6 +22,7 @@ namespace Project.Application.Features.CQRS.Handlers.EmployeeHandlers
         {
             await unitOfWork.employeeRepository.CreateAsync(new Employee
             {
+              
                 Salary = command.Salary,
                 SecondLastName = command.LastName,
                 Status = command.Status,
@@ -32,7 +33,7 @@ namespace Project.Application.Features.CQRS.Handlers.EmployeeHandlers
                 DateOfBirth = command.DateOfBirth,
                 Department = command.Department,
                 OffDays = command.OffDays,
-                //ImageName = command.ImageName,
+                ImageName = command.ImageName,
                 IdendificationNumber = command.IdentificationNumber,
                 Address=command.Address,
                 Name = command.Name,
@@ -43,6 +44,7 @@ namespace Project.Application.Features.CQRS.Handlers.EmployeeHandlers
                 PrivateMail = command.PrivateMail
 
             });
+            await unitOfWork.CommitAsync();
         }
     }
 }
