@@ -37,7 +37,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<AppDbContext>(
-    o => o.UseSqlServer(builder.Configuration.GetConnectionString("Tarık")));
+    o => o.UseSqlServer(builder.Configuration.GetConnectionString("connectionString")));
 
 builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
 

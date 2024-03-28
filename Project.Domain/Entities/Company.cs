@@ -19,7 +19,7 @@ namespace Project.Domain.Entities
 
         public string PhoneNumber { get; set; }
 
-        public int VatNumber { get; set; }
+        public string VatNumber { get; set; }
 
         public List<Employee> Employees { get; set; }
         public List<Employer> Employers { get; set; }
