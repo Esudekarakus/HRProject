@@ -36,23 +36,27 @@ namespace Project.WebApi.Controllers
         public async Task<IActionResult> UpdateAppUserDetailsById(AppUserUpdateDetailsDTO user)
         {
             AppUser appUser = await userManager.FindByEmailAsync(user.Email);
-            if (appUser.EmployeeID != null&&appUser!=null)
+            if(appUser != null)
             {
-                Employee employee = await unitOfWork.employeeRepository.GetEmployeeByIdWithCompanyAsync((int)appUser.EmployeeID);
-                employee.Address = user.Address;
-                employee.PhoneNumber = user.PhoneNumber;
-                await unitOfWork.employeeRepository.UpdateAsync(employee);
-                return Ok();
-            }
-            else
-            {
-                Employer employer = await unitOfWork.employerRepository.GetEmployerByIdWithCompanyAsync((int)appUser.EmployerID);
-                employer.Address = user.Address;
-                employer.PhoneNumber = user.PhoneNumber;
-                await unitOfWork.employerRepository.UpdateAsync(employer);
-                return Ok();
+                if (appUser.EmployeeID != null && appUser != null)
+                {
+                    Employee employee = await unitOfWork.employeeRepository.GetEmployeeByIdWithCompanyAsync((int)appUser.EmployeeID);
+                    employee.Address = user.Address;
+                    employee.PhoneNumber = user.PhoneNumber;
+                    await unitOfWork.employeeRepository.UpdateAsync(employee);
+                    return Ok();
+                }
+                else if(appUser.EmployerID != null && appUser != null) 
+                {
+                    Employer employer = await unitOfWork.employerRepository.GetEmployerByIdWithCompanyAsync((int)appUser.EmployerID);
+                    employer.Address = user.Address;
+                    employer.PhoneNumber = user.PhoneNumber;
+                    await unitOfWork.employerRepository.UpdateAsync(employer);
+                    return Ok();
 
+                }
             }
+         
             return BadRequest();
  
         }

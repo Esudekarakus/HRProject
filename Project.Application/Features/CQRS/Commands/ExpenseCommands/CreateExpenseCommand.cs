@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,5 +15,7 @@ namespace Project.Application.Features.CQRS.Commands.ExpenseCommands
         public string InvoicePath { get; set; }
         public double Amount { get; set; }
         public int? EmployeeId { get; set; }
+        public string FileName { get; set; }
+        public IFormFile FormFile { get; set; }
     }
 }
