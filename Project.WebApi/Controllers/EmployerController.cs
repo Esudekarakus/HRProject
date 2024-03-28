@@ -73,7 +73,7 @@ namespace Project.WebApi.Controllers
                 PhoneNumber = CreatedUser.PhoneNumber,
                 UserName = CreatedUser.Email,
                 EmailConfirmed = false,
-                EmployeeID = CreatedUser.Id
+                EmployerID = CreatedUser.Id
             };
 
             var hasher = new PasswordHasher<AppUser>();
