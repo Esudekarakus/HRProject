@@ -33,7 +33,7 @@ namespace Project.Application.Features.CQRS.Handlers.EmployerQueries
                 DateOfBirth = command.DateOfBirth,
                 Department = command.Department,
                 OffDays = command.OffDays,
-                //ImageName = command.ImageName,
+                ImageName = command.ImageName,
                 IdentityNumber = command.IdentificationNumber,
                 Address = command.Address,
                 Name = command.Name,

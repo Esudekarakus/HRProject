@@ -52,21 +52,21 @@ namespace Project.Persistence.Migrations
                         new
                         {
                             Id = "AdminRoleID",
-                            ConcurrencyStamp = "a5b0588f-e7f0-4b40-8b16-a3ab30ce3575",
+                            ConcurrencyStamp = "1ed69b02-25be-4718-b0b3-d5895152d13d",
                             Name = "admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "EmployerRoleID",
-                            ConcurrencyStamp = "6f2349f7-a702-4f56-860c-9290b5d3a615",
+                            ConcurrencyStamp = "b5f7efa2-24ef-403d-8a87-b8055fa5ca2c",
                             Name = "employer",
                             NormalizedName = "EMPLOYER"
                         },
                         new
                         {
                             Id = "EmployeeRoleID",
-                            ConcurrencyStamp = "f50664a0-bc56-47ec-b1ee-8ff4b3891053",
+                            ConcurrencyStamp = "df9b4daf-02cf-4acb-bb88-d9b71ab5ede1",
                             Name = "employee",
                             NormalizedName = "EMPLOYEE"
                         });
@@ -482,7 +482,7 @@ namespace Project.Persistence.Migrations
                         .HasMaxLength(11)
                         .HasColumnType("nvarchar(11)");
 
-                    b.Property<string>("ImagePath")
+                    b.Property<string>("ImageName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LastName")
@@ -573,6 +573,9 @@ namespace Project.Persistence.Migrations
                     b.Property<int>("ExpenseType")
                         .HasColumnType("int");
 
+                    b.Property<string>("FileName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("InvoicePath")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -659,13 +662,13 @@ namespace Project.Persistence.Migrations
                         {
                             Id = "adminUserId",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "87e1ba81-8e58-4190-8467-8b948f790424",
+                            ConcurrencyStamp = "e7e417ca-31d1-4a36-8975-5650bd3b800b",
                             Email = "admin@boost.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@BOOST.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEDbFmJLhFmX3WL/JivkOW7KOPw5iVDG5T8VR0bXEITmSOZZbMgAZ1ZpraCTFEL/Acg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEFYDZW1M5ElQ7ZJ6UgWwfP30ilCE7gN98Ej/jtIkYeWcVjTYbXFiyDtta3ZQxNyuLA==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -677,13 +680,13 @@ namespace Project.Persistence.Migrations
                         {
                             Id = "employerUserId",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "a91a6596-19be-41ab-8970-a82ae831e317",
+                            ConcurrencyStamp = "0483629a-4184-4d77-a34c-e715d72ba303",
                             Email = "employer@boost.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "EMPLOYER@BOOST.COM",
                             NormalizedUserName = "EMPLOYER",
-                            PasswordHash = "AQAAAAEAACcQAAAAEN5zQR8tO9e+CVgMdgkfqETM7WHqqXPwzvcmv+24sHYm1Fo0619AXS+ulJmyYX9FkA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEOz9LdtUukDRzMQ1uaSkPv0+zw86GsVcmXTOBtI8qFhkkCKR0O+N1wEI39R0SFjIKg==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -695,13 +698,13 @@ namespace Project.Persistence.Migrations
                         {
                             Id = "employeeUserId",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "541ac1c9-7cac-4933-b018-cb22e6e350c8",
+                            ConcurrencyStamp = "c6c4eb15-4ee2-4f84-8cff-844a98f41361",
                             Email = "employee@boost.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "EMPLOYEE@BOOST.COM",
                             NormalizedUserName = "EMPLOYEE",
-                            PasswordHash = "AQAAAAEAACcQAAAAEBxYMwcIIeAgDeAtuiiGifvKTygoMc9h5xvie0u4dTU2fiXpToH6xqB8W4ZV45t7mg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAENCzE5m5if6Dt/GJQLiBVCg30ZTUg1XgjLDMmVK7ZJgbzs0y/7aEeku/Ox5Z+YBQfg==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,

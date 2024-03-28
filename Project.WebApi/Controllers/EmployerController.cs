@@ -56,12 +56,12 @@ namespace Project.WebApi.Controllers
         }
 
         [HttpPost("CreateEmployerByAdmin")]
-        public async Task<IActionResult> CreateEmployerByAdmin([FromBody]CreateEmployerCommand command)
+        public async Task<IActionResult> CreateEmployerByAdmin([FromForm]CreateEmployerCommand command)
         {
             if (await CheckUserIdsForEmployer(command))
                 return BadRequest("Eklenmek istenen kullanıcı halihazırda mevcut.");
 
-            //string imageName = await SaveImage(command.ImageFile);
+            string imageName = await SaveImage(command.ImageFile);
             await createEmployerCommandHandler.Handle(command);
 
             Employer CreatedUser = await unitOfWork.employerRepository.FirstOrDefaultAsync(x => x.IdentityNumber == command.IdentificationNumber);
