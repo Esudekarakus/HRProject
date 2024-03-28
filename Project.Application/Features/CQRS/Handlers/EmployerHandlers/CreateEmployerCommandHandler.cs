@@ -23,25 +23,27 @@ namespace Project.Application.Features.CQRS.Handlers.EmployerQueries
         {
             await unitOfWork.employerRepository.CreateAsync(new Employer
             {
-                Name=command.Name,
-                MiddleName=command.MiddleName,
-                LastName=command.LastName,
-                SecondLastName=command.LastName,
-                DateOfBirth=command.DateOfBirth,
-                DateOfStart=command.DateOfStart,
-                PlaceOfBirth=command.PlaceOfBirth,
-                IdentityNumber=command.IdentityNumber,
-                Status=command.Status,
-                //ImagePath=command.ImagePath,
-                Address=command.Address,
-                Salary=command.Salary,
-                Profession=command.Profession,
-                PhoneNumber=command.PhoneNumber,
-                DateOfEnd=command.DateOfEnd,
-                OffDays=command.OffDays,
-                CompanyId=command.CompanyId,
-                Department=command.Department,
-                
+                Salary = command.Salary,
+                SecondLastName = command.LastName,
+                Status = (Domain.Enum.Status)command.Status,
+                PlaceOfBirth = command.BirthOfPlace,
+                CompanyId = command.CompanyId,
+                DateOfStart = command.DateOfStart,
+                DateOfEnd = command.DateOfEnd,
+                DateOfBirth = command.DateOfBirth,
+                Department = command.Department,
+                OffDays = command.OffDays,
+                //ImageName = command.ImageName,
+                IdentityNumber = command.IdentificationNumber,
+                Address = command.Address,
+                Name = command.Name,
+                LastName = command.LastName,
+                MiddleName = command.MiddleName,
+                Profession = command.Profession,
+                PhoneNumber = command.PhoneNumber,
+                PrivateMail = command.PrivateMail
+
+
 
             });
         }

@@ -36,7 +36,7 @@ namespace Project.Application.Services.Concrete
             {
 
                 await signInManager.SignOutAsync();
-                Microsoft.AspNetCore.Identity.SignInResult result = await signInManager.PasswordSignInAsync(User, inputPassword, true, false);
+                Microsoft.AspNetCore.Identity.SignInResult result = await signInManager.PasswordSignInAsync(User, inputPassword, false, false);
                 if (result.Succeeded)
                     return true;
 

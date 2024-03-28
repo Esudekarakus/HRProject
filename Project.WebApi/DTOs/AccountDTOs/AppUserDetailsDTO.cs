@@ -16,6 +16,7 @@ namespace Project.WebApi.DTOs.AccountDTOs
         public DateTime DateOfStart { get; set; }
         public DateTime? DateOfEnd { get; set; }
         public int? CompanyId { get; set; }
+        public string CompanyName { get; set; }
         public string Department { get; set; }
         public Status? Status { get; set; }
         //public string? ImageName { get; set; }

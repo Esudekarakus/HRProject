@@ -54,7 +54,8 @@ namespace Project.WebApi.Controllers
             AppUser user = await userManager.FindByEmailAsync(email.mail);
             if (user != null && user.EmployeeID != null)
             {
-                Employee employee = await unitOfWork.employeeRepository.FirstOrDefaultAsync(x => x.Id == user.EmployeeID);
+                Employee employee = await unitOfWork.employeeRepository.GetEmployeeByIdWithCompanyAsync((int)user.EmployeeID);
+                //Company company = await unitOfWork.companyRepository.FirstOrDefaultAsync(c => c.Id == employee.CompanyId);
 
                 AppUserDetailsDTO detailsDTO = new AppUserDetailsDTO()
                 {
@@ -64,11 +65,13 @@ namespace Project.WebApi.Controllers
                     Status = (Status?)employee.Status,
                     BirthOfPlace = employee.BirthOfPlace,
                     CompanyId = employee.CompanyId,
+                    CompanyName=employee.Company.Name,
                     DateOfStart = employee.DateOfStart,
                     DateOfEnd = employee.DateOfEnd,
                     DateOfBirth = employee.DateOfBirth,
                     Department = employee.Department,
                     OffDays = employee.OffDays,
+
                     //ImageName = command.ImageName,
                     IdendificationNumber = employee.IdendificationNumber,
                     Address = employee.Address,
@@ -84,7 +87,9 @@ namespace Project.WebApi.Controllers
             }
             else if (user != null && user.EmployerID != null)
             {
-                Employer employer = await unitOfWork.employerRepository.FirstOrDefaultAsync(x => x.Id == user.EmployerID);
+                Employer employer = await unitOfWork.employerRepository.GetEmployerByIdWithCompanyAsync((int)user.EmployerID);
+                //Company company = await unitOfWork.companyRepository.FirstOrDefaultAsync(c => c.Id == employer.CompanyId);
+
                 AppUserDetailsDTO detailsDTO2 = new AppUserDetailsDTO()
                 {
                     Email = user.Email,
@@ -93,6 +98,7 @@ namespace Project.WebApi.Controllers
                     Status = employer.Status,
                     BirthOfPlace = employer.PlaceOfBirth,
                     CompanyId = employer.CompanyId,
+                    CompanyName=employer.Company.Name,
                     DateOfStart = employer.DateOfStart,
                     DateOfEnd = employer.DateOfEnd,
                     DateOfBirth = employer.DateOfBirth,

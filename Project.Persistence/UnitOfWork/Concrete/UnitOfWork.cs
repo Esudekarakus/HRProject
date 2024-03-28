@@ -35,10 +35,6 @@ namespace Project.Persistence.UnitOfWork.Concrete
 
         public IExpenseRepository expenseRepository => ExpenseRepository ?? new ExpenseRepository(_context);
         
-        public IRepository<T> GetRepository<T>() where T : class
-        {
-            return new GenericRepository<T>(_context);
-        }
 
         public async Task<int> CommitAsync()
         {
