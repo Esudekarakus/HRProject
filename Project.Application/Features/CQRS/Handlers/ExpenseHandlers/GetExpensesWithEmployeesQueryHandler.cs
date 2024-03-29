@@ -101,7 +101,9 @@ namespace Project.Application.Features.CQRS.Handlers.ExpenseHandlers
                     EmployeeLastName = ex.Employee.LastName,
                     EmployeeName = ex.Employee.Name,
                     ExpenseDate = ex.Employee.CreatedDate,
-                    ExpenseType=expenseType
+                    ExpenseType=expenseType,
+                    FileName = ex.FileName
+                    
 
                 });
 
