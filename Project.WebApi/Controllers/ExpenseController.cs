@@ -52,6 +52,7 @@ namespace Project.WebApi.Controllers
         public async Task<IActionResult> CreateExpense([FromForm] CreateExpenseCommand command)
         {
             string fileName = await SaveFile(command.FormFile);
+            command.FileName = fileName;
             await _createExpenseCommandHandler.Handle(command);
             return Ok("Harcamalar başarıyla eklendi");
         }
