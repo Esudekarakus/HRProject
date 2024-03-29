@@ -6,6 +6,8 @@ using Project.Application.Features.CQRS.Handlers.CompanyHandlers;
 using Project.Application.Features.CQRS.Handlers.EmployerQueries;
 using Project.Application.Features.CQRS.Queries.CompanQueries;
 using Project.Application.Features.CQRS.Queries.EmployerQueries;
+using Project.Application.UnitOfWork.Abstract;
+using Project.Persistence.UnitOfWork.Concrete;
 
 namespace Project.WebApi.Controllers
 {
@@ -18,9 +20,11 @@ namespace Project.WebApi.Controllers
         private readonly GetCompanyQueryHandler getCompanyQueryHandler;
         private readonly UpdateCompanyCommandHandler updateCompanyCommandHandler;
         private readonly RemoveCompanyCommandHandler removeCompanyCommandHandler;
+        private readonly IUnitOfWork unitOfWork;
 
-        public CompanyController(CreateCompanyCommandHandler createCompanyCommandHandler, GetCompanyByIdQueryHandler getCompanyByIdQueryHandler, GetCompanyQueryHandler getCompanyQueryHandler, UpdateCompanyCommandHandler updateCompanyCommandHandler, RemoveCompanyCommandHandler removeCompanyCommandHandler)
+        public CompanyController(CreateCompanyCommandHandler createCompanyCommandHandler, GetCompanyByIdQueryHandler getCompanyByIdQueryHandler, GetCompanyQueryHandler getCompanyQueryHandler, UpdateCompanyCommandHandler updateCompanyCommandHandler, RemoveCompanyCommandHandler removeCompanyCommandHandler,IUnitOfWork unitOfWork)
         {
+            this.unitOfWork=unitOfWork;
             this.createCompanyCommandHandler = createCompanyCommandHandler;
             this.getCompanyByIdQueryHandler = getCompanyByIdQueryHandler;
             this.getCompanyQueryHandler = getCompanyQueryHandler;
@@ -29,7 +33,7 @@ namespace Project.WebApi.Controllers
             
         }
 
-        [HttpGet]
+        [HttpGet("GetCompanyList")]
         public async Task<IActionResult> GetCompanyList()
         {
             var values = await getCompanyQueryHandler.Handle();
@@ -65,6 +69,14 @@ namespace Project.WebApi.Controllers
         {
             await updateCompanyCommandHandler.Handle(command);
             return Ok("Şirket başarıyla güncellendi");
+        }
+
+    
+        [HttpPost("GetCompaniesIncludePersonals")]
+        public async Task<IActionResult> GetCompaniesIncludePersonals()
+        {
+            var companies=await unitOfWork.companyRepository.GetCompaniesIncludeWorkers();
+            return Ok(companies);
         }
     }
 }

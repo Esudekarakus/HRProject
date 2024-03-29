@@ -1,4 +1,5 @@
-﻿using Project.Application.Repositories.Abstract;
+﻿using Microsoft.EntityFrameworkCore;
+using Project.Application.Repositories.Abstract;
 using Project.Domain.Entities;
 using Project.Persistence.Context;
 using System;
@@ -15,6 +16,11 @@ namespace Project.Persistence.Repositories.Concrete
         public CompanyRepository(AppDbContext context) : base(context)
         {
             this.appDbContext = context;
+        }
+        public async Task<IEnumerable<Company>> GetCompaniesIncludeWorkers()
+        {
+            return await appDbContext.Companies.Include(e=>e.Employers).Include(e=>e.Employees).ToListAsync();
+
         }
     }
 }
