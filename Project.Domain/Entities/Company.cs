@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Project.Domain.Enum;
 
 namespace Project.Domain.Entities
@@ -25,12 +27,12 @@ namespace Project.Domain.Entities
         public string? MersisNo { get; set; }
         public string? Email { get; set; }
         public string? ImageURL  { get; set; }
-//        [NotMapped]
-  //      public IFormFile? ImageFile { get; set; }
+        [NotMapped]
+        public IFormFile? ImageFile { get; set; }
 
         public DateTime? DateOfContractStart { get; set; }
         public DateTime? DateOFContractEnd { get; set; }
-        public Status? Status { get; set; }
+        public int? Status { get; set; }
         public List<Employee>? Employees { get; set; }
         public List<Employer>? Employers { get; set; }
 
