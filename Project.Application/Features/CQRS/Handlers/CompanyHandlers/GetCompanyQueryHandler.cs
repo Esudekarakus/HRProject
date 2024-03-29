@@ -29,6 +29,14 @@ namespace Project.Application.Features.CQRS.Handlers.CompanyHandlers
                 Name = x.Name,
                 PhoneNumber = x.PhoneNumber,
                 VatNumber = x.VatNumber,
+                DateOfContractStart=x.DateOfContractStart,
+                DateOFContractEnd=x.DateOFContractEnd,
+                TaxOffice=x.TaxOffice,
+                Email=x.Email,
+                ImageURL=x.ImageURL,
+                MersisNo=x.MersisNo,
+                NumberOfEmployees=x.Employees.Count,
+                NumberOfEmployers=x.Employers.Count,
             }).ToList();    
         }
     }
