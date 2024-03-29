@@ -30,7 +30,7 @@ namespace Project.Domain.Entities
 
         public DateTime? DateOfContractStart { get; set; }
         public DateTime? DateOFContractEnd { get; set; }
-        public Status? Status { get; set; }
+        public int? Status { get; set; }
         public List<Employee>? Employees { get; set; }
         public List<Employer>? Employers { get; set; }
 
