@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Project.Domain.Enum;
 
 namespace Project.Domain.Entities
 {
@@ -20,11 +21,21 @@ namespace Project.Domain.Entities
         public string PhoneNumber { get; set; }
 
         public string VatNumber { get; set; }
+        public string TaxOffice { get; set; }
+        public string? MersisNo { get; set; }
+        public string? Email { get; set; }
+        public string? ImageURL  { get; set; }
+//        [NotMapped]
+  //      public IFormFile? ImageFile { get; set; }
 
-        public List<Employee> Employees { get; set; }
-        public List<Employer> Employers { get; set; }
+        public DateTime? DateOfContractStart { get; set; }
+        public DateTime? DateOFContractEnd { get; set; }
+        public Status? Status { get; set; }
+        public List<Employee>? Employees { get; set; }
+        public List<Employer>? Employers { get; set; }
 
       
 
     }
 }
+
