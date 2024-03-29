@@ -23,11 +23,19 @@ namespace Project.Application.Features.CQRS.Handlers.CompanyHandlers
         {
             await unitOfWork.companyRepository.CreateAsync(new Company
             {
-                Address=command.Address,
-                PhoneNumber=command.PhoneNumber,
-                VatNumber=command.VatNumber,
-                FoundationDate=command.FoundationDate,
-                Name=command.Name,
+
+                Address = command.Address,
+                FoundationDate = command.FoundationDate,
+                Name = command.Name,
+                PhoneNumber = command.PhoneNumber,
+                VatNumber = command.VatNumber,
+                DateOfContractStart=command.DateOfContractStart,
+                DateOFContractEnd=command.DateOFContractEnd,
+                TaxOffice=command.TaxOffice,
+                Email=command.Email,
+                ImageURL=command.ImageURL,
+                MersisNo=command.MersisNo,
+                Status=command.Status
             });
         }
     }
