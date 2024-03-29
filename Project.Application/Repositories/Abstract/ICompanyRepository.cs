@@ -9,5 +9,6 @@ namespace Project.Application.Repositories.Abstract
 {
     public interface ICompanyRepository : IRepository<Company>
     {
+        public Task<IEnumerable<Company>> GetCompaniesIncludeWorkers();
     }
 }
