@@ -1,4 +1,5 @@
-﻿using Project.Domain.Entities;
+﻿using Microsoft.AspNetCore.Http;
+using Project.Domain.Entities;
 using Project.Domain.Enum;
 using System;
 using System.Collections.Generic;
@@ -22,7 +23,7 @@ namespace Project.Application.Features.CQRS.Results.ExpenseResults
         public DateTime? ApprovalDate { get; set; }
         public DateTime? UpdatedDate { get; set; }
         public DateTime? DeletedTime { get; set; }
-
+        public string FileName { get; set; }
         public int? EmployeeId { get; set; }
         public string EmployeeName { get; set; }
         public string EmployeeLastName { get; set; }
