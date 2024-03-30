@@ -47,8 +47,8 @@ namespace Project.WebApi.Controllers
             var value = await getCompanyByIdQueryHandler.Handle(new GetCompanyByIdQuery(id));
             return Ok(value);
         }
+        
         [HttpPost]
-
         public async Task<IActionResult> CreateCompany(CreateCompanyCommand command)
         {
             await createCompanyCommandHandler.Handle(command);

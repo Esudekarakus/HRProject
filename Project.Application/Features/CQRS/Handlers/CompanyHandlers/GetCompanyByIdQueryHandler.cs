@@ -29,8 +29,14 @@ namespace Project.Application.Features.CQRS.Handlers.CompanyHandlers
                 FoundationDate = values.FoundationDate,
                 Name = values.Name,
                 PhoneNumber = values.PhoneNumber,
-                VatNumber = values.VatNumber
-                
+                VatNumber = values.VatNumber,
+                Email=values.Email,
+                TaxOffice=values.TaxOffice,
+                MersisNo=values.MersisNo,
+                ImageURL=values.ImageURL,
+                Status=values.Status,
+                DateOFContractEnd=values.DateOFContractEnd,
+                DateOfContractStart=values.DateOfContractStart
             };
         }
     }
