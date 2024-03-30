@@ -106,6 +106,7 @@ builder.Services.AddControllers()
         fv.RegisterValidatorsFromAssemblyContaining<LoginValidation>();
         fv.RegisterValidatorsFromAssemblyContaining<CreateAdvanceValidation>();
         fv.RegisterValidatorsFromAssemblyContaining<ForgotPasswordValidation>();
+        fv.RegisterValidatorsFromAssemblyContaining<AddingEmployerValid>();
     });
 
 //builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -144,7 +145,7 @@ app.UseAuthentication();
 
 app.UseAuthorization();
 app.UseCors(options => options
-.WithOrigins("http://localhost:5174", "http://localhost:5178", "http://localhost:5175", "http://localhost:5173", "http://localhost:5173")
+.WithOrigins("http://localhost:5174", "http://localhost:5178", "http://localhost:5175", "http://localhost:5173", "http://localhost:5173","http://localhost:5176")
 .AllowCredentials()
 .AllowAnyMethod()
 .AllowAnyHeader()

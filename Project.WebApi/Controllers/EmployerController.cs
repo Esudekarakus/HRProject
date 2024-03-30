@@ -238,7 +238,7 @@ namespace Project.WebApi.Controllers
         [NonAction]
         private async Task<bool> CheckUserIds(CreateEmployeeCommand command)
         {
-            var checkUserId = await unitOfWork.employerRepository.GetWhereListAsync(x => x.IdentityNumber == command.IdentificationNumber || x.PhoneNumber==command.PhoneNumber);
+            var checkUserId = await unitOfWork.employeeRepository.GetWhereListAsync(x => x.IdendificationNumber == command.IdentificationNumber || x.PhoneNumber==command.PhoneNumber);
             if (checkUserId!=null)
                 return false;
             return true;
