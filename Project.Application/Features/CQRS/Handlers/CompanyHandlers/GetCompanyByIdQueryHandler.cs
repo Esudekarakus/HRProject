@@ -36,7 +36,9 @@ namespace Project.Application.Features.CQRS.Handlers.CompanyHandlers
                 ImageURL=values.ImageURL,
                 Status=values.Status,
                 DateOFContractEnd=values.DateOFContractEnd,
-                DateOfContractStart=values.DateOfContractStart
+                DateOfContractStart=values.DateOfContractStart,
+                NumberOfEmployees=values.Employees.Count,
+                NumberOfEmployers=values.Employers.Count
             };
         }
     }
