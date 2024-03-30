@@ -39,7 +39,7 @@ namespace Project.Domain.Entities
             get
             {
 
-                string email = $"{LastName?.ToLower()}{Name.ToLower()}@bilgeadam.boost";
+                string email = $"{LastName?.ToLower()}{Name.ToLower()}@bilgeadamboost.com";
                 return email;
             }
         }
