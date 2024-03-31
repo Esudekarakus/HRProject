@@ -55,62 +55,6 @@ namespace Project.WebApi.Controllers
             this.environment = environment;
         }
 
-        [HttpPost("CreateEmployerByAdmin")]
-        public async Task<IActionResult> CreateEmployerByAdmin([FromForm]CreateEmployerCommand command)
-        {
-            if (await CheckUserIdsForEmployer(command))
-                return BadRequest("Eklenmek istenen kullanıcı halihazırda mevcut.");
-
-            string imageName = await SaveImage(command.ImageFile);
-            await createEmployerCommandHandler.Handle(command);
-
-            Employer CreatedUser = await unitOfWork.employerRepository.FirstOrDefaultAsync(x => x.IdentityNumber == command.IdentificationNumber);
-
-            AppUser NewUser = new()
-            {
-                Email = CreatedUser.Email,
-                FirstName = CreatedUser.Name,
-                PhoneNumber = CreatedUser.PhoneNumber,
-                UserName = CreatedUser.Email,
-                EmailConfirmed = false,
-                EmployerID = CreatedUser.Id
-            };
-
-            var hasher = new PasswordHasher<AppUser>();
-            var result = await userManager.CreateAsync(NewUser, "Bilgeadam.123");
-
-            if (result.Succeeded)
-            {
-                // Kullanıcı başarıyla oluşturulduysa, kullanıcıyı bulma işlemi
-
-                AppUser createdUser = await userManager.FindByNameAsync(NewUser.Email);
-
-                if (createdUser != null)
-                {
-                    IdentityRole role = await roleManager.FindByNameAsync("Employer");
-
-                    if (role != null)
-                    {
-                        await userManager.AddToRoleAsync(createdUser, role.Name);
-
-                        await mailService.SendCompanyMailToCreatedEmployee(createdUser.Email, "Bilgeadam.123", command.PrivateMail);
-                    }
-                    else
-                        return BadRequest("Employer role not found.");
-
-                }
-                else
-                    return BadRequest("Created user not found.");
-
-            }
-            else
-            {
-                var errors = result.Errors.Select(e => e.Description).ToList();
-                return BadRequest(errors);
-            }
-            return Ok();
-        }
-
         [HttpGet]
         public async Task<IActionResult> GetEmployerList()
         {

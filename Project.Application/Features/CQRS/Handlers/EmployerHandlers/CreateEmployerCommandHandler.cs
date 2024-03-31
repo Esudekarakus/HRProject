@@ -46,6 +46,7 @@ namespace Project.Application.Features.CQRS.Handlers.EmployerQueries
 
 
             });
+            await unitOfWork.CommitAsync();
         }
     }
 }

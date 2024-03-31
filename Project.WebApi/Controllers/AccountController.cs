@@ -41,7 +41,7 @@ namespace Project.WebApi.Controllers
 
 
 
-        public AccountController(UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager, IConfiguration config, IAccountService accountService, JwtConfiguration jwtService, IUnitOfWork unitOfWork, IConfiguration _config, IEmailService emailService,IWebHostEnvironment environment,CreateEmployerCommandHandler createEmployerCommandHandler)
+        public AccountController(UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager, IConfiguration config, IAccountService accountService, JwtConfiguration jwtService, IUnitOfWork unitOfWork, IConfiguration _config, IEmailService emailService, IWebHostEnvironment environment, CreateEmployerCommandHandler createEmployerCommandHandler)
         {
             this.userManager = userManager;
             this.roleManager = roleManager;
@@ -50,13 +50,14 @@ namespace Project.WebApi.Controllers
             this.jwtService = jwtService;
             this.unitOfWork = unitOfWork;
             this.emailService = emailService;
-            this.createEmployerCommandHandler=createEmployerCommandHandler;
-            this.environment=environment;
+            this.createEmployerCommandHandler = createEmployerCommandHandler;
+            this.environment = environment;
         }
 
         [HttpPost("CreateEmployerByAdmin")]
-        public async Task<IActionResult> CreateEmployerByAdmin([FromForm]CreateEmployerCommand command){
-            
+        public async Task<IActionResult> CreateEmployerByAdmin([FromForm] CreateEmployerCommand command)
+        {
+
             var validator = new AddingEmployerValid();
             var validationResult = await validator.ValidateAsync(command);
 
@@ -65,58 +66,63 @@ namespace Project.WebApi.Controllers
                 var errors = validationResult.Errors.Select(e => e.ErrorMessage).ToList();
                 return BadRequest(errors);
             }
-
-            if (await CheckUserIds(command))
+            else if (!await IsUserAvailable(command))
+            {
                 return BadRequest("Eklenmek istenen kullanıcı halihazırda mevcut.");
-
-            string imageName = await SaveImage(command.ImageFile);
-            await createEmployerCommandHandler.Handle(command);
-
-            Employer CreatedUser = await unitOfWork.employerRepository.FirstOrDefaultAsync(x => x.IdentityNumber == command.IdentificationNumber);
-
-            AppUser NewUser = new()
-            {
-                Email = CreatedUser.Email,
-                FirstName=CreatedUser.Name,
-                PhoneNumber = CreatedUser.PhoneNumber,
-                UserName=CreatedUser.Email,
-                EmailConfirmed = false,
-                EmployerID=CreatedUser.Id
-            };
-
-            var hasher = new PasswordHasher<AppUser>();
-            var result = await userManager.CreateAsync(NewUser, "Bilgeadam.123");
-
-            if (result.Succeeded)
-            {
-                // Kullanıcı başarıyla oluşturulduysa, kullanıcıyı bulma işlemi
-
-                AppUser createdUser = await userManager.FindByNameAsync(NewUser.Email);
-
-                if (createdUser != null)
-                {
-                    IdentityRole role = await roleManager.FindByNameAsync("employer");
-
-                    if (role != null)
-                    {
-                        await userManager.AddToRoleAsync(createdUser, role.Name);
-
-                        await emailService.SendCompanyMailToCreatedEmployee(createdUser.Email, "Bilgeadam.123", command.PrivateMail);
-                    }
-                    else
-                        return BadRequest("Employee role not found.");
-
-                }
-                else
-                    return BadRequest("Created user not found.");
-
             }
             else
             {
-                var errors = result.Errors.Select(e => e.Description).ToList();
-                return BadRequest(errors);
+                await createEmployerCommandHandler.Handle(command);
+                // string imageName = await SaveImage(command.ImageFile);
+
+                Employer CreatedUser = await unitOfWork.employerRepository.FirstOrDefaultAsync(x => x.IdentityNumber == command.IdentificationNumber);
+
+                AppUser NewUser = new()
+                {
+                    Email = CreatedUser.Email,
+                    FirstName = CreatedUser.Name,
+                    PhoneNumber = CreatedUser.PhoneNumber,
+                    UserName = CreatedUser.Email,
+                    EmailConfirmed = false,
+                    EmployerID = CreatedUser.Id
+                };
+
+                var hasher = new PasswordHasher<AppUser>();
+                var result = await userManager.CreateAsync(NewUser, "Bilgeadam.123");
+
+                if (result.Succeeded)
+                {
+                    // Kullanıcı başarıyla oluşturulduysa, kullanıcıyı bulma işlemi
+
+                    AppUser createdUser = await userManager.FindByNameAsync(NewUser.Email);
+
+                    if (createdUser != null)
+                    {
+                        IdentityRole role = await roleManager.FindByNameAsync("employer");
+
+                        if (role != null)
+                        {
+                            await userManager.AddToRoleAsync(createdUser, role.Name);
+
+                            await emailService.SendCompanyMailToCreatedEmployee(createdUser.Email, "Bilgeadam.123", command.PrivateMail);
+                        }
+                        else
+                            return BadRequest("Employee role not found.");
+
+                    }
+                    else
+                        return BadRequest("Created user not found.");
+
+                }
+                else
+                {
+                    var errors = result.Errors.Select(e => e.Description).ToList();
+                    return BadRequest(errors);
+                }
+                return Ok();
+
             }
-            return Ok();
+
         }
 
 
@@ -137,7 +143,7 @@ namespace Project.WebApi.Controllers
                     Status = (Status?)employee.Status,
                     BirthOfPlace = employee.BirthOfPlace,
                     CompanyId = employee.CompanyId,
-                    CompanyName=employee.Company.Name,
+                    CompanyName = employee.Company.Name,
                     DateOfStart = employee.DateOfStart,
                     DateOfEnd = employee.DateOfEnd,
                     DateOfBirth = employee.DateOfBirth,
@@ -170,7 +176,7 @@ namespace Project.WebApi.Controllers
                     Status = employer.Status,
                     BirthOfPlace = employer.PlaceOfBirth,
                     CompanyId = employer.CompanyId,
-                    CompanyName=employer.Company.Name,
+                    CompanyName = employer.Company.Name,
                     DateOfStart = employer.DateOfStart,
                     DateOfEnd = employer.DateOfEnd,
                     DateOfBirth = employer.DateOfBirth,
@@ -277,26 +283,26 @@ namespace Project.WebApi.Controllers
         }
 
         [NonAction]
-        private async Task<bool> CheckUserIds(CreateEmployerCommand command)
+        private async Task<bool> IsUserAvailable(CreateEmployerCommand command)
         {
-            var checkUserId = await unitOfWork.employerRepository.GetWhereListAsync(x => x.IdentityNumber == command.IdentificationNumber || x.PhoneNumber==command.PhoneNumber);
-            if (checkUserId!=null)
-                return false;
-            return true;
+            var checkUserId = await unitOfWork.employerRepository.GetWhereListAsync(x => x.IdentityNumber == command.IdentificationNumber || x.PhoneNumber == command.PhoneNumber);
+            if (checkUserId.Count == 0)
+                return true;
+            return false;
         }
 
-                [NonAction]
-        public async Task<string> SaveImage(IFormFile imageFile)
-        {
-            string imageName = new String(Path.GetFileNameWithoutExtension(imageFile.FileName).Take(10).ToArray()).Replace(' ', '-');
-            imageName = imageName + DateTime.Now.ToString("yymmssfff") + Path.GetExtension(imageFile.FileName);
-            var imagePath = Path.Combine(environment.ContentRootPath, "Images", imageName);
-            using (var fileStream = new FileStream(imagePath, FileMode.Create))
-            {
-                await imageFile.CopyToAsync(fileStream);
-            }
-            return imageName;
-        }
+        //         [NonAction]
+        // public async Task<string> SaveImage(IFormFile imageFile)
+        // {
+        //     string imageName = new String(Path.GetFileNameWithoutExtension(imageFile.FileName).Take(10).ToArray()).Replace(' ', '-');
+        //     imageName = imageName + DateTime.Now.ToString("yymmssfff") + Path.GetExtension(imageFile.FileName);
+        //     var imagePath = Path.Combine(environment.ContentRootPath, "Images", imageName);
+        //     using (var fileStream = new FileStream(imagePath, FileMode.Create))
+        //     {
+        //         await imageFile.CopyToAsync(fileStream);
+        //     }
+        //     return imageName;
+        // }
 
     }
 }

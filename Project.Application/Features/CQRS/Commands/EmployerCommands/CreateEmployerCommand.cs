@@ -29,7 +29,7 @@ namespace Project.Application.Features.CQRS.Commands.EmployerCommands
         public int? CompanyId { get; set; }
 
         public string Department { get; set; }
-        public int Status { get; set; }
+        public int? Status { get; set; }
         public string? ImageName { get; set; }
 
         public IFormFile? ImageFile { get; set; }
