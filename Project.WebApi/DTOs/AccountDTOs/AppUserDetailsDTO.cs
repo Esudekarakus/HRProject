@@ -4,6 +4,7 @@ namespace Project.WebApi.DTOs.AccountDTOs
 {
     public class AppUserDetailsDTO
     {
+        public int PersonalId { get; set; }
         public string Email { get; set; }
         public string Name { get; set; }
         public string? MiddleName { get; set; }

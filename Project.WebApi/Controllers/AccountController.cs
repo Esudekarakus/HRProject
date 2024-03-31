@@ -137,6 +137,7 @@ namespace Project.WebApi.Controllers
 
                 AppUserDetailsDTO detailsDTO = new AppUserDetailsDTO()
                 {
+                    PersonalId=employee.Id,
                     Email = user.Email,
                     Salary = employee.Salary,
                     SecondLastName = employee.LastName,
@@ -170,6 +171,7 @@ namespace Project.WebApi.Controllers
 
                 AppUserDetailsDTO detailsDTO2 = new AppUserDetailsDTO()
                 {
+                    PersonalId=employer.Id,
                     Email = user.Email,
                     Salary = employer.Salary,
                     SecondLastName = employer.LastName,
