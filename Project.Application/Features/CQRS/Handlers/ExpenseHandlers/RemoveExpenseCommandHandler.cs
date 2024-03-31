@@ -23,6 +23,7 @@ namespace Project.Application.Features.CQRS.Handlers.ExpenseHandlers
 
             if (value != null)
                 await unitOfWork.advanceRepository.RemoveAsync(value);
+                await unitOfWork.CommitAsync();
         }
     }
 }

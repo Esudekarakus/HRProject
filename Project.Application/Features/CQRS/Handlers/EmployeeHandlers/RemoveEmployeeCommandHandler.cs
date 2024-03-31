@@ -22,6 +22,7 @@ namespace Project.Application.Features.CQRS.Handlers.EmployeeHandlers
             var values = await unitOfWork.employeeRepository.GetByIdAsync(command.Id);
 
             await unitOfWork.employeeRepository.RemoveAsync(values);
+            await unitOfWork.CommitAsync();
 
         }
     }

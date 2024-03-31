@@ -34,6 +34,7 @@ namespace Project.Application.Features.CQRS.Handlers.ExpenseHandlers
                 values.ApprovalStatus = command.ApprovalStatus;
 
                 await unitOfWork.expenseRepository.UpdateAsync(values);
+                await unitOfWork.CommitAsync();
             }
 
         }

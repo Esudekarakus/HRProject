@@ -21,6 +21,7 @@ namespace Project.Application.Features.CQRS.Handlers.CompanyHandlers
         {
             var value = await unitOfWork.companyRepository.GetByIdAsync(command.Id);
             await unitOfWork.companyRepository.RemoveAsync(value);
+            await unitOfWork.CommitAsync();
         }
     }
 }

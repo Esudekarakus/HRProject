@@ -33,6 +33,7 @@ namespace Project.Application.Features.CQRS.Handlers.LeaveHandler
               
                 values.Status = command.Status;
                 await unitOfWork.leaveRepository.UpdateAsync(values);
+                await unitOfWork.CommitAsync();
             }
            
         }

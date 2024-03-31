@@ -36,7 +36,7 @@ namespace Project.Application.Features.CQRS.Handlers.EmployeeHandlers
             }
 
             await unitOfWork.employeeRepository.UpdateAsync(employee);
-            await unitOfWork.CommitAsync(); // Transaksiyonu kaydet
+            await unitOfWork.CommitAsync(); 
         }
     }
 }

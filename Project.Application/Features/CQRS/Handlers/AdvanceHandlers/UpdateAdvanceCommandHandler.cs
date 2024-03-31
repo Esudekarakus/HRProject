@@ -35,6 +35,7 @@ namespace Project.Application.Features.CQRS.Handlers.AdvanceHandlers
 
             }
             await unitOfWork.advanceRepository.UpdateAsync(values);
+            await unitOfWork.CommitAsync();
         }
     }
 }

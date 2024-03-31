@@ -22,6 +22,7 @@ namespace Project.Application.Features.CQRS.Handlers.AdvanceHandlers
             var value= await unitOfWork.advanceRepository.GetByIdAsync(command.Id);
             if (value != null)
                 await unitOfWork.advanceRepository.RemoveAsync(value);
+                await unitOfWork.CommitAsync();
         }
     }
 }

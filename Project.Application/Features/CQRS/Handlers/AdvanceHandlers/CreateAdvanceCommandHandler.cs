@@ -65,6 +65,8 @@ namespace Project.Application.Features.CQRS.Handlers.AdvanceHandlers
                     CurrencyInt = command.Currency,
                     EmployeeId = command.EmployeeId,
                 });
+
+                await unitOfWork.CommitAsync();
             }
             catch (Exception ex)
             {

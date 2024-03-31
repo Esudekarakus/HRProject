@@ -22,13 +22,11 @@ namespace Project.Persistence.Repositories.Concrete
         public async Task AddRangeAsync(IEnumerable<T> entities)
         {
             context.Set<T>().AddRange(entities);
-            await context.SaveChangesAsync();
         }
 
         public async Task CreateAsync(T entity)
         {
             context.Set<T>().Add(entity);
-            await context.SaveChangesAsync();
         }
 
        
@@ -57,7 +55,7 @@ namespace Project.Persistence.Repositories.Concrete
         public async Task RemoveAsync(T entity)
         {
             context.Set<T>().Remove(entity);
-            await context.SaveChangesAsync();
+
         }
 
         public async Task<T> SingleorDefault(Expression<Func<T, bool>> expression)
@@ -68,7 +66,7 @@ namespace Project.Persistence.Repositories.Concrete
         public async Task UpdateAsync(T entity)
         {
             context.Set<T>().Update(entity);
-            await context.SaveChangesAsync();
+
         }
 
        

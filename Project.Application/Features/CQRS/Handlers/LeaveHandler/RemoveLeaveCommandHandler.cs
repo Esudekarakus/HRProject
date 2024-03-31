@@ -23,6 +23,7 @@ namespace Project.Application.Features.CQRS.Handlers.LeaveHandler
             if (value != null)
             {
                 await unitOfWork.leaveRepository.RemoveAsync(value);
+                await unitOfWork.CommitAsync();
             }
 
         }

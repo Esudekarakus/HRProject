@@ -44,6 +44,7 @@ namespace Project.Application.Features.CQRS.Handlers.EmployerQueries
             //values.IdentityNumber= command.IdentityNumber;
 
             await unitOfWork.employerRepository.UpdateAsync(values);
+            await unitOfWork.CommitAsync();
         }
     }
 }

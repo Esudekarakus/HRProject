@@ -30,6 +30,7 @@ namespace Project.Application.Features.CQRS.Handlers.CompanyHandlers
                 values.FoundationDate = command.FoundationDate;
 
                 await unitOfWork.companyRepository.UpdateAsync(values);
+                await unitOfWork.CommitAsync();
             }
             
         }

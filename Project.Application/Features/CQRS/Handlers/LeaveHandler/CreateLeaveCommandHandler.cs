@@ -29,6 +29,7 @@ namespace Project.Application.Features.CQRS.Handlers.LeaveHandler
                 NumberOfDays = command.NumberOfDays,
                 EmployeeId = command.EmployeeId,
             });
+            await unitOfWork.CommitAsync();
 
         }
     }

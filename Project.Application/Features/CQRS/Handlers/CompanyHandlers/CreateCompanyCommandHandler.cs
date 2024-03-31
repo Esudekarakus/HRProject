@@ -37,6 +37,7 @@ namespace Project.Application.Features.CQRS.Handlers.CompanyHandlers
                 MersisNo=command.MersisNo,
                 Status=command.Status
             });
+            await unitOfWork.CommitAsync();
         }
     }
 }
