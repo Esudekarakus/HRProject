@@ -8,6 +8,7 @@ using Project.Application.UnitOfWork.Abstract;
 using Project.Domain.Entities;
 using Project.WebApi.DTOs.AccountDTOs;
 using Project.WebApi.Models.AccountDTOs;
+using System;
 
 namespace Project.WebApi.Controllers
 {
@@ -18,11 +19,12 @@ namespace Project.WebApi.Controllers
         private readonly UserManager<AppUser> userManager;
         private readonly IUnitOfWork unitOfWork;
         private readonly  RoleManager<IdentityRole> roleManager;
+        private readonly IWebHostEnvironment environment;
 
-
-        public UserController(UserManager<AppUser> userManager, IUnitOfWork unitOfWork,RoleManager<IdentityRole> roleManager)
+        public UserController(UserManager<AppUser> userManager, IUnitOfWork unitOfWork,RoleManager<IdentityRole> roleManager, IWebHostEnvironment environment)
         {
             this.roleManager=roleManager;
+            this.environment = environment;
             this.userManager = userManager;
             this.unitOfWork = unitOfWork;
         }
@@ -50,17 +52,21 @@ namespace Project.WebApi.Controllers
 
         
 
-        [HttpPost("UpdateAppUserDetailsById")]
-        public async Task<IActionResult> UpdateAppUserDetailsById(AppUserUpdateDetailsDTO user)
+        [HttpPut("UpdateAppUserDetailsById")]
+        public async Task<IActionResult> UpdateAppUserDetailsById([FromForm]AppUserUpdateDetailsDTO user)
         {
-            AppUser appUser = await userManager.FindByEmailAsync(user.Email);
+            AppUser appUser = await userManager.FindByIdAsync(user.Id);
             if(appUser != null)
             {
+                string imageName = await SaveImage(user.ImageFile);
+                user.ImageName = imageName;
                 if (appUser.EmployeeID != null && appUser != null)
                 {
                     Employee employee = await unitOfWork.employeeRepository.GetEmployeeByIdWithCompanyAsync((int)appUser.EmployeeID);
                     employee.Address = user.Address;
                     employee.PhoneNumber = user.PhoneNumber;
+                    
+
                     await unitOfWork.employeeRepository.UpdateAsync(employee);
                     return Ok();
                 }
@@ -116,6 +122,20 @@ namespace Project.WebApi.Controllers
             
 
             return Ok();
+        }
+
+
+        [NonAction]
+        public async Task<string> SaveImage(IFormFile imageFile)
+        {
+            string imageName = new String(Path.GetFileNameWithoutExtension(imageFile.FileName).Take(10).ToArray()).Replace(' ', '-');
+            imageName = imageName + DateTime.Now.ToString("yymmssfff") + Path.GetExtension(imageFile.FileName);
+            var imagePath = Path.Combine(environment.ContentRootPath, "Images", imageName);
+            using (var fileStream = new FileStream(imagePath, FileMode.Create))
+            {
+                await imageFile.CopyToAsync(fileStream);
+            }
+            return imageName;
         }
     }
 }
