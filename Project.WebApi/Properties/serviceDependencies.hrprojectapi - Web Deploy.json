@@ -1,3 +1,41 @@
 {
-  "dependencies": {}
+  "dependencies": {
+    "mssql1": {
+      "ignored": "true",
+      "type": "mssql",
+      "connectionId": "ConnectionStrings:connectionString"
+    },
+    "mssql2": {
+      "ignored": "true",
+      "type": "mssql",
+      "connectionId": "ConnectionStrings:Tarık"
+    },
+    "mssql3": {
+      "ignored": "true",
+      "type": "mssql",
+      "connectionId": "ConnectionStrings:Sude"
+    },
+    "mssql4": {
+      "ignored": "true",
+      "type": "mssql",
+      "connectionId": "ConnectionStrings:Fatih"
+    },
+    "mssql5": {
+      "ignored": "true",
+      "type": "mssql",
+      "connectionId": "ConnectionStrings:Gökçe"
+    },
+    "mssql7": {
+      "ignored": "true",
+      "type": "mssql",
+      "connectionId": "ConnectionStrings:Reyhan"
+    },
+    "mssql6": {
+      "serviceConnectorResourceId": "",
+      "secretStore": "AzureAppSettings",
+      "type": "mssql.onprem",
+      "connectionId": "ConnectionStrings:connectionStr",
+      "dynamicId": null
+    }
+  }
 }

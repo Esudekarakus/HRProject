@@ -128,7 +128,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
 
 builder.Services.ConfigureOptions<JwtOptionsSetup>();
 builder.Services.ConfigureOptions<JwtBearerOptionsSetup>();
-
+builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
@@ -145,8 +145,7 @@ app.UseAuthentication();
 
 app.UseAuthorization();
 app.UseCors(options => options
-.WithOrigins("http://localhost:5174", "http://localhost:5178", "http://localhost:5175", "http://localhost:5173", "http://localhost:5173","http://localhost:5176","http://localhost:5177")
-.AllowCredentials()
+.AllowAnyOrigin()
 .AllowAnyMethod()
 .AllowAnyHeader()
 );

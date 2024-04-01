@@ -1,11 +1,17 @@
 {
   "dependencies": {
+    "mssql6": {
+      "type": "mssql",
+      "connectionId": "ConnectionStrings:connectionStr",
+      "dynamicId": null
+    },
     "apis1": {
       "type": "apis"
     },
-    "mssql6": {
+    "mssql7": {
       "type": "mssql",
-      "connectionId": "ConnectionStrings:connectionStr"
+      "connectionId": "ConnectionStrings:connectionString",
+      "dynamicId": null
     }
   }
 }
