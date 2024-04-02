@@ -37,7 +37,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<AppDbContext>(
-    o => o.UseSqlServer(builder.Configuration.GetConnectionString("connectionString")));
+    o => o.UseSqlServer(builder.Configuration.GetConnectionString("Sude")));
 
 builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
 
@@ -77,6 +77,7 @@ builder.Services.AddScoped<UpdateAdvanceCommandHandler>();
 builder.Services.AddScoped<RemoveAdvanceCommandHandler>();
 builder.Services.AddScoped<GetAdvanceByEmployeeIdQueryResultHandler>();
 builder.Services.AddScoped<GetAdvanceQueryResultHandler>();
+builder.Services.AddScoped<GetAdvanceByCompanyIdQueryHandler>();
 
 builder.Services.AddScoped<CreateLeaveCommandHandler>();
 builder.Services.AddScoped<UpdateLeaveCommandHandler>();

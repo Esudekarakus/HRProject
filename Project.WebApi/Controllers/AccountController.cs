@@ -73,8 +73,8 @@ namespace Project.WebApi.Controllers
             else
             {
                 await createEmployerCommandHandler.Handle(command);
-                // string imageName = await SaveImage(command.ImageFile);
-
+                string imageName = await SaveImage(command.ImageFile);
+                command.ImageName = imageName;
                 Employer CreatedUser = await unitOfWork.employerRepository.FirstOrDefaultAsync(x => x.IdentityNumber == command.IdentificationNumber);
 
                 AppUser NewUser = new()
@@ -293,18 +293,18 @@ namespace Project.WebApi.Controllers
             return false;
         }
 
-        //         [NonAction]
-        // public async Task<string> SaveImage(IFormFile imageFile)
-        // {
-        //     string imageName = new String(Path.GetFileNameWithoutExtension(imageFile.FileName).Take(10).ToArray()).Replace(' ', '-');
-        //     imageName = imageName + DateTime.Now.ToString("yymmssfff") + Path.GetExtension(imageFile.FileName);
-        //     var imagePath = Path.Combine(environment.ContentRootPath, "Images", imageName);
-        //     using (var fileStream = new FileStream(imagePath, FileMode.Create))
-        //     {
-        //         await imageFile.CopyToAsync(fileStream);
-        //     }
-        //     return imageName;
-        // }
+        [NonAction]
+        public async Task<string> SaveImage(IFormFile imageFile)
+        {
+            string imageName = new String(Path.GetFileNameWithoutExtension(imageFile.FileName).Take(10).ToArray()).Replace(' ', '-');
+            imageName = imageName + DateTime.Now.ToString("yymmssfff") + Path.GetExtension(imageFile.FileName);
+            var imagePath = Path.Combine(environment.ContentRootPath, "Images", imageName);
+            using (var fileStream = new FileStream(imagePath, FileMode.Create))
+            {
+                await imageFile.CopyToAsync(fileStream);
+            }
+            return imageName;
+        }
 
     }
 }

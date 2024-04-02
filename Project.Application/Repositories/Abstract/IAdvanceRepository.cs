@@ -11,5 +11,6 @@ namespace Project.Application.Repositories.Abstract
     {
         List<Advance> GetAllWithEmployee();
         Task<List<Advance>> GetAdvanceWithEmployeeWithEmployeeId(int employeeId);
+        Task<List<Advance>> GetAdvanceWithEmployeeByCompanyId(int companyId);
     }
 }
