@@ -20,8 +20,9 @@ namespace Project.WebApi.Controllers
         private readonly GetExpensesWithEmployeesQueryHandler _getExpensesWithEmployeesCommandHandler;
         private readonly GetExpenseByEmployeeIdQueryHandler _getExpenseByEmployeeIdQueryHandler;
         private readonly IWebHostEnvironment _environment;
+        private readonly GetExpenseByCompanyIdQueryHandler getExpenseByCompanyIdQueryHandler;
 
-        public ExpenseController(CreateExpenseCommandHandler createExpenseCommandHandler, UpdateExpenseCommandHandler updateExpenseCommandHandler, RemoveExpenseCommandHandler removeExpenseCommandHandler, GetExpensesWithEmployeesQueryHandler getExpensesWithEmployeesCommandHandler, GetExpenseByEmployeeIdQueryHandler getExpenseByEmployeeIdQueryHandler, IWebHostEnvironment environment)
+        public ExpenseController(CreateExpenseCommandHandler createExpenseCommandHandler, UpdateExpenseCommandHandler updateExpenseCommandHandler, RemoveExpenseCommandHandler removeExpenseCommandHandler, GetExpensesWithEmployeesQueryHandler getExpensesWithEmployeesCommandHandler, GetExpenseByEmployeeIdQueryHandler getExpenseByEmployeeIdQueryHandler, IWebHostEnvironment environment, GetExpenseByCompanyIdQueryHandler getExpenseByCompanyIdQueryHandler)
         {
             _createExpenseCommandHandler = createExpenseCommandHandler;
             _updateExpenseCommandHandler = updateExpenseCommandHandler;
@@ -29,6 +30,7 @@ namespace Project.WebApi.Controllers
             _getExpensesWithEmployeesCommandHandler = getExpensesWithEmployeesCommandHandler;
             _getExpenseByEmployeeIdQueryHandler = getExpenseByEmployeeIdQueryHandler;
             this._environment = environment;
+            this.getExpenseByCompanyIdQueryHandler = getExpenseByCompanyIdQueryHandler;
         }
 
         [HttpGet]
@@ -46,6 +48,13 @@ namespace Project.WebApi.Controllers
         {
             var advances = await _getExpenseByEmployeeIdQueryHandler.Handle(new GetExpenseByEmployeeIdQuery(id));
             return Ok(advances);
+        }
+
+        [HttpGet("GetExpenseByCompanyId")]
+        public async Task<IActionResult> GetExpensesByCompanyId(int id)
+        {
+            var expenses = await getExpenseByCompanyIdQueryHandler.Handle(new GetExpenseByCompanyIdQuery(id));
+            return Ok(expenses);
         }
         [HttpPost]
 

@@ -84,12 +84,14 @@ builder.Services.AddScoped<UpdateLeaveCommandHandler>();
 builder.Services.AddScoped<RemoveLeaveCommandHandler>();
 builder.Services.AddScoped<GetLeaveByEmployeeIdQueryResultHandler>();
 builder.Services.AddScoped<GetLeaveQueryResultHandler>();
+builder.Services.AddScoped<GetLeaveByCompanyIdQueryResultHandler>();
 
 builder.Services.AddScoped<CreateExpenseCommandHandler>();
 builder.Services.AddScoped<RemoveExpenseCommandHandler>();
 builder.Services.AddScoped<UpdateExpenseCommandHandler>();
 builder.Services.AddScoped<GetExpenseByEmployeeIdQueryHandler>();
 builder.Services.AddScoped<GetExpensesWithEmployeesQueryHandler>();
+builder.Services.AddScoped<GetExpenseByCompanyIdQueryHandler>();
 
 builder.Services.AddScoped<IEmployerRepository, EmployerRepository>();
 builder.Services.AddScoped<ICompanyRepository, CompanyRepository>();

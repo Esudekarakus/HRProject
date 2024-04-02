@@ -24,6 +24,11 @@ namespace Project.Persistence.Repositories.Concrete
             return context.Leaves.Include(x=>x.Employee).ToList();
         }
 
+        public async Task<List<Leave>> GetLeaveWithEmployeeByCompanyId(int companyId)
+        {
+            return await context.Leaves.Include(x=>x.Employee).Where(x=>x.Employee.CompanyId == companyId).ToListAsync();   
+        }
+
         public async Task<List<Leave>> GetLeaveWithEmployeeWithEmployeeId(int employeeId)
         {
             return await context.Leaves.Include(x=>x.Employee).Where(x=>x.EmployeeId == employeeId).ToListAsync();

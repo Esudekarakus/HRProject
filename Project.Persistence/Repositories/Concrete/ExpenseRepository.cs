@@ -28,5 +28,10 @@ namespace Project.Persistence.Repositories.Concrete
         {
             return _context.Expenses.Include(x=>x.Employee).ToList();
         }
+
+        public Task<List<Expense>> GetExpenseWithEmployeeByCompanyId(int companyId)
+        {
+           return _context.Expenses.Include(x=>x.Employee).Where(x=>x.Employee.CompanyId== companyId).ToListAsync();    
+        }
     }
 }
