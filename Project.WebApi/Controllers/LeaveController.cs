@@ -3,8 +3,10 @@ using Microsoft.AspNetCore.Mvc;
 using Project.Application.Features.CQRS.Commands.AdvanceCommands;
 using Project.Application.Features.CQRS.Commands.LeaveCommands;
 using Project.Application.Features.CQRS.Handlers.AdvanceHandlers;
+using Project.Application.Features.CQRS.Handlers.ExpenseHandlers;
 using Project.Application.Features.CQRS.Handlers.LeaveHandler;
 using Project.Application.Features.CQRS.Queries.AdvanceQueries;
+using Project.Application.Features.CQRS.Queries.ExpenseQueries;
 using Project.Application.Features.CQRS.Queries.LeaveQueries;
 
 namespace Project.WebApi.Controllers
@@ -18,14 +20,16 @@ namespace Project.WebApi.Controllers
         private readonly RemoveLeaveCommandHandler removeLeaveCommandHandler;
         private readonly GetLeaveByEmployeeIdQueryResultHandler getLeaveByEmployeeIdQueryResultHandler;
         private readonly GetLeaveQueryResultHandler getLeaveQueryResultHandler;
+        private readonly GetLeaveByCompanyIdQueryResultHandler getLeaveByCompanyIdQueryResultHandler;
 
-        public LeaveController(CreateLeaveCommandHandler createLeaveCommandHandler, UpdateLeaveCommandHandler updateLeaveCommandHandler, RemoveLeaveCommandHandler removeLeaveCommandHandler, GetLeaveByEmployeeIdQueryResultHandler getLeaveByEmployeeIdQueryResultHandler, GetLeaveQueryResultHandler getLeaveQueryResultHandler)
+        public LeaveController(CreateLeaveCommandHandler createLeaveCommandHandler, UpdateLeaveCommandHandler updateLeaveCommandHandler, RemoveLeaveCommandHandler removeLeaveCommandHandler, GetLeaveByEmployeeIdQueryResultHandler getLeaveByEmployeeIdQueryResultHandler, GetLeaveQueryResultHandler getLeaveQueryResultHandler, GetLeaveByCompanyIdQueryResultHandler getLeaveByCompanyIdQueryResultHandler)
         {
             this.createLeaveCommandHandler = createLeaveCommandHandler;
             this.updateLeaveCommandHandler = updateLeaveCommandHandler;
             this.removeLeaveCommandHandler = removeLeaveCommandHandler;
             this.getLeaveByEmployeeIdQueryResultHandler = getLeaveByEmployeeIdQueryResultHandler;
             this.getLeaveQueryResultHandler = getLeaveQueryResultHandler;
+            this.getLeaveByCompanyIdQueryResultHandler = getLeaveByCompanyIdQueryResultHandler;
         }
 
 
@@ -44,6 +48,13 @@ namespace Project.WebApi.Controllers
         {
             var leave = await getLeaveByEmployeeIdQueryResultHandler.Handle(new GetLeaveByEmployerIdQuery(id));
             return Ok(leave);
+        }
+
+        [HttpGet("GetLeaveByCompanyId")]
+        public async Task<IActionResult> GetExpensesByCompanyId(int id)
+        {
+            var leaves = await getLeaveByCompanyIdQueryResultHandler.Handle(new GetLeaveByCompanyIdQuery(id));
+            return Ok(leaves);
         }
         [HttpPost]
 

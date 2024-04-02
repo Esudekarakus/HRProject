@@ -11,5 +11,6 @@ namespace Project.Application.Repositories.Abstract
     {
         List<Leave> GetAllWithEmployee();
         Task<List<Leave>> GetLeaveWithEmployeeWithEmployeeId(int employeeId);
+        Task<List<Leave>> GetLeaveWithEmployeeByCompanyId(int companyId);
     }
 }
