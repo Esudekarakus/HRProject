@@ -18,14 +18,16 @@ namespace Project.WebApi.Controllers
         private readonly RemoveAdvanceCommandHandler removeAdvanceCommandHandler;
         private readonly GetAdvanceByEmployeeIdQueryResultHandler getAdvanceByEmployeeIdQueryResultHandler;
         private readonly GetAdvanceQueryResultHandler getAdvanceQueryResultHandler;
+        private readonly GetAdvanceByCompanyIdQueryHandler getAdvanceByCompanyIdQueryHandler;
 
-        public AdvanceController(CreateAdvanceCommandHandler createAdvanceCommandHandler, UpdateAdvanceCommandHandler updateAdvanceCommandHandler, RemoveAdvanceCommandHandler removeAdvanceCommandHandler, GetAdvanceByEmployeeIdQueryResultHandler getAdvanceByEmployeeIdQueryResultHandler, GetAdvanceQueryResultHandler getAdvanceQueryResultHandler)
+        public AdvanceController(CreateAdvanceCommandHandler createAdvanceCommandHandler, UpdateAdvanceCommandHandler updateAdvanceCommandHandler, RemoveAdvanceCommandHandler removeAdvanceCommandHandler, GetAdvanceByEmployeeIdQueryResultHandler getAdvanceByEmployeeIdQueryResultHandler, GetAdvanceQueryResultHandler getAdvanceQueryResultHandler,GetAdvanceByCompanyIdQueryHandler getAdvanceByCompanyIdQueryHandler)
         {
             this.createAdvanceCommandHandler = createAdvanceCommandHandler;
             this.updateAdvanceCommandHandler = updateAdvanceCommandHandler;
             this.removeAdvanceCommandHandler = removeAdvanceCommandHandler;
             this.getAdvanceByEmployeeIdQueryResultHandler = getAdvanceByEmployeeIdQueryResultHandler;
             this.getAdvanceQueryResultHandler = getAdvanceQueryResultHandler;
+            this.getAdvanceByCompanyIdQueryHandler = getAdvanceByCompanyIdQueryHandler;
         }
 
         [HttpGet]
@@ -42,6 +44,13 @@ namespace Project.WebApi.Controllers
         public async Task<IActionResult>GetAdvancesByEmployeeId(int id)
         {
             var advances = await getAdvanceByEmployeeIdQueryResultHandler.Handle(new GetByEmployeeIdQuery(id));
+            return Ok(advances);
+        }
+
+        [HttpGet("GetAdvanceByCompanyId")]
+        public async Task<IActionResult> GetAdvancesByCompanyId(int id)
+        {
+            var advances = await getAdvanceByCompanyIdQueryHandler.Handle(new GetAdvanceByCompanyId(id));
             return Ok(advances);
         }
         [HttpPost]

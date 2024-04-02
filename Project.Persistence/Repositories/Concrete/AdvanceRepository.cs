@@ -19,6 +19,11 @@ namespace Project.Persistence.Repositories.Concrete
             this.context = context;
         }
 
+        public async Task<List<Advance>> GetAdvanceWithEmployeeByCompanyId(int companyId)
+        {
+            return await context.Advances.Include(x=>x.Employee).Where(x=>x.Employee.CompanyId== companyId).ToListAsync();
+        }
+
         public async Task<List<Advance>> GetAdvanceWithEmployeeWithEmployeeId(int employeeId)
         {
             return await context.Advances.Include(x=>x.Employee).Where(x=>x.EmployeeId == employeeId).ToListAsync();
