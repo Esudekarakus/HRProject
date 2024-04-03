@@ -39,6 +39,8 @@ namespace Project.Domain.Entities
 
         [NotMapped]
         public IFormFile? ImageFile { get; set; }
+        [NotMapped]
+        public string ImageSrc { get; set; }
         public string Address { get; set; }
         public string PrivateMail { get; set; }
 

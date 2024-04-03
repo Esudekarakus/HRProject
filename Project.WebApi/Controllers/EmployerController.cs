@@ -130,6 +130,7 @@ namespace Project.WebApi.Controllers
                 return BadRequest("Eklenmek istenen kullanıcı halihazırda mevcut.");
 
             string imageName = await SaveImage(command.ImageFile);
+            command.ImageName = imageName;
             await createEmployee.Handle(command);
 
             Employee CreatedUser = await unitOfWork.employeeRepository.FirstOrDefaultAsync(x => x.IdendificationNumber == command.IdentificationNumber);

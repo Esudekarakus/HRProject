@@ -1,4 +1,6 @@
-﻿using Project.Application.Features.CQRS.Results.EmployeeResults;
+﻿using Microsoft.AspNetCore.Http;
+using Org.BouncyCastle.Asn1.Ocsp;
+using Project.Application.Features.CQRS.Results.EmployeeResults;
 using Project.Application.UnitOfWork.Abstract;
 using Project.Domain.Enum;
 using System;
@@ -58,8 +60,11 @@ namespace Project.Application.Features.CQRS.Handlers.EmployeeHandlers
                     IdendificationNumber = employee.IdendificationNumber,
                     LastName = employee.LastName,
                     OffDays = employee.OffDays,
+                    ImageName=employee.ImageName,
+                    ImageSrc = employee.ImageSrc,
 
-                    PhoneNumber = employee.PhoneNumber,
+
+                PhoneNumber = employee.PhoneNumber,
                     Profession = employee.Profession,
 
                 });

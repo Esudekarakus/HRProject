@@ -51,7 +51,8 @@ namespace Project.Application.Features.CQRS.Handlers.EmployeeHandlers
                 Department=values.Department,
                 Email=values.Email,
                 IdendificationNumber=values.IdendificationNumber,
-               
+                ImageName=values.ImageName,
+                ImageSrc=values.ImageSrc,
                 LastName=values.LastName,
                 MiddleName=values.MiddleName,
                 OffDays=values.OffDays,
