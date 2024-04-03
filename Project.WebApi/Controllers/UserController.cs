@@ -58,15 +58,20 @@ namespace Project.WebApi.Controllers
             AppUser appUser = await userManager.FindByIdAsync(user.Id);
             if(appUser != null)
             {
-                string imageName = await SaveImage(user.ImageFile);
-                user.ImageName = imageName;
+                
+                
+                
                 
                 if (appUser.EmployeeID != null && appUser != null)
                 {
+                   
                     Employee employee = await unitOfWork.employeeRepository.GetEmployeeByIdWithCompanyAsync((int)appUser.EmployeeID);
                     employee.Address = user.Address;
                     employee.PhoneNumber = user.PhoneNumber;
-                    employee.ImageSrc = String.Format("{0}://{1}{2}/Images/{3}", Request.Scheme, Request.Host, Request.PathBase, user.ImageName);
+                    DeleteImage(employee.ImageName);
+                    string imageName = await SaveImage(user.ImageFile);
+                    employee.ImageName = imageName;
+                    employee.ImageSrc = String.Format("{0}://{1}{2}/Images/{3}", Request.Scheme, Request.Host, Request.PathBase, employee.ImageName);
 
 
 
@@ -79,7 +84,10 @@ namespace Project.WebApi.Controllers
                     Employer employer = await unitOfWork.employerRepository.GetEmployerByIdWithCompanyAsync((int)appUser.EmployerID);
                     employer.Address = user.Address;
                     employer.PhoneNumber = user.PhoneNumber;
-                    employer.ImageSrc = String.Format("{0}://{1}{2}/Images/{3}", Request.Scheme, Request.Host, Request.PathBase, user.ImageName);
+                    DeleteImage(employer.ImageName);
+                    string imageName = await SaveImage(user.ImageFile);
+                    employer.ImageName = imageName; 
+                    employer.ImageSrc = String.Format("{0}://{1}{2}/Images/{3}", Request.Scheme, Request.Host, Request.PathBase, employer.ImageName);
 
                     await unitOfWork.employerRepository.UpdateAsync(employer);
                     await unitOfWork.CommitAsync();
@@ -143,6 +151,16 @@ namespace Project.WebApi.Controllers
                 await imageFile.CopyToAsync(fileStream);
             }
             return imageName;
+        }
+
+        [NonAction]
+        public void DeleteImage(string imageName)
+        {
+            var imagePath = Path.Combine(environment.ContentRootPath, "Images", imageName);
+            if (System.IO.File.Exists(imagePath))
+            {
+                System.IO.File.Delete(imagePath);
+            }
         }
     }
 }

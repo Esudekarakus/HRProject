@@ -88,7 +88,7 @@ namespace Project.WebApi.Controllers
         {
             string fileName = new String(Path.GetFileNameWithoutExtension(file.FileName).Take(10).ToArray()).Replace(' ', '-');
             fileName = fileName + DateTime.Now.ToString("yymmssfff") + Path.GetExtension(file.FileName);
-            var imagePath = Path.Combine(_environment.ContentRootPath, "Expense", fileName);
+            var imagePath = Path.Combine(_environment.ContentRootPath, "Expenses", fileName);
             using (var fileStream = new FileStream(imagePath, FileMode.Create))
             {
                 await file.CopyToAsync(fileStream);
