@@ -19,8 +19,12 @@ namespace Project.Domain.Entities
         public Status Status { get; set; }
         public string Department { get; set; }
         public string? ImageName { get; set; }
+
         [NotMapped]
         public IFormFile? ImageFile { get; set; }
+
+        [NotMapped]
+        public string ImageSrc { get; set; }
         public string Address { get; set; }
 
         [Phone]

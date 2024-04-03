@@ -33,6 +33,7 @@ namespace Project.WebApi.Controllers
         public async Task<IActionResult> GetEmployeesWithCompany()
         {
             var values = getEmployeeWithCompanyHandler.Handle();
+
             return Ok(values);
         }
 

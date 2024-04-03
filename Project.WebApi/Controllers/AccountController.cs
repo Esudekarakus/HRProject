@@ -151,7 +151,8 @@ namespace Project.WebApi.Controllers
                     Department = employee.Department,
                     OffDays = employee.OffDays,
 
-                    //ImageName = command.ImageName,
+                    ImageName = employee.ImageName,
+                    ImageSrc = String.Format("{0}://{1}{2}/Images/{3}", Request.Scheme, Request.Host, Request.PathBase, employee.ImageName),
                     IdendificationNumber = employee.IdendificationNumber,
                     Address = employee.Address,
                     Name = employee.Name,
@@ -184,7 +185,8 @@ namespace Project.WebApi.Controllers
                     DateOfBirth = employer.DateOfBirth,
                     Department = employer.Department,
                     OffDays = employer.OffDays,
-                    //ImageName = command.ImageName,
+                    ImageName = employer.ImageName,
+                    ImageSrc = String.Format("{0}://{1}{2}/Images/{3}",Request.Scheme,Request.Host,Request.PathBase,employer.ImageName),
                     IdendificationNumber = employer.IdentityNumber,
                     Address = employer.Address,
                     Name = employer.Name,
@@ -202,7 +204,7 @@ namespace Project.WebApi.Controllers
                 //null reference gelmemea için kontrol lazım
                 AppUserDetailsDTO detailsDTO2 = new AppUserDetailsDTO()
                 {
-                    Email = user.Email,
+                    //Email = user.Email,
                     //SecondLastName = user.LastName,
                     //ImageName = command.ImageName,
                     PhoneNumber = user.PhoneNumber,
@@ -210,6 +212,7 @@ namespace Project.WebApi.Controllers
                 };
                 return Ok(detailsDTO2);
             }
+            //return BadRequest();
         }
 
 

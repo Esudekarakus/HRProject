@@ -27,7 +27,9 @@ namespace Project.Application.Features.CQRS.Results.EmployeeResults
 
         public string Department { get; set; }
         public Status Status { get; set; }
-        public string ImageURL { get; set; }
+        public string ImageName { get; set; }
+
+        public string ImageSrc { get; set; }
 
 
 
