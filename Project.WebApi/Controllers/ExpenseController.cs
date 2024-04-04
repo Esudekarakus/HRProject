@@ -6,7 +6,11 @@ using Project.Application.Features.CQRS.Handlers.AdvanceHandlers;
 using Project.Application.Features.CQRS.Handlers.ExpenseHandlers;
 using Project.Application.Features.CQRS.Queries.AdvanceQueries;
 using Project.Application.Features.CQRS.Queries.ExpenseQueries;
+using Project.Application.UnitOfWork.Abstract;
+using Project.Domain.Entities;
 using System;
+using System.Text.Json.Serialization;
+using System.Text.Json;
 
 namespace Project.WebApi.Controllers
 {
@@ -21,8 +25,9 @@ namespace Project.WebApi.Controllers
         private readonly GetExpenseByEmployeeIdQueryHandler _getExpenseByEmployeeIdQueryHandler;
         private readonly IWebHostEnvironment _environment;
         private readonly GetExpenseByCompanyIdQueryHandler getExpenseByCompanyIdQueryHandler;
+        private readonly IUnitOfWork unitOfWork;
 
-        public ExpenseController(CreateExpenseCommandHandler createExpenseCommandHandler, UpdateExpenseCommandHandler updateExpenseCommandHandler, RemoveExpenseCommandHandler removeExpenseCommandHandler, GetExpensesWithEmployeesQueryHandler getExpensesWithEmployeesCommandHandler, GetExpenseByEmployeeIdQueryHandler getExpenseByEmployeeIdQueryHandler, IWebHostEnvironment environment, GetExpenseByCompanyIdQueryHandler getExpenseByCompanyIdQueryHandler)
+        public ExpenseController(CreateExpenseCommandHandler createExpenseCommandHandler, UpdateExpenseCommandHandler updateExpenseCommandHandler, RemoveExpenseCommandHandler removeExpenseCommandHandler, GetExpensesWithEmployeesQueryHandler getExpensesWithEmployeesCommandHandler, GetExpenseByEmployeeIdQueryHandler getExpenseByEmployeeIdQueryHandler, IWebHostEnvironment environment, GetExpenseByCompanyIdQueryHandler getExpenseByCompanyIdQueryHandler,IUnitOfWork unitOfWork)
         {
             _createExpenseCommandHandler = createExpenseCommandHandler;
             _updateExpenseCommandHandler = updateExpenseCommandHandler;
@@ -31,6 +36,7 @@ namespace Project.WebApi.Controllers
             _getExpenseByEmployeeIdQueryHandler = getExpenseByEmployeeIdQueryHandler;
             this._environment = environment;
             this.getExpenseByCompanyIdQueryHandler = getExpenseByCompanyIdQueryHandler;
+            this.unitOfWork = unitOfWork;
         }
 
         [HttpGet]
@@ -46,8 +52,19 @@ namespace Project.WebApi.Controllers
         [HttpGet("id")]
         public async Task<IActionResult> GetExpensesByEmployeeId(int id)
         {
-            var advances = await _getExpenseByEmployeeIdQueryHandler.Handle(new GetExpenseByEmployeeIdQuery(id));
-            return Ok(advances);
+            var expenses = await unitOfWork.expenseRepository.GetExpenseWithEmployeeByEmployeeId(id);
+            if(expenses !=null)
+            {
+                foreach(var expense in expenses)
+                {
+                    expense.FileSrc= String.Format("{0}://{1}{2}/Expenses/{3}", Request.Scheme, Request.Host, Request.PathBase, expense.FileName);
+                }
+            }
+            var options = new JsonSerializerOptions
+            {
+                ReferenceHandler = ReferenceHandler.Preserve
+            };
+            return Ok(JsonSerializer.Serialize(expenses, options));
         }
 
         [HttpGet("GetExpenseByCompanyId")]
