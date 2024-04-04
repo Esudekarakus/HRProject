@@ -25,7 +25,9 @@ namespace Project.Domain.Entities
         public DateTime? DeletedTime { get; set; }
 
         [NotMapped] 
-        IFormFile? ExpenseFile { get; set; }
+        public IFormFile? ExpenseFile { get; set; }
+        [NotMapped]
+        public string FileSrc { get; set; }
         public string? FileName { get; set; }
         public int? EmployeeId { get; set; }
         public Employee? Employee { get; set; }

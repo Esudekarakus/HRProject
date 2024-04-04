@@ -84,7 +84,11 @@ namespace Project.WebApi.Controllers
                     Employer employer = await unitOfWork.employerRepository.GetEmployerByIdWithCompanyAsync((int)appUser.EmployerID);
                     employer.Address = user.Address;
                     employer.PhoneNumber = user.PhoneNumber;
-                    DeleteImage(employer.ImageName);
+                    if(employer.ImageFile != null)
+                    {
+                        DeleteImage(employer.ImageName);
+                    }
+                    
                     string imageName = await SaveImage(user.ImageFile);
                     employer.ImageName = imageName; 
                     employer.ImageSrc = String.Format("{0}://{1}{2}/Images/{3}", Request.Scheme, Request.Host, Request.PathBase, employer.ImageName);
