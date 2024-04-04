@@ -22,14 +22,7 @@ namespace Project.Application.Features.CQRS.Handlers.LeaveHandler
 
             if (values != null)
             {
-                if (command.Status == 2)
-                {
-                    values.ApprovalDate = DateTime.Now;
-                }
-                else
-                {
-                    values.ApprovalDate = null;
-                }
+                values.ApprovalDate = DateTime.Now;
               
                 values.Status = command.Status;
                 await unitOfWork.leaveRepository.UpdateAsync(values);

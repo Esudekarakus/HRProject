@@ -52,19 +52,21 @@ namespace Project.WebApi.Controllers
         [HttpGet("id")]
         public async Task<IActionResult> GetExpensesByEmployeeId(int id)
         {
-            var expenses = await unitOfWork.expenseRepository.GetExpenseWithEmployeeByEmployeeId(id);
-            if(expenses !=null)
-            {
-                foreach(var expense in expenses)
-                {
-                    expense.FileSrc= String.Format("{0}://{1}{2}/Expenses/{3}", Request.Scheme, Request.Host, Request.PathBase, expense.FileName);
-                }
-            }
-            var options = new JsonSerializerOptions
-            {
-                ReferenceHandler = ReferenceHandler.Preserve
-            };
-            return Ok(JsonSerializer.Serialize(expenses, options));
+            var expenses= await _getExpenseByEmployeeIdQueryHandler.Handle(new GetExpenseByEmployeeIdQuery(id));
+            return Ok(expenses);
+            //var expenses = await unitOfWork.expenseRepository.GetExpenseWithEmployeeByEmployeeId(id);
+            //if(expenses !=null)
+            //{
+            //    foreach(var expense in expenses)
+            //    {
+            //        expense.FileSrc= String.Format("{0}://{1}{2}/Expenses/{3}", Request.Scheme, Request.Host, Request.PathBase, expense.FileName);
+            //    }
+            //}
+            //var options = new JsonSerializerOptions
+            //{
+            //    ReferenceHandler = ReferenceHandler.Preserve
+            //};
+            //return Ok(JsonSerializer.Serialize(expenses, options));
         }
 
         [HttpGet("GetExpenseByCompanyId")]
