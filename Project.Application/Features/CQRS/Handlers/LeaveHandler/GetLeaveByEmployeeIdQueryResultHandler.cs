@@ -74,7 +74,7 @@ namespace Project.Application.Features.CQRS.Handlers.LeaveHandler
                 EmployeeId = x.EmployeeId,
                 Id = x.Id,
                 Description = x.Description,
-               
+                ApprovalStatus=x.Status,
                 
                 DueDate = x.DueDate,
                 ApprovalDate = x.ApprovalDate,

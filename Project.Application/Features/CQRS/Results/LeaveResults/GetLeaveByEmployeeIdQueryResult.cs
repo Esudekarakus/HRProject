@@ -16,6 +16,7 @@ namespace Project.Application.Features.CQRS.Results.LeaveResults
         public DateTime DueDate { get; set; }
 
         public DateTime? ApprovalDate { get; set; }
+        public int ApprovalStatus { get; set; }
         public string Description { get; set; }
         public int NumberOfDays { get; set; }
 
